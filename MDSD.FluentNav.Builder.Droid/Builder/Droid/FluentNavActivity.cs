@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MDSD.FluentNav.Builder.Droid
 {
-    public class Class1
+    public class FluentNavActivity : AppCompatActivity
     {
     }
 }

@@ -35,11 +35,13 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <Folder Include="Builder\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Meta\MenuDefinition.cs" />
-    <Compile Include="Meta\ViewMenu.cs" />
-    <Compile Include="Meta\View.cs" />
+    <Compile Include="Metamodel\Navigation.cs" />
+    <Compile Include="Metamodel\NavigationTransition.cs" />
+    <Compile Include="Metamodel\ViewMenu.cs" />
+    <Compile Include="Metamodel\View.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

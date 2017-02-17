@@ -5,7 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
-namespace MDSD.NavModel.Example.iOS
+namespace MDSD.FluentNav.Example.iOS
 {
 	public class Application
 	{

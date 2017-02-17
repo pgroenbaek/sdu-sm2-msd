@@ -116,12 +116,6 @@
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\MDSD.FluentNav\MDSD.FluentNav.csproj">
-      <Project>{41540215-8573-48bf-8d63-c4786c2678eb}</Project>
-      <Name>MDSD.FluentNav</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="..\MDSD.FluentNav.Example\MDSD.FluentNav.Example.projitems" Label="Shared" Condition="Exists('..\MDSD.FluentNav.Example\MDSD.FluentNav.Example.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

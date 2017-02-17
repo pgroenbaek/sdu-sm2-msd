@@ -5,7 +5,7 @@ using System.Text;
 
 using Xamarin.Forms;
 
-namespace MDSD.NavModel.Example
+namespace MDSD.FluentNav.Example
 {
 	public class App : Application
 	{

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MDSD.FluentNav
+namespace MDSD.FluentNav.Builder.iOS
 {
-    public class View
+    public class Class1
     {
     }
 }

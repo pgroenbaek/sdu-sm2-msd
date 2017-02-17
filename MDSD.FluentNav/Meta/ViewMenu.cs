@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MDSD.NavModel.Meta
+namespace MDSD.FluentNav.Meta
 {
-    class MenuView
+    public class ViewMenu : View
     {
     }
 }

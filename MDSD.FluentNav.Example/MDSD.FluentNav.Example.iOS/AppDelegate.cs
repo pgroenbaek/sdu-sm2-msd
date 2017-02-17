@@ -5,7 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
-namespace MDSD.NavModel.Example.iOS
+namespace MDSD.FluentNav.Example.iOS
 {
 	// The UIApplicationDelegate for the application. This class is responsible for launching the 
 	// User Interface of the application, as well as listening (and optionally responding) to 
@@ -23,7 +23,7 @@ namespace MDSD.NavModel.Example.iOS
 		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
 			global::Xamarin.Forms.Forms.Init ();
-			LoadApplication (new MDSD.NavModel.Example.App ());
+			LoadApplication (new MDSD.FluentNav.Example.App ());
 
 			return base.FinishedLaunching (app, options);
 		}

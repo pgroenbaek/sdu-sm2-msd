@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace MDSD.FluentNav
+namespace MDSD.FluentNav.Meta
 {
-    public class View
+    public class MenuDefinition
     {
     }
 }

@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MDSD.FluentNav.Example.iOS")]
+[assembly: AssemblyTitle("MDSD.FluentNav.Builder.iOS")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MDSD.FluentNav.Example.iOS")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyProduct("MDSD.FluentNav.Builder.iOS")]
+[assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("72bdc44f-c588-44f3-b6df-9aace7daafdd")]
+[assembly: Guid("7e062b98-99f7-4e7a-adcd-72d5032a0cd5")]
 
 // Version information for an assembly consists of the following four values:
 //

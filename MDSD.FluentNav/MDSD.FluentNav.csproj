@@ -35,10 +35,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <Folder Include="Builder\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Meta\MenuView.cs" />
+    <Compile Include="Meta\MenuDefinition.cs" />
+    <Compile Include="Meta\ViewMenu.cs" />
     <Compile Include="Meta\View.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

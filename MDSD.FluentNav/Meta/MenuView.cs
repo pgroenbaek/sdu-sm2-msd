@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace MDSD.NavModel
+namespace MDSD.NavModel.Meta
 {
-    public class Class1
+    class MenuView
     {
     }
 }

@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("MDSD.NavModel.Example.Droid.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("MDSD.FluentNav.Example.Droid.Resource", IsApplication=true)]
 
-namespace MDSD.NavModel.Example.Droid
+namespace MDSD.FluentNav.Example.Droid
 {
 	
 	

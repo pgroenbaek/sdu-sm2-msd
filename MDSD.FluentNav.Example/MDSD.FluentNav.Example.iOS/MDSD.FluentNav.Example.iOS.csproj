@@ -8,9 +8,9 @@
     <ProjectGuid>{DB135C6C-AF27-4601-AC03-BEE5B10FA90E}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
-    <RootNamespace>MDSD.NavModel.Example.iOS</RootNamespace>
+    <RootNamespace>MDSD.FluentNav.Example.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>MDSD.NavModel.Example.iOS</AssemblyName>
+    <AssemblyName>MDSD.FluentNav.Example.iOS</AssemblyName>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -137,7 +137,13 @@
     </Reference>
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
-  <Import Project="..\MDSD.NavModel.Example\MDSD.NavModel.Example.projitems" Label="Shared" Condition="Exists('..\MDSD.NavModel.Example\MDSD.NavModel.Example.projitems')" />
+  <ItemGroup>
+    <ProjectReference Include="..\..\MDSD.FluentNav\MDSD.FluentNav.csproj">
+      <Project>{41540215-8573-48bf-8d63-c4786c2678eb}</Project>
+      <Name>MDSD.FluentNav</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="..\MDSD.FluentNav.Example\MDSD.FluentNav.Example.projitems" Label="Shared" Condition="Exists('..\MDSD.FluentNav.Example\MDSD.FluentNav.Example.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

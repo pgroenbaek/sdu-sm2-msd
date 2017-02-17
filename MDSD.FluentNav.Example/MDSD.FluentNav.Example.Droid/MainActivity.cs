@@ -6,18 +6,16 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Android.Support.V7.App;
 
 namespace MDSD.NavModel.Example.Droid
 {
 	[Activity (Label = "MDSD.NavModel.Example", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-	public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
+	public class MainActivity : AppCompatActivity
 	{
 		protected override void OnCreate (Bundle bundle)
 		{
-			base.OnCreate (bundle);
-
-			global::Xamarin.Forms.Forms.Init (this, bundle);
-			LoadApplication (new MDSD.NavModel.Example.App ());
+			base.OnCreate(bundle);
 		}
 	}
 }

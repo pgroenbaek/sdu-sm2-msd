@@ -6,7 +6,7 @@
     <SharedGUID>52a7b2d2-4ae6-4415-98e9-85a0baee53e9</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>MDSD.NavModel.Example</Import_RootNamespace>
+    <Import_RootNamespace>MDSD.FluentNav.Example</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />

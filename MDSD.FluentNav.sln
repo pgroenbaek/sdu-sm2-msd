@@ -3,19 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MDSD.NavModel.Example", "MDSD.NavModel.Example\MDSD.NavModel.Example\MDSD.NavModel.Example.shproj", "{52A7B2D2-4AE6-4415-98E9-85A0BAEE53E9}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MDSD.FluentNav.Example", "MDSD.FluentNav.Example\MDSD.FluentNav.Example\MDSD.FluentNav.Example.shproj", "{52A7B2D2-4AE6-4415-98E9-85A0BAEE53E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDSD.NavModel.Example.Droid", "MDSD.NavModel.Example\MDSD.NavModel.Example.Droid\MDSD.NavModel.Example.Droid.csproj", "{EAD7B093-9D73-4B55-83DB-DD5A1A607911}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDSD.FluentNav.Example.Droid", "MDSD.FluentNav.Example\MDSD.FluentNav.Example.Droid\MDSD.FluentNav.Example.Droid.csproj", "{EAD7B093-9D73-4B55-83DB-DD5A1A607911}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDSD.NavModel.Example.iOS", "MDSD.NavModel.Example\MDSD.NavModel.Example.iOS\MDSD.NavModel.Example.iOS.csproj", "{DB135C6C-AF27-4601-AC03-BEE5B10FA90E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDSD.FluentNav.Example.iOS", "MDSD.FluentNav.Example\MDSD.FluentNav.Example.iOS\MDSD.FluentNav.Example.iOS.csproj", "{DB135C6C-AF27-4601-AC03-BEE5B10FA90E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDSD.NavModel", "MDSD.NavModel\MDSD.NavModel.csproj", "{41540215-8573-48BF-8D63-C4786C2678EB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MDSD.FluentNav", "MDSD.FluentNav\MDSD.FluentNav.csproj", "{41540215-8573-48BF-8D63-C4786C2678EB}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		MDSD.NavModel.Example\MDSD.NavModel.Example\MDSD.NavModel.Example.projitems*{52a7b2d2-4ae6-4415-98e9-85a0baee53e9}*SharedItemsImports = 13
-		MDSD.NavModel.Example\MDSD.NavModel.Example\MDSD.NavModel.Example.projitems*{db135c6c-af27-4601-ac03-bee5b10fa90e}*SharedItemsImports = 4
-		MDSD.NavModel.Example\MDSD.NavModel.Example\MDSD.NavModel.Example.projitems*{ead7b093-9d73-4b55-83db-dd5a1a607911}*SharedItemsImports = 4
+		MDSD.FluentNav.Example\MDSD.FluentNav.Example\MDSD.FluentNav.Example.projitems*{52a7b2d2-4ae6-4415-98e9-85a0baee53e9}*SharedItemsImports = 13
+		MDSD.FluentNav.Example\MDSD.FluentNav.Example\MDSD.FluentNav.Example.projitems*{db135c6c-af27-4601-ac03-bee5b10fa90e}*SharedItemsImports = 4
+		MDSD.FluentNav.Example\MDSD.FluentNav.Example\MDSD.FluentNav.Example.projitems*{ead7b093-9d73-4b55-83db-dd5a1a607911}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU

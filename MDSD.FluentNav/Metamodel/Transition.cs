@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace MDSD.FluentNav.Metamodel
 {
-    public class ViewMenu : View
+    public class Transition
     {
+        public Type TargetView { get; private set; }
 
-        public ViewMenu(Type viewType) : base(viewType)
-        {
-        }
+        // TODO Transition type
     }
 }

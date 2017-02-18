@@ -7,11 +7,12 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Android.Support.V7.App;
+using MDSD.FluentNav.Builder.Droid;
 
 namespace MDSD.FluentNav.Example.Droid
 {
 	[Activity (Label = "MDSD.FluentNav.Example", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-	public class MainActivity : AppCompatActivity
+	public class MainActivity : FluentNavActivity
 	{
 		protected override void OnCreate (Bundle bundle)
 		{

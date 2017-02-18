@@ -8,8 +8,8 @@
     <ProjectGuid>{41540215-8573-48BF-8D63-C4786C2678EB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MDSD.NavModel</RootNamespace>
-    <AssemblyName>MDSD.NavModel</AssemblyName>
+    <RootNamespace>MDSD.FluentNav</RootNamespace>
+    <AssemblyName>MDSD.FluentNav</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -39,7 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Metamodel\Navigation.cs" />
-    <Compile Include="Metamodel\NavigationTransition.cs" />
+    <Compile Include="Metamodel\Transition.cs" />
     <Compile Include="Metamodel\ViewMenu.cs" />
     <Compile Include="Metamodel\View.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

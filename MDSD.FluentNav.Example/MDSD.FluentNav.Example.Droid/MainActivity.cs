@@ -15,7 +15,7 @@ namespace MDSD.FluentNav.Example.Droid
     [Activity(Label = "MDSD.FluentNav.Example", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : FluentNavActivity
     {
-        protected override void Build(INavigation navigation)
+        protected override void BuildNavigation(INavigation navigation)
         {
             navigation.
                 View()

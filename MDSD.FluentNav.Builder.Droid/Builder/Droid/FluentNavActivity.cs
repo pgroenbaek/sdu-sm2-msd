@@ -22,10 +22,10 @@ namespace MDSD.FluentNav.Builder.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            Build(this);
+            BuildNavigation(this);
         }
 
-        protected abstract void Build(INavigation navigation);
+        protected abstract void BuildNavigation(INavigation navigation);
 
         public void View()
         {

@@ -35,9 +35,9 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <Folder Include="Builder\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builder\INavigation.cs" />
     <Compile Include="Metamodel\Navigation.cs" />
     <Compile Include="Metamodel\Transition.cs" />
     <Compile Include="Metamodel\ViewMenu.cs" />

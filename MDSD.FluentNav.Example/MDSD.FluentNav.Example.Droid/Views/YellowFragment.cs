@@ -13,7 +13,7 @@ using Android.Widget;
 
 namespace MDSD.FluentNav.Example.Droid.Views
 {
-    public class YellowFragment : Fragment
+    public class YellowFragment : Android.Support.V4.App.Fragment
     {
         public override void OnCreate(Bundle savedInstanceState)
         {

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MDSD.FluentNav.Builder
 {
-    public interface IViewBuilderMenuTabbedSlider
+    public interface IViewBuilderMenuTabbedSlider<ViewType>
     {
-        IViewBuilderMenuTabbedSlider Item<T>(string name = null, object icon = null);
-        IViewBuilder SubView<T>(string title = null);
+        IViewBuilderMenuTabbedSlider<ViewType> Item<T>(string name = null, object icon = null) where T : ViewType;
+        IViewBuilder<ViewType> SubView<T>(string title = null) where T : ViewType;
     }
 }

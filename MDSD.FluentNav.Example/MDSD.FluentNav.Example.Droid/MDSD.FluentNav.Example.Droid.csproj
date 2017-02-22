@@ -104,6 +104,10 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\WhiteFragment.cs" />
+    <Compile Include="Views\BlueFragment.cs" />
+    <Compile Include="Views\RedFragment.cs" />
+    <Compile Include="Views\BlackFragment.cs" />
     <Compile Include="Views\GreenFragment.cs" />
     <Compile Include="Views\YellowFragment.cs" />
   </ItemGroup>
@@ -115,6 +119,18 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\fragment_yellow.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_blue.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_red.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_black.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragment_white.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -143,8 +159,9 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Resources\values\" />
+    <AndroidResource Include="Resources\values\colors.xml" />
   </ItemGroup>
   <Import Project="..\MDSD.FluentNav.Example\MDSD.FluentNav.Example.projitems" Label="Shared" Condition="Exists('..\MDSD.FluentNav.Example\MDSD.FluentNav.Example.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MDSD.FluentNav.Builder
 {
-    public interface ITransitionBuilder
+    public interface ITransitionBuilder<ViewType>
     {
-        IViewBuilderPlain NavigateTo<T>(); // TODO, transition animation
+        IViewBuilderPlain<ViewType> NavigateTo<T>() where T : ViewType; // TODO, transition animation
     }
 }

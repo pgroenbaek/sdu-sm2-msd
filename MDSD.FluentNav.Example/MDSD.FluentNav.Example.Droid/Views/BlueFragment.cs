@@ -13,7 +13,7 @@ using Android.Widget;
 
 namespace MDSD.FluentNav.Example.Droid.Views
 {
-    public class BlueFragment : Fragment
+    public class BlueFragment : Android.Support.V4.App.Fragment
     {
         public override void OnCreate(Bundle savedInstanceState)
         {

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace MDSD.FluentNav.Builder
 {
-    public interface IViewBuilder
+    public interface IViewBuilder<ViewType>
     {
-        IViewBuilderPlain Plain();
-        IViewBuilderMenuDrawer DrawerMenu();
-        IViewBuilderMenuTabbedSlider TabbedSlider();
+        IViewBuilderPlain<ViewType> Plain();
+        IViewBuilderMenuDrawer<ViewType> DrawerMenu();
+        IViewBuilderMenuTabbedSlider<ViewType> TabbedSlider();
     }
 }

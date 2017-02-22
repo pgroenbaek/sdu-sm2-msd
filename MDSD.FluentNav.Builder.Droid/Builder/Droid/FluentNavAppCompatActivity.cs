@@ -9,8 +9,8 @@ using Android.OS;
 
 namespace MDSD.FluentNav.Builder.Droid
 {
-    public abstract class FluentNavAppCompatActivity : AppCompatActivity, INavigationBuilder, IViewBuilder, IViewBuilderPlain,
-        IViewBuilderMenuDrawer, IViewBuilderMenuTabbedSlider, ITransitionBuilder
+    public abstract class FluentNavAppCompatActivity : AppCompatActivity, INavigationBuilder<Android.Support.V4.App.Fragment>, IViewBuilder<Android.Support.V4.App.Fragment>, IViewBuilderPlain<Android.Support.V4.App.Fragment>,
+        IViewBuilderMenuDrawer<Android.Support.V4.App.Fragment>, IViewBuilderMenuTabbedSlider<Android.Support.V4.App.Fragment>, ITransitionBuilder<Android.Support.V4.App.Fragment>
     {
         private NavigationModel<Android.Support.V4.App.Fragment> NavModel { get; }
 
@@ -25,61 +25,57 @@ namespace MDSD.FluentNav.Builder.Droid
             BuildNavigation(this);
         }
 
-        protected abstract void BuildNavigation(INavigationBuilder navigation);
+        protected abstract void BuildNavigation(INavigationBuilder<Android.Support.V4.App.Fragment> navigation);
         
-        public INavigationBuilder TopView<T>(string title = null)
+
+        public IViewBuilderMenuDrawer<Android.Support.V4.App.Fragment> Spacer(string name = null, object icon = null)
         {
-            Type viewType = typeof(T);
-            return this;
+            throw new NotImplementedException();
         }
 
-        public IViewBuilderPlain Plain()
+        public IViewBuilderMenuDrawer<Android.Support.V4.App.Fragment> Item<T>(string name = null, object icon = null) where T : Android.Support.V4.App.Fragment
         {
-            return this;
+            throw new NotImplementedException();
         }
 
-        public IViewBuilderMenuDrawer DrawerMenu()
+        public IViewBuilder<Android.Support.V4.App.Fragment> TopView<T>(string title = null) where T : Android.Support.V4.App.Fragment
         {
-            return this;
+            throw new NotImplementedException();
         }
 
-        public IViewBuilderMenuTabbedSlider TabbedSlider()
+        public IViewBuilderPlain<Android.Support.V4.App.Fragment> Plain()
         {
-            return this;
+            throw new NotImplementedException();
         }
 
-        public ITransitionBuilder OnClick(int resourceId)
+        public IViewBuilderMenuDrawer<Android.Support.V4.App.Fragment> DrawerMenu()
         {
-            return this;
+            throw new NotImplementedException();
         }
 
-        public IViewBuilder SubView<T>(string title = null)
+        public IViewBuilderMenuTabbedSlider<Android.Support.V4.App.Fragment> TabbedSlider()
         {
-            Type viewType = typeof(T);
-            return this;
+            throw new NotImplementedException();
         }
 
-        public IViewBuilderPlain NavigateTo<T>()
+        public ITransitionBuilder<Android.Support.V4.App.Fragment> OnClick(int resourceId)
         {
-            Type viewType = typeof(T);
-            return this;
+            throw new NotImplementedException();
         }
 
-        IViewBuilderMenuDrawer IViewBuilderMenuDrawer.Spacer(string name = null, object icon = null)
+        public IViewBuilder<Android.Support.V4.App.Fragment> SubView<T>(string title = null) where T : Android.Support.V4.App.Fragment
         {
-            return this;
+            throw new NotImplementedException();
         }
 
-        IViewBuilderMenuDrawer IViewBuilderMenuDrawer.Item<T>(string name, object icon)
+        IViewBuilderMenuTabbedSlider<Android.Support.V4.App.Fragment> IViewBuilderMenuTabbedSlider<Android.Support.V4.App.Fragment>.Item<T>(string name, object icon)
         {
-            Type viewType = typeof(T);
-            return this;
+            throw new NotImplementedException();
         }
 
-        IViewBuilderMenuTabbedSlider IViewBuilderMenuTabbedSlider.Item<T>(string name, object icon)
+        public IViewBuilderPlain<Android.Support.V4.App.Fragment> NavigateTo<T>() where T : Android.Support.V4.App.Fragment
         {
-            Type viewType = typeof(T);
-            return this;
+            throw new NotImplementedException();
         }
     }
 }

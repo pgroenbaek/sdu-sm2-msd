@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace MDSD.FluentNav.Metamodel
 {
-    public class Navigation
+    public class NavigationModel
     {
         public View CurrentView { get; private set; }
 
         private Dictionary<Type, View> views = new Dictionary<Type, View>();
 
-        public Navigation()
+        public NavigationModel(string name = "", string test = "")
         {
+
         }
 
     }

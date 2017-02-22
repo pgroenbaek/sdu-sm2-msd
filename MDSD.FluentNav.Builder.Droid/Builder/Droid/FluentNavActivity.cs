@@ -10,13 +10,13 @@ using Android.OS;
 
 namespace MDSD.FluentNav.Builder.Droid
 {
-    public abstract class FluentNavActivity : AppCompatActivity, INavigation
+    public abstract class FluentNavActivity : AppCompatActivity, INavigationBuilder
     {
-        private Navigation Navigation { get; }
+        private NavigationModel NavModel { get; }
 
         public FluentNavActivity()
         {
-            Navigation = new Navigation();
+            NavModel = new NavigationModel();
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -25,11 +25,15 @@ namespace MDSD.FluentNav.Builder.Droid
             BuildNavigation(this);
         }
 
-        protected abstract void BuildNavigation(INavigation navigation);
+        protected abstract void BuildNavigation(INavigationBuilder navigation);
 
-        public void View()
+        public INavigationBuilder View<T : Android.Support.V7.Widget>(string id, params object[] subViews)
         {
+            Type viewType = typeof(T);
 
+
+            
+            return this;
         }
     }
 }

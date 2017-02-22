@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MDSD.FluentNav.Builder
+namespace MDSD.FluentNav.Metamodel
 {
-    public interface INavigation
+    public class Menu
     {
-        void View();
+        
     }
 }

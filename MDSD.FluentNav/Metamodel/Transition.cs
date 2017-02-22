@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MDSD.FluentNav.Metamodel
 {
-    public class Transition
+    public class Transition<ViewType>
     {
-        public Type TargetView { get; private set; }
+        public View<ViewType> TargetView { get; private set; }
 
         // TODO Transition type
     }

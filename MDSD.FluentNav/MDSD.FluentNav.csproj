@@ -39,13 +39,12 @@
   <ItemGroup>
     <Compile Include="Builder\INavigationBuilder.cs" />
     <Compile Include="Builder\ITransitionBuilder.cs" />
+    <Compile Include="Builder\IViewBuilderMenuTabbedSlider.cs" />
     <Compile Include="Builder\IViewBuilderPlain.cs" />
-    <Compile Include="Builder\IViewBuilderDrawerMenu.cs" />
-    <Compile Include="Builder\IViewBuilderTabbedSlider.cs" />
+    <Compile Include="Builder\IViewBuilderMenuDrawer.cs" />
     <Compile Include="Builder\IViewBuilder.cs" />
     <Compile Include="Metamodel\NavigationModel.cs" />
     <Compile Include="Metamodel\Transition.cs" />
-    <Compile Include="Metamodel\Menu.cs" />
     <Compile Include="Metamodel\View.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

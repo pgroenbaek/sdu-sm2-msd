@@ -1,4 +1,3 @@
-using Android.App;
 using Android.Support.V7.App;
 using MDSD.FluentNav.Builder;
 using MDSD.FluentNav.Metamodel;
@@ -11,13 +10,13 @@ using Android.OS;
 namespace MDSD.FluentNav.Builder.Droid
 {
     public abstract class FluentNavAppCompatActivity : AppCompatActivity, INavigationBuilder, IViewBuilder, IViewBuilderPlain,
-        IViewBuilderDrawerMenu, IViewBuilderTabbedSlider, ITransitionBuilder
+        IViewBuilderMenuDrawer, IViewBuilderMenuTabbedSlider, ITransitionBuilder
     {
-        private NavigationModel NavModel { get; }
+        private NavigationModel<Android.Support.V4.App.Fragment> NavModel { get; }
 
         public FluentNavAppCompatActivity()
         {
-            NavModel = new NavigationModel();
+            NavModel = new NavigationModel<Android.Support.V4.App.Fragment>();
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -39,12 +38,12 @@ namespace MDSD.FluentNav.Builder.Droid
             return this;
         }
 
-        public IViewBuilderDrawerMenu DrawerMenu()
+        public IViewBuilderMenuDrawer DrawerMenu()
         {
             return this;
         }
 
-        public IViewBuilderTabbedSlider TabbedSlider()
+        public IViewBuilderMenuTabbedSlider TabbedSlider()
         {
             return this;
         }
@@ -66,18 +65,18 @@ namespace MDSD.FluentNav.Builder.Droid
             return this;
         }
 
-        public IViewBuilderDrawerMenu Spacer(string name = null, object icon = null)
+        IViewBuilderMenuDrawer IViewBuilderMenuDrawer.Spacer(string name = null, object icon = null)
         {
             return this;
         }
 
-        public IViewBuilderDrawerMenu Item<T>(string name = null, object icon = null)
+        IViewBuilderMenuDrawer IViewBuilderMenuDrawer.Item<T>(string name, object icon)
         {
             Type viewType = typeof(T);
             return this;
         }
 
-        public IViewBuilderTabbedSlider Item<T>(string name, object icon)
+        IViewBuilderMenuTabbedSlider IViewBuilderMenuTabbedSlider.Item<T>(string name, object icon)
         {
             Type viewType = typeof(T);
             return this;

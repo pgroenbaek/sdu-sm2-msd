@@ -5,13 +5,13 @@ using System.Text;
 
 namespace MDSD.FluentNav.Metamodel
 {
-    public class View
+    public class View<ViewType>
     {
-        public Type Type { get; private set; }
+        public ViewType Type { get; private set; }
 
-        private Dictionary<Type, Transition> transitions = new Dictionary<Type, Transition>();
+        private Dictionary<ViewType, Transition<ViewType>> transitions = new Dictionary<ViewType, Transition<ViewType>>();
 
-        public View(Type viewType)
+        public View(ViewType viewType)
         {
             Type = viewType;
         }

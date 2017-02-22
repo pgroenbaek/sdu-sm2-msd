@@ -8,6 +8,6 @@ namespace MDSD.FluentNav.Builder
 {
     public interface INavigationBuilder
     {
-        INavigationBuilder TopView<T>(params object[] p);
+        INavigationBuilder TopView<T>(string title = null);
     }
 }

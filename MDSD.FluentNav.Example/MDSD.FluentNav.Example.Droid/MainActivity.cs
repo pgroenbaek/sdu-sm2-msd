@@ -14,19 +14,19 @@ using MDSD.FluentNav.Example.Droid.Views;
 namespace MDSD.FluentNav.Example.Droid
 {
     [Activity(Label = "MDSD.FluentNav.Example", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-    public class MainActivity : FluentNavActivity
+    public class MainActivity : FluentNavAppCompatActivity
     {
-        int test;
+
 
         protected override void BuildNavigation(INavigationBuilder nav)
         {
             nav
             .TopView<GreenFragment>(title)
-                .MenuDrawer()
-                .Item(name, icon).OnClick().NavigateTo<RedFragment>()
-                .Item(name, icon).OnClick().NavigateTo<GreenFragment>()
+                .DrawerMenu()
+                .Item<RedFragment>(name, icon)
+                .Item<GreenFragment>(name, icon)
                 .Spacer(name = null)
-                .Item(name, icon).OnClick().NavigateTo<YellowFragment>()
+                .Item<YellowFragment>(name, icon)
             .SubView<RedFragment>()
                 .Plain()
                 .OnClick(Resource.Id.fragment_red_btn1).NavigateTo<BlueFragment>()

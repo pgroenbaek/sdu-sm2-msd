@@ -37,9 +37,11 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builder\IMenuBuilder.cs" />
     <Compile Include="Builder\INavigationBuilder.cs" />
     <Compile Include="Builder\ITransitionBuilder.cs" />
+    <Compile Include="Builder\IViewBuilderPlain.cs" />
+    <Compile Include="Builder\IViewBuilderDrawerMenu.cs" />
+    <Compile Include="Builder\IViewBuilderTabbedSlider.cs" />
     <Compile Include="Builder\IViewBuilder.cs" />
     <Compile Include="Metamodel\NavigationModel.cs" />
     <Compile Include="Metamodel\Transition.cs" />

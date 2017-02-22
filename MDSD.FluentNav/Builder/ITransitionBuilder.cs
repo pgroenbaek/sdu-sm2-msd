@@ -8,5 +8,6 @@ namespace MDSD.FluentNav.Builder
 {
     public interface ITransitionBuilder
     {
+        IViewBuilderPlain NavigateTo<T>(); // TODO, transition animation
     }
 }

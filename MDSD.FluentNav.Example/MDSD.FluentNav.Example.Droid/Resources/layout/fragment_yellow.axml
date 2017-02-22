@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:background="@android:color/holo_green_light"
+    android:background="@android:color/holo_yellow_light"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
   <TextView
-    android:textColor="@android:color/holo_green_yellow"
+    android:textColor="@android:color/holo_yellow_dark"
     android:text="Yellow"
     android:layout_gravity="center"
     android:layout_width="wrap_content"

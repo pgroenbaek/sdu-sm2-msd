@@ -43,6 +43,7 @@
     <Compile Include="Builder\IViewBuilderPlain.cs" />
     <Compile Include="Builder\IViewBuilderMenuDrawer.cs" />
     <Compile Include="Builder\IViewBuilder.cs" />
+    <Compile Include="Metamodel\MenuDefinition.cs" />
     <Compile Include="Metamodel\NavigationModel.cs" />
     <Compile Include="Metamodel\Transition.cs" />
     <Compile Include="Metamodel\View.cs" />

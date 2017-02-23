@@ -23,16 +23,11 @@ namespace MDSD.FluentNav.Builder.Droid
         private NavigationModel<MenuType> navModel;
         private bool modelIsBuilt = false;
 
-        private Type currentView;
-        private int menuItemCounter = 0;
-        private MenuType currentMenuType;
-        private Dictionary<string, Type> currentTransitions;
-        private Dictionary<int, Dictionary<string, object>> currentMenuFeatures;
-
-        public FluentNavAppCompatActivity()
-        {
-            navModel = new NavigationModel<MenuType>();
-        }
+        private Type currentView = null;
+        private int currentMenuItemPosition = 0;
+        private MenuType? currentMenuType = null;
+        private Dictionary<string, Type> currentTransitions = new Dictionary<string, Type>();
+        private Dictionary<int, Dictionary<string, object>> currentMenuFeatures = new Dictionary<int, Dictionary<string, object>>();
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -44,7 +39,7 @@ namespace MDSD.FluentNav.Builder.Droid
             }
         }
 
-
+        // TODO's
         // Instantiate metamodel + verify correctness of metamodel
         // Send click events + nav events to metamodel
         // Change state within metamodel accordingly
@@ -57,8 +52,9 @@ namespace MDSD.FluentNav.Builder.Droid
         {
             if(modelIsBuilt)
             {
-                throw new InvalidOperationException("Cannot build a new navigation model, after it is already built.");
+                throw new InvalidOperationException("Cannot build a new navigation model after it is already built.");
             }
+            navModel = new NavigationModel<MenuType>(); // Overwrite model if an attempt is made to redefine it within the BuildNavigation() impl.
             currentView = typeof(T);
             return this;
         }
@@ -67,12 +63,17 @@ namespace MDSD.FluentNav.Builder.Droid
         {
             FlushView();
             currentView = typeof(T);
-
             return this;
         }
 
         public IViewBuilderMenuDrawer<Android.Support.V4.App.Fragment> Spacer(string name = null)
         {
+            if(currentMenuFeatures[currentMenuItemPosition] == null)
+            {
+                currentMenuFeatures[currentMenuItemPosition] = new Dictionary<string, object>();
+            }
+            currentMenuFeatures[currentMenuItemPosition].Add("transitionId", currentMenuItemPosition.ToString());
+            currentMenuFeatures[currentMenuItemPosition].Add("name", name);
 
             NextMenuItem();
             return this;
@@ -80,16 +81,34 @@ namespace MDSD.FluentNav.Builder.Droid
 
         IViewBuilderMenuDrawer<Android.Support.V4.App.Fragment> IViewBuilderMenuDrawer<Android.Support.V4.App.Fragment>.Item<T>(string name, object icon)
         {
+            if (currentMenuFeatures[currentMenuItemPosition] == null)
+            {
+                currentMenuFeatures[currentMenuItemPosition] = new Dictionary<string, object>();
+            }
             Type viewType = typeof(T);
+            currentMenuFeatures[currentMenuItemPosition].Add("transitionId", currentMenuItemPosition.ToString());
+            currentMenuFeatures[currentMenuItemPosition].Add("name", name);
+            currentMenuFeatures[currentMenuItemPosition].Add("icon", icon);
 
+            currentTransitions.Add(currentMenuItemPosition.ToString(), viewType);
+            
             NextMenuItem();
             return this;
         }
 
         IViewBuilderMenuTabbedSlider<Android.Support.V4.App.Fragment> IViewBuilderMenuTabbedSlider<Android.Support.V4.App.Fragment>.Item<T>(string name, object icon)
         {
+            if (currentMenuFeatures[currentMenuItemPosition] == null)
+            {
+                currentMenuFeatures[currentMenuItemPosition] = new Dictionary<string, object>();
+            }
             Type viewType = typeof(T);
+            currentMenuFeatures[currentMenuItemPosition].Add("transitionId", currentMenuItemPosition.ToString());
+            currentMenuFeatures[currentMenuItemPosition].Add("name", name);
+            currentMenuFeatures[currentMenuItemPosition].Add("icon", icon);
 
+            currentTransitions.Add(currentMenuItemPosition.ToString(), viewType);
+            
             NextMenuItem();
             return this;
         }
@@ -136,14 +155,15 @@ namespace MDSD.FluentNav.Builder.Droid
             navModel.AddView(currentView, currentTransitions, currentMenuFeatures);
 
             currentView = null;
-            currentTransitions = null;
-            currentMenuFeatures = null;
-            menuItemCounter = 0;
+            currentTransitions = new Dictionary<string, Type>();
+            currentMenuFeatures = new Dictionary<int, Dictionary<string, object>>();
+            currentMenuType = null;
+            currentMenuItemPosition = 0;
         }
 
         private void NextMenuItem()
         {
-            menuItemCounter += 1;
+            currentMenuItemPosition += 1;
         }
     }
 }

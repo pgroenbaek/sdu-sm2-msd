@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MDSD.FluentNav.Builder
 {
-    public interface IViewBuilderPlain<ViewType>
+    public interface IViewBuilderPlain<TBaseView>
     {
-        ITransitionBuilder<ViewType> OnClick(int resourceId);
-        IViewBuilder<ViewType> SubView<T>(string title = null) where T : ViewType;
+        ITransitionBuilder<TBaseView> OnClick(int resourceId);
+        IViewBuilder<TBaseView> SubView<TView>(string title = null) where TView : TBaseView;
     }
 }

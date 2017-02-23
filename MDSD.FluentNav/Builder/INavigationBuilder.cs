@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MDSD.FluentNav.Builder
 {
-    public interface INavigationBuilder<ViewType>
+    public interface INavigationBuilder<TBaseView>
     {
-        IViewBuilder<ViewType> TopView<T>(string title = null) where T : ViewType;
+        IViewBuilder<TBaseView> TopView<TView>(string title = null) where TView : TBaseView;
     }
 }

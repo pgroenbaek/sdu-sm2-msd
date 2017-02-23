@@ -23,8 +23,8 @@ namespace MDSD.FluentNav.Builder.Droid
         private bool modelIsBuilt = false;
 
         private Type currentView;
-        private List<Transition<MenuTypes>> currentTransitions;
-        private 
+        private List<Type> currentTransitionsTo;
+        private Dictionary<int, Dictionary<string, object>> currentMenuFeaturesAtPositions;
 
         public FluentNavAppCompatActivity()
         {
@@ -56,6 +56,7 @@ namespace MDSD.FluentNav.Builder.Droid
             {
                 throw new InvalidOperationException("Cannot build a new navigation model, after it is already built.");
             }
+            Type viewType = typeof(T);
 
             return this;
         }
@@ -68,7 +69,7 @@ namespace MDSD.FluentNav.Builder.Droid
 
         public IViewBuilderMenuDrawer<Android.Support.V4.App.Fragment> Item<T>(string name = null, object icon = null) where T : Android.Support.V4.App.Fragment
         {
-
+            Type viewType = typeof(T);
             return this;
         }
         
@@ -98,6 +99,7 @@ namespace MDSD.FluentNav.Builder.Droid
 
         public IViewBuilder<Android.Support.V4.App.Fragment> SubView<T>(string title = null) where T : Android.Support.V4.App.Fragment
         {
+            Type viewType = typeof(T);
 
             return this;
         }
@@ -110,6 +112,7 @@ namespace MDSD.FluentNav.Builder.Droid
 
         public IViewBuilderPlain<Android.Support.V4.App.Fragment> NavigateTo<T>() where T : Android.Support.V4.App.Fragment
         {
+            Type viewType = typeof(T);
 
             return this;
         }

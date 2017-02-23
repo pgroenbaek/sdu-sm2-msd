@@ -9,7 +9,7 @@ namespace MDSD.FluentNav.Metamodel
     public class MenuDefinition<EMenuTypes>
     {
         public EMenuTypes MenuTypes { get; private set; }
-        public Dictionary<int, Dictionary<string, object>> FeaturesAtPosition { get; private set; }
+        public Dictionary<int, Dictionary<string, object>> MenuFeaturesAtPosition { get; private set; }
 
         public MenuDefinition()
         {

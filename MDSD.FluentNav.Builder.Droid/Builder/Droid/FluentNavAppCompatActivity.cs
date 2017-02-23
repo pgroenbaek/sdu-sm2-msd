@@ -14,21 +14,24 @@ namespace MDSD.FluentNav.Builder.Droid
         IViewBuilderMenuTabbedSlider<Android.Support.V4.App.Fragment>, ITransitionBuilder<Android.Support.V4.App.Fragment>
     {
 
-        public enum MenuTypes {
+        public enum MenuType {
+            Plain,
             DrawerMenu,
             TabbedSlider
         }
 
-        private NavigationModel<MenuTypes> navModel;
+        private NavigationModel<MenuType> navModel;
         private bool modelIsBuilt = false;
 
         private Type currentView;
-        private List<Type> currentTransitionsTo;
-        private Dictionary<int, Dictionary<string, object>> currentMenuFeaturesAtPositions;
+        private int menuItemCounter = 0;
+        private MenuType currentMenuType;
+        private Dictionary<string, Type> currentTransitions;
+        private Dictionary<int, Dictionary<string, object>> currentMenuFeatures;
 
         public FluentNavAppCompatActivity()
         {
-            navModel = new NavigationModel<MenuTypes>();
+            navModel = new NavigationModel<MenuType>();
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -56,55 +59,60 @@ namespace MDSD.FluentNav.Builder.Droid
             {
                 throw new InvalidOperationException("Cannot build a new navigation model, after it is already built.");
             }
-            Type viewType = typeof(T);
-
-            return this;
-        }
-
-        public IViewBuilderMenuDrawer<Android.Support.V4.App.Fragment> Spacer(string name = null, object icon = null)
-        {
-
-            return this;
-        }
-
-        public IViewBuilderMenuDrawer<Android.Support.V4.App.Fragment> Item<T>(string name = null, object icon = null) where T : Android.Support.V4.App.Fragment
-        {
-            Type viewType = typeof(T);
-            return this;
-        }
-        
-        public IViewBuilderPlain<Android.Support.V4.App.Fragment> Plain()
-        {
-
-            return this;
-        }
-
-        public IViewBuilderMenuDrawer<Android.Support.V4.App.Fragment> DrawerMenu()
-        {
-
-            return this;
-        }
-
-        public IViewBuilderMenuTabbedSlider<Android.Support.V4.App.Fragment> TabbedSlider()
-        {
-
-            return this;
-        }
-
-        public ITransitionBuilder<Android.Support.V4.App.Fragment> OnClick(int resourceId)
-        {
-
+            currentView = typeof(T);
             return this;
         }
 
         public IViewBuilder<Android.Support.V4.App.Fragment> SubView<T>(string title = null) where T : Android.Support.V4.App.Fragment
         {
-            Type viewType = typeof(T);
+            FlushView();
+            currentView = typeof(T);
 
             return this;
         }
 
+        public IViewBuilderMenuDrawer<Android.Support.V4.App.Fragment> Spacer(string name = null)
+        {
+
+            NextMenuItem();
+            return this;
+        }
+
+        IViewBuilderMenuDrawer<Android.Support.V4.App.Fragment> IViewBuilderMenuDrawer<Android.Support.V4.App.Fragment>.Item<T>(string name, object icon)
+        {
+            Type viewType = typeof(T);
+
+            NextMenuItem();
+            return this;
+        }
+
         IViewBuilderMenuTabbedSlider<Android.Support.V4.App.Fragment> IViewBuilderMenuTabbedSlider<Android.Support.V4.App.Fragment>.Item<T>(string name, object icon)
+        {
+            Type viewType = typeof(T);
+
+            NextMenuItem();
+            return this;
+        }
+
+        public IViewBuilderPlain<Android.Support.V4.App.Fragment> Plain()
+        {
+            currentMenuType = MenuType.Plain;
+            return this;
+        }
+
+        public IViewBuilderMenuDrawer<Android.Support.V4.App.Fragment> DrawerMenu()
+        {
+            currentMenuType = MenuType.DrawerMenu;
+            return this;
+        }
+
+        public IViewBuilderMenuTabbedSlider<Android.Support.V4.App.Fragment> TabbedSlider()
+        {
+            currentMenuType = MenuType.TabbedSlider;
+            return this;
+        }
+
+        public ITransitionBuilder<Android.Support.V4.App.Fragment> OnClick(int resourceId)
         {
 
             return this;
@@ -120,12 +128,22 @@ namespace MDSD.FluentNav.Builder.Droid
 
         private void FlushView()
         {
+            if(currentView == null)
+            {
+                throw new InvalidOperationException("Cannot flush view to model when no view was defined.");
+            }
 
+            navModel.AddView(currentView, currentTransitions, currentMenuFeatures);
+
+            currentView = null;
+            currentTransitions = null;
+            currentMenuFeatures = null;
+            menuItemCounter = 0;
         }
 
-        private void FlushTransition()
+        private void NextMenuItem()
         {
-
+            menuItemCounter += 1;
         }
     }
 }

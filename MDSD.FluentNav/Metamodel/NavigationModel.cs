@@ -17,12 +17,12 @@ namespace MDSD.FluentNav.Metamodel
 
         }
 
-        public void AddView(Type view)
+        public void AddView(Type view, Dictionary<string, Type> transitions, Dictionary<int, Dictionary<string, object>> menuDefinition)
         {
 
         }
 
-        public void AddTransition(Type fromView, Type toView, )
+        public void AddTransition(Type fromView, Type toView)
         {
 
         }

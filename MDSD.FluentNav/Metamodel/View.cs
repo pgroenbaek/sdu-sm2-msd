@@ -15,13 +15,17 @@ namespace MDSD.FluentNav.Metamodel
         public View(Type viewType)
         {
             Type = viewType;
-
             _transitions = new Dictionary<string, Transition>();
         }
 
         public void AddTransition(string eventId, Transition transition)
         {
             _transitions.Add(eventId, transition);
+        }
+
+        public Transition NextTransition(string eventId)
+        {
+            return _transitions[eventId];
         }
 
     }

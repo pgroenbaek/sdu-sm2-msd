@@ -35,7 +35,6 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <Folder Include="Validator\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builder\INavigationBuilder.cs" />
@@ -49,6 +48,7 @@
     <Compile Include="Metamodel\Transition.cs" />
     <Compile Include="Metamodel\View.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validator\NavigationModelValidator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

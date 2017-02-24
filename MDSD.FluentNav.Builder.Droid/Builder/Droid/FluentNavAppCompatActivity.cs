@@ -133,7 +133,7 @@ namespace MDSD.FluentNav.Builder.Droid
 
         public ITransitionBuilder<Android.Support.V4.App.Fragment> OnClick(int resourceId)
         {
-
+            
             return this;
         }
 

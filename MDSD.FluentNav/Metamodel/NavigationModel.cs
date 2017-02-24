@@ -6,27 +6,25 @@ using System.Threading.Tasks;
 
 namespace MDSD.FluentNav.Metamodel
 {
-    public class NavigationModel<EMenuTypes>
+    public class NavigationModel
     {
-        public View<EMenuTypes> CurrentView { get; private set; }
+        public View CurrentView { get; private set; }
 
-        private Dictionary<Type, View<EMenuTypes>> views = new Dictionary<Type, View<EMenuTypes>>();
+        private Dictionary<Type, View> _views;
 
         public NavigationModel()
         {
-
+            _views = new Dictionary<Type, View>()
         }
 
-        public void AddView(Type view, Dictionary<string, Type> transitions, Dictionary<int, Dictionary<string, object>> menuDefinition)
+        public void AddView(View view)
+        {
+            _views.Add(view.Type, view);
+        }
+
+        public void HandleEvent(string eventId)
         {
 
         }
-
-        public void AddTransition(Type fromView, Type toView)
-        {
-
-        }
-
-
     }
 }

@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace MDSD.FluentNav.Metamodel
 {
-    public class MenuDefinition<EMenuTypes>
+    public class MenuDefinition
     {
-        public EMenuTypes MenuTypes { get; private set; }
-        public Dictionary<int, Dictionary<string, object>> MenuFeaturesAtPosition { get; private set; }
+        public string MenuType { get; private set; }
+        public Dictionary<int, Dictionary<string, object>> FeaturesAtPosition { get; private set; }
 
-        public MenuDefinition()
+        public MenuDefinition(string menuType, Dictionary<int, Dictionary<string, object>> featuresAtPosition)
         {
-
+            MenuType = menuType;
+            FeaturesAtPosition = featuresAtPosition;
         }
-        
     }
 }

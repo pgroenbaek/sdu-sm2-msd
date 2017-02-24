@@ -10,19 +10,19 @@ namespace MDSD.FluentNav.Metamodel
     public class NavigationModel
     {
         public View CurrentView { get; private set; }
-
-        private bool _isModelBuilt;
+        public bool IsModelBuilt { get; private set; }
+        
         private Dictionary<Type, View> _views;
 
         public NavigationModel()
         {
-            _isModelBuilt = false;
+            IsModelBuilt = false;
             _views = new Dictionary<Type, View>();
         }
 
         public void AddView(View view)
         {
-            if(_isModelBuilt)
+            if(IsModelBuilt)
             {
                 return;
             }
@@ -31,15 +31,15 @@ namespace MDSD.FluentNav.Metamodel
 
         public void Initialize()
         {
-            _isModelBuilt = true;
+            IsModelBuilt = true;
             NavigationModelValidator.Validate(this);
         }
 
-        public void HandleEvent(string eventId)
+        public Transition HandleEvent(string eventId)
         {
             if(CurrentView != null)
             {
-                return;
+                return null;
             }
 
             Transition nextTransition = CurrentView.NextTransition(eventId);
@@ -47,11 +47,7 @@ namespace MDSD.FluentNav.Metamodel
             {
                 CurrentView = _views[nextTransition.TargetView];
             }
-        }
-
-        public void HandleBackEvent()
-        {
-
+            return nextTransition;
         }
     }
 }

@@ -20,8 +20,7 @@ namespace MDSD.FluentNav.Builder.Droid
             TabbedSlider
         }
 
-        private NavigationModel navModel;
-        private bool modelIsBuilt = false;
+        private NavigationModel _navModel;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -29,22 +28,35 @@ namespace MDSD.FluentNav.Builder.Droid
             if (savedInstanceState == null)
             {
                 BuildNavigation(this);
-                modelIsBuilt = true;
+                _navModel.Initialize();
             }
         }
 
+        /// <summary>
+        ///   Override with a definitnion of how views should be bound together.
+        /// </summary>
+        /// <param name="navigation">Builder interface</param>
         protected abstract void BuildNavigation(INavigationBuilder<Android.Support.V4.App.Fragment> navigation);
 
 
 
-
-
+        //////////////////////////////////////
+        //////////////////////////////////////
+        ///// Using the built metamodel //////
+        //////////////////////////////////////
+        //////////////////////////////////////
 
         // TODO's
-        // Instantiate metamodel + verify correctness of metamodel
         // Send click events + nav events to metamodel
-        // Change state within metamodel accordingly
         // Observe currentview. Make changes to activity accordingly.
+
+        
+        public override void OnBackPressed()
+        {
+            base.OnBackPressed();
+        }
+
+
 
         ///////////////////////////////////////
         ///////////////////////////////////////
@@ -59,11 +71,11 @@ namespace MDSD.FluentNav.Builder.Droid
 
         public IViewBuilder<Android.Support.V4.App.Fragment> TopView<T>(string title = null) where T : Android.Support.V4.App.Fragment
         {
-            if(modelIsBuilt)
+            if(_navModel.IsModelBuilt)
             {
                 throw new InvalidOperationException("Cannot build a new navigation model after it is already built.");
             }
-            navModel = new NavigationModel(); // Make sure to overwrite model, if an attempt has been made to redefine it within the BuildNavigation() impl.
+            _navModel = new NavigationModel(); // Make sure to overwrite model, if an attempt has been made to redefine it within the BuildNavigation() impl.
             currentView = new View(typeof(T));
             return this;
         }
@@ -140,19 +152,19 @@ namespace MDSD.FluentNav.Builder.Droid
 
         public IViewBuilderPlain<Android.Support.V4.App.Fragment> Plain()
         {
-            currentMenuDef = new MenuDefinition("Plain");
+            currentMenuDef = new MenuDefinition(MenuType.Plain.ToString());
             return this;
         }
 
         public IViewBuilderMenuDrawer<Android.Support.V4.App.Fragment> DrawerMenu()
         {
-            currentMenuDef = new MenuDefinition("DrawerMenu");
+            currentMenuDef = new MenuDefinition(MenuType.Drawer.ToString());
             return this;
         }
 
         public IViewBuilderMenuTabbedSlider<Android.Support.V4.App.Fragment> TabbedSlider()
         {
-            currentMenuDef = new MenuDefinition("TabbedSlider");
+            currentMenuDef = new MenuDefinition(MenuType.TabbedSlider.ToString());
             return this;
         }
 
@@ -178,9 +190,9 @@ namespace MDSD.FluentNav.Builder.Droid
             {
                 return;
             }
-
             currentView.MenuDefinition = currentMenuDef;
-            navModel.AddView(currentView);
+
+            _navModel.AddView(currentView);
 
             currentView = null;
             currentMenuDef = null;

@@ -8,7 +8,7 @@ namespace MDSD.FluentNav.Builder
 {
     public interface IViewBuilderMenuTabbedSlider<TBaseView>
     {
-        IViewBuilderMenuTabbedSlider<TBaseView> Item<TView>(string name = null, object icon = null) where TView : TBaseView;
+        IViewBuilderMenuTabbedSlider<TBaseView> TabbedItem<TView>(string name = null, object icon = null) where TView : TBaseView;
         IViewBuilder<TBaseView> SubView<TView>(string title = null) where TView : TBaseView;
     }
 }

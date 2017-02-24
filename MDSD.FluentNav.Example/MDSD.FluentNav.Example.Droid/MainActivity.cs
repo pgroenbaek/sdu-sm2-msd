@@ -22,22 +22,23 @@ namespace MDSD.FluentNav.Example.Droid
             nav
             .TopView<GreenFragment>(title: "Example")
                 .DrawerMenu()
-                .Item<RedFragment>(name: "Red")
-                .Item<GreenFragment>(name: "Green")
-                .Spacer(name: null)
-                .Item<YellowFragment>(icon: null, name: "Yellow")
+                .DrawerItem<RedFragment>(name: "Red")
+                .DrawerItem<GreenFragment>(name: "Green")
+                .DrawerSpacer(name: null)
+                .DrawerItem<YellowFragment>(icon: null, name: "Yellow")
             .SubView<RedFragment>()
                 .Plain()
-                .OnClick(Resource.Id.fragment_red_btn1).NavigateTo<BlueFragment>()
+                .OnClick(Resource.Id.fragment_red_btn1)
+                    .NavigateTo<BlueFragment>()
             .SubView<YellowFragment>()
                 .Plain()
-                .OnClick(Resource.Id.fragment_yellow_btn1).NavigateTo<BlueFragment>()
+                .OnClick(Resource.Id.fragment_yellow_btn1)
+                    .NavigateTo<BlueFragment>()
             .SubView<BlueFragment>()
                 .TabbedSlider()
-                .Item<WhiteFragment>(name: "White")
-                .Item<BlackFragment>(name: "Not White")
+                .TabbedItem<WhiteFragment>(name: "White")
+                .TabbedItem<BlackFragment>(name: "Not White")
             ;
-
         }
     }
 }

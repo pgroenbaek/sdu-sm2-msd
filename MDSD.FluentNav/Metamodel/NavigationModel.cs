@@ -14,7 +14,7 @@ namespace MDSD.FluentNav.Metamodel
 
         public NavigationModel()
         {
-            _views = new Dictionary<Type, View>()
+            _views = new Dictionary<Type, View>();
         }
 
         public void AddView(View view)

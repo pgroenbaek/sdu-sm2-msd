@@ -11,10 +11,10 @@ namespace MDSD.FluentNav.Metamodel
         public string MenuType { get; private set; }
         public Dictionary<int, Dictionary<string, object>> FeaturesAtPosition { get; private set; }
 
-        public MenuDefinition(string menuType, Dictionary<int, Dictionary<string, object>> featuresAtPosition)
+        public MenuDefinition(string menuType)
         {
             MenuType = menuType;
-            FeaturesAtPosition = featuresAtPosition;
+            FeaturesAtPosition = new Dictionary<int, Dictionary<string, object>>();
         }
     }
 }

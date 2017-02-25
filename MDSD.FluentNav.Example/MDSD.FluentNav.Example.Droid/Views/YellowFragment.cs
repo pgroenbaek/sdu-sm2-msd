@@ -25,7 +25,7 @@ namespace MDSD.FluentNav.Example.Droid.Views
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
-            return inflater.Inflate(Resource.Layout.fragment_green, container, false);
+            return inflater.Inflate(Resource.Layout.fragment_yellow, container, false);
         }
     }
 }

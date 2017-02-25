@@ -2,6 +2,7 @@ using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Views;
+using Android.Widget;
 using MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers;
 using MDSD.FluentNav.Metamodel;
 using System;
@@ -21,7 +22,7 @@ namespace MDSD.FluentNav.Builder.Droid
         }
 
         private NavigationModel _navModel;
-        Android.Support.V7.Widget.Toolbar _toolbar;
+        private Android.Support.V7.Widget.Toolbar _toolbar;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -53,11 +54,6 @@ namespace MDSD.FluentNav.Builder.Droid
         ///// Using the built metamodel //////
         //////////////////////////////////////
         //////////////////////////////////////
-
-        // TODO's
-        // Send click events + nav events to metamodel
-        // Observe currentview. Make changes to activity accordingly.
-
         
         public override void OnBackPressed()
         {
@@ -65,7 +61,14 @@ namespace MDSD.FluentNav.Builder.Droid
             if(isEmpty)
             {
                 Finish();
+                return;
             }
+            ApplyView(_navModel.CurrentView);
+        }
+
+        public void HandleEvent(string eventId)
+        {
+            _navModel.HandleEvent(eventId);
             ApplyView(_navModel.CurrentView);
         }
 
@@ -86,43 +89,45 @@ namespace MDSD.FluentNav.Builder.Droid
             // Configure style of menu.
             MenuType menuType;
             Enum.TryParse(menuDef.MenuType, out menuType);
-            Android.Support.V4.App.Fragment containerView = null;
+            Android.Support.V4.App.Fragment container = null;
             switch(menuType)
             {
                 case MenuType.Plain:
-                    containerView = new PlainAppCompatContainer();
+                    container = new PlainAppCompatContainer();
                     SetUpNavigationEnabled(true);
                     break;
 
                 case MenuType.Drawer:
-                    containerView = new DrawerAppCompatContainer();
+                    container = new DrawerAppCompatContainer();
                     SetUpNavigationEnabled(false);
                     BuildDrawerMenu(menuDef);
                     break;
 
                 case MenuType.TabbedSlider:
-                    containerView = new TabbedSliderAppCompatContainer();
+                    container = new TabbedSliderAppCompatContainer();
                     SetUpNavigationEnabled(true);
                     break;
 
                 default:
                     return;
-            }            
+            }
             SupportFragmentManager
                 .BeginTransaction()
-                .Replace(Resource.Id.activity_fluentnav_containerframe, containerView)
+                .Replace(Resource.Id.activity_fluentnav_containerframe, container)
                 .DisallowAddToBackStack()
                 .Commit();
 
+            // Instantiate content fragment.
+            Android.Support.V4.App.Fragment contentFragment = (Android.Support.V4.App.Fragment)Activator.CreateInstance(contentType);
+            
             // Set the content frame to the specified type of fragment.
-            Android.Support.V4.App.Fragment contentView = (Android.Support.V4.App.Fragment)Activator.CreateInstance(contentType);
             SupportFragmentManager
                 .BeginTransaction()
-                .Replace(Resource.Id.activity_fluentnav_contentframe, contentView)
-                .AddToBackStack(contentType.ToString())
+                .Replace(Resource.Id.activity_fluentnav_contentframe, contentFragment)
+                .DisallowAddToBackStack()
                 .Commit();
         }
-        
+
         private void BuildDrawerMenu(MenuDefinition menuDef)
         {
             NavigationView navigationView = FindViewById<NavigationView>(Resource.Id.activity_fluentnav_navigationview);

@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers
 {
-    public class PlainAppCompatContainer : Android.Support.V4.App.Fragment
+    public class PlainAppCompatContainer : Android.Support.V4.App.Fragment, ViewGroup.IOnHierarchyChangeListener
     {
         private FluentNavAppCompatActivity _parentActivity;
 
@@ -25,7 +25,35 @@ namespace MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
-            return inflater.Inflate(Resource.Layout.container_plain, container, false);
+
+            
+
+            ViewGroup rootView = (ViewGroup) inflater.Inflate(Resource.Layout.container_plain, container, false);
+            rootView.SetOnHierarchyChangeListener(this);
+            return rootView;
+        }
+
+        // Add click listeners to buttons, when child views are added.
+        public void OnChildViewAdded(View parent, View child)
+        {
+            for (int i = 0; i < ((ViewGroup)child).ChildCount; i++)
+            {
+                View childView = ((ViewGroup)child).GetChildAt(i);
+                if (childView is Button)
+                {
+                    Button b = (Button)childView;
+                    b.Click += (btnSender, btnEvent) =>
+                    {
+                        Console.WriteLine("CliCCCCK");
+                        _parentActivity.HandleEvent(Convert.ToString(b.Id));
+                    };
+                }
+            }
+        }
+
+        public void OnChildViewRemoved(View parent, View child)
+        {
+
         }
     }
 }

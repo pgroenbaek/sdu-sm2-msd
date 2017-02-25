@@ -45,10 +45,10 @@ namespace MDSD.FluentNav.Metamodel
         // Returns true if transition stack is empty.
         public bool HandleBackPressed()
         {
-            Transition previousTransition = _transitionStack.Peek();
-            if (previousTransition != null)
+            if (_transitionStack.Count > 0)
             {
-                CurrentView = previousTransition.SourceView;
+                CurrentView = _transitionStack.Peek().SourceView;
+                _transitionStack.Pop();
                 return false;
             }
             return true;
@@ -56,7 +56,7 @@ namespace MDSD.FluentNav.Metamodel
 
         public Transition HandleEvent(string eventId)
         {
-            if(CurrentView != null)
+            if(CurrentView == null)
             {
                 return null;
             }

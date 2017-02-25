@@ -26,9 +26,13 @@ namespace MDSD.FluentNav.Metamodel
             _transitions.Add(eventId, transition);
         }
 
-        public Transition NextTransition(string eventId)
+        internal Transition NextTransition(string eventId)
         {
-            return _transitions[eventId];
+            if (_transitions.ContainsKey(eventId))
+            {
+                return _transitions[eventId];
+            }
+            return null;
         }
 
     }

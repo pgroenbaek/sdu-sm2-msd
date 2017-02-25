@@ -10,6 +10,6 @@ namespace MDSD.FluentNav.Builder
     {
         IViewBuilderMenuDrawer<TBaseView> DrawerSpacer(string name = null);
         IViewBuilderMenuDrawer<TBaseView> DrawerItem<TView>(string name = null, object icon = null) where TView : TBaseView;
-        IViewBuilder<TBaseView> SubView<TView>(string title = null) where TView : TBaseView;
+        IViewBuilder<TBaseView> View<TView>(string title = null) where TView : TBaseView;
     }
 }

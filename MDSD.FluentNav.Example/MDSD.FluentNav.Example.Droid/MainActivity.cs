@@ -19,26 +19,30 @@ namespace MDSD.FluentNav.Example.Droid
         
         protected override void BuildNavigation(INavigationBuilder<Android.Support.V4.App.Fragment> nav)
         {
-            nav
+            /*nav
             .TopView<GreenFragment>(title: "Example")
                 .DrawerMenu()
                 .DrawerItem<RedFragment>(name: "Red")
                 .DrawerItem<GreenFragment>(name: "Green")
                 .DrawerSpacer(name: null)
                 .DrawerItem<YellowFragment>(icon: null, name: "Yellow")
-            .SubView<RedFragment>()
+            .View<RedFragment>()
                 .Plain()
                 .OnClick(Resource.Id.fragment_red_btn1)
                     .NavigateTo<BlueFragment>()
-            .SubView<YellowFragment>()
+            .View<YellowFragment>()
                 .Plain()
                 .OnClick(Resource.Id.fragment_yellow_btn1)
                     .NavigateTo<BlueFragment>()
-            .SubView<BlueFragment>()
+            .View<BlueFragment>()
                 .TabbedSlider()
                 .TabbedItem<WhiteFragment>(name: "White")
                 .TabbedItem<BlackFragment>(name: "Not White")
-            ;
+            ;*/
+
+            nav
+            .TopView<GreenFragment>(title: "Example")
+                .Plain();
         }
     }
 }

@@ -23,6 +23,7 @@ EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		MDSD.FluentNav.Example\MDSD.FluentNav.Example\MDSD.FluentNav.Example.projitems*{52fce341-f939-4fd5-9822-a8662db1c287}*SharedItemsImports = 13
+		MDSD.FluentNav.Example\MDSD.FluentNav.Example\MDSD.FluentNav.Example.projitems*{bee4f6b7-8e14-4ef1-a17c-1f9d6c5848c7}*SharedItemsImports = 4
 		MDSD.FluentNav.Example\MDSD.FluentNav.Example\MDSD.FluentNav.Example.projitems*{e77c46aa-c80e-4425-b783-b4114443fa21}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

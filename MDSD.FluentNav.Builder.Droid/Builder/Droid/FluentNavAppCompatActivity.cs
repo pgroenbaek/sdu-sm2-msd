@@ -48,10 +48,9 @@ namespace MDSD.FluentNav.Builder.Droid
         protected abstract void BuildNavigation(INavigationBuilder<Android.Support.V4.App.Fragment> navigation);
 
 
-
         //////////////////////////////////////
         //////////////////////////////////////
-        ///// Using the built metamodel //////
+        ///   Using the built metamodel    ///
         //////////////////////////////////////
         //////////////////////////////////////
         
@@ -168,7 +167,7 @@ namespace MDSD.FluentNav.Builder.Droid
 
         ///////////////////////////////////////
         ///////////////////////////////////////
-        ///// Fluent builder-stuff below //////
+        ///   Fluent builder-stuff below    ///
         ///////////////////////////////////////
         ///////////////////////////////////////
 

@@ -53,6 +53,15 @@ namespace MDSD.FluentNav.Builder.Droid
         ///   Using the built metamodel    ///
         //////////////////////////////////////
         //////////////////////////////////////
+
+
+        // TODO's
+        // - Implement Drawer
+        // - Implement TabbedSlider
+        // - Make proper example work
+        // - Make simple validator + test
+        // - Write README.md
+
         
         public override void OnBackPressed()
         {

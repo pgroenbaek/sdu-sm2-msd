@@ -33,7 +33,7 @@ namespace MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers
             return rootView;
         }
 
-        // Add click listeners to buttons, when child views are added.
+        // Add click listeners to buttons, when child views are added. Could be expanded to things other than buttons.
         public void OnChildViewAdded(View parent, View child)
         {
             for (int i = 0; i < ((ViewGroup)child).ChildCount; i++)
@@ -44,7 +44,6 @@ namespace MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers
                     Button b = (Button)childView;
                     b.Click += (btnSender, btnEvent) =>
                     {
-                        Console.WriteLine("CliCCCCK");
                         _parentActivity.HandleEvent(Convert.ToString(b.Id));
                     };
                 }

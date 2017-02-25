@@ -13,7 +13,7 @@ using MDSD.FluentNav.Example.Droid.Views;
 
 namespace MDSD.FluentNav.Example.Droid
 {
-    [Activity(Label = "MDSD.FluentNav.Example", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "MDSD.FluentNav.Example", Icon = "@drawable/icon", MainLauncher = true, Theme = "@style/AppTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : FluentNavAppCompatActivity
     {
         

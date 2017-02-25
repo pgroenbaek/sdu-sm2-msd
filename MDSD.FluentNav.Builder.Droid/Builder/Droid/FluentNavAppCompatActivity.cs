@@ -29,6 +29,8 @@ namespace MDSD.FluentNav.Builder.Droid
             {
                 BuildNavigation(this);
                 _navModel.Initialize();
+
+                System.Console.WriteLine(_navModel.CurrentView);
             }
         }
 
@@ -58,6 +60,8 @@ namespace MDSD.FluentNav.Builder.Droid
 
 
 
+
+
         ///////////////////////////////////////
         ///////////////////////////////////////
         ///// Fluent builder-stuff below //////
@@ -71,10 +75,6 @@ namespace MDSD.FluentNav.Builder.Droid
 
         public IViewBuilder<Android.Support.V4.App.Fragment> TopView<T>(string title = null) where T : Android.Support.V4.App.Fragment
         {
-            if(_navModel.IsModelBuilt)
-            {
-                throw new InvalidOperationException("Cannot build a new navigation model after it is already built.");
-            }
             _navModel = new NavigationModel(); // Make sure to overwrite model, if an attempt has been made to redefine it within the BuildNavigation() impl.
             currentView = new View(typeof(T));
             return this;
@@ -94,7 +94,7 @@ namespace MDSD.FluentNav.Builder.Droid
                 return this;
             }
 
-            if (currentMenuDef.FeaturesAtPosition[currentMenuDefPosition] == null)
+            if (!currentMenuDef.FeaturesAtPosition.ContainsKey(currentMenuDefPosition))
             {
                 currentMenuDef.FeaturesAtPosition[currentMenuDefPosition] = new Dictionary<string, object>();
             }
@@ -111,7 +111,7 @@ namespace MDSD.FluentNav.Builder.Droid
                 return this;
             }
 
-            if (currentMenuDef.FeaturesAtPosition[currentMenuDefPosition] == null)
+            if (!currentMenuDef.FeaturesAtPosition.ContainsKey(currentMenuDefPosition))
             {
                 currentMenuDef.FeaturesAtPosition[currentMenuDefPosition] = new Dictionary<string, object>();
             }
@@ -134,7 +134,7 @@ namespace MDSD.FluentNav.Builder.Droid
                 return this;
             }
 
-            if (currentMenuDef.FeaturesAtPosition[currentMenuDefPosition] == null)
+            if (!currentMenuDef.FeaturesAtPosition.ContainsKey(currentMenuDefPosition))
             {
                 currentMenuDef.FeaturesAtPosition[currentMenuDefPosition] = new Dictionary<string, object>();
             }

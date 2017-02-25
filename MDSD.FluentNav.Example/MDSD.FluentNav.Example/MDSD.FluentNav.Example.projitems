@@ -3,7 +3,7 @@
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
-    <SharedGUID>52a7b2d2-4ae6-4415-98e9-85a0baee53e9</SharedGUID>
+    <SharedGUID>52fce341-f939-4fd5-9822-a8662db1c287</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
     <Import_RootNamespace>MDSD.FluentNav.Example</Import_RootNamespace>

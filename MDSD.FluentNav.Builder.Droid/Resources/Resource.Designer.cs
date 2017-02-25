@@ -1449,8 +1449,8 @@ namespace MDSD.FluentNav.Builder.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0b0050
-			public static int action0 = 2131427408;
+			// aapt resource value: 0x7f0b0053
+			public static int action0 = 2131427411;
 			
 			// aapt resource value: 0x7f0b0041
 			public static int action_bar = 2131427393;
@@ -1476,8 +1476,8 @@ namespace MDSD.FluentNav.Builder.Droid
 			// aapt resource value: 0x7f0b0042
 			public static int action_context_bar = 2131427394;
 			
-			// aapt resource value: 0x7f0b0054
-			public static int action_divider = 2131427412;
+			// aapt resource value: 0x7f0b0057
+			public static int action_divider = 2131427415;
 			
 			// aapt resource value: 0x7f0b0002
 			public static int action_menu_divider = 2131427330;
@@ -1497,6 +1497,15 @@ namespace MDSD.FluentNav.Builder.Droid
 			// aapt resource value: 0x7f0b0024
 			public static int activity_chooser_view_content = 2131427364;
 			
+			// aapt resource value: 0x7f0b0050
+			public static int activity_fluentnav_appbar = 2131427408;
+			
+			// aapt resource value: 0x7f0b0052
+			public static int activity_fluentnav_containerframe = 2131427410;
+			
+			// aapt resource value: 0x7f0b0051
+			public static int activity_fluentnav_toolbar = 2131427409;
+			
 			// aapt resource value: 0x7f0b0030
 			public static int alertTitle = 2131427376;
 			
@@ -1509,14 +1518,14 @@ namespace MDSD.FluentNav.Builder.Droid
 			// aapt resource value: 0x7f0b002b
 			public static int buttonPanel = 2131427371;
 			
-			// aapt resource value: 0x7f0b0051
-			public static int cancel_action = 2131427409;
+			// aapt resource value: 0x7f0b0054
+			public static int cancel_action = 2131427412;
 			
 			// aapt resource value: 0x7f0b0039
 			public static int checkbox = 2131427385;
 			
-			// aapt resource value: 0x7f0b0057
-			public static int chronometer = 2131427415;
+			// aapt resource value: 0x7f0b005a
+			public static int chronometer = 2131427418;
 			
 			// aapt resource value: 0x7f0b001d
 			public static int collapseActionView = 2131427357;
@@ -1545,8 +1554,8 @@ namespace MDSD.FluentNav.Builder.Droid
 			// aapt resource value: 0x7f0b001a
 			public static int end = 2131427354;
 			
-			// aapt resource value: 0x7f0b005c
-			public static int end_padder = 2131427420;
+			// aapt resource value: 0x7f0b005f
+			public static int end_padder = 2131427423;
 			
 			// aapt resource value: 0x7f0b0025
 			public static int expand_activities_button = 2131427365;
@@ -1569,14 +1578,14 @@ namespace MDSD.FluentNav.Builder.Droid
 			// aapt resource value: 0x7f0b0026
 			public static int image = 2131427366;
 			
-			// aapt resource value: 0x7f0b005b
-			public static int info = 2131427419;
+			// aapt resource value: 0x7f0b005e
+			public static int info = 2131427422;
 			
-			// aapt resource value: 0x7f0b0055
-			public static int line1 = 2131427413;
+			// aapt resource value: 0x7f0b0058
+			public static int line1 = 2131427416;
 			
-			// aapt resource value: 0x7f0b0059
-			public static int line3 = 2131427417;
+			// aapt resource value: 0x7f0b005c
+			public static int line3 = 2131427420;
 			
 			// aapt resource value: 0x7f0b0009
 			public static int listMode = 2131427337;
@@ -1584,8 +1593,8 @@ namespace MDSD.FluentNav.Builder.Droid
 			// aapt resource value: 0x7f0b0028
 			public static int list_item = 2131427368;
 			
-			// aapt resource value: 0x7f0b0053
-			public static int media_actions = 2131427411;
+			// aapt resource value: 0x7f0b0056
+			public static int media_actions = 2131427414;
 			
 			// aapt resource value: 0x7f0b001b
 			public static int middle = 2131427355;
@@ -1686,8 +1695,8 @@ namespace MDSD.FluentNav.Builder.Droid
 			// aapt resource value: 0x7f0b0018
 			public static int src_over = 2131427352;
 			
-			// aapt resource value: 0x7f0b0052
-			public static int status_bar_latest_event_content = 2131427410;
+			// aapt resource value: 0x7f0b0055
+			public static int status_bar_latest_event_content = 2131427413;
 			
 			// aapt resource value: 0x7f0b004c
 			public static int submit_area = 2131427404;
@@ -1695,17 +1704,17 @@ namespace MDSD.FluentNav.Builder.Droid
 			// aapt resource value: 0x7f0b000b
 			public static int tabMode = 2131427339;
 			
-			// aapt resource value: 0x7f0b005a
-			public static int text = 2131427418;
+			// aapt resource value: 0x7f0b005d
+			public static int text = 2131427421;
 			
-			// aapt resource value: 0x7f0b0058
-			public static int text2 = 2131427416;
+			// aapt resource value: 0x7f0b005b
+			public static int text2 = 2131427419;
 			
 			// aapt resource value: 0x7f0b0034
 			public static int textSpacerNoButtons = 2131427380;
 			
-			// aapt resource value: 0x7f0b0056
-			public static int time = 2131427414;
+			// aapt resource value: 0x7f0b0059
+			public static int time = 2131427417;
 			
 			// aapt resource value: 0x7f0b002a
 			public static int title = 2131427370;
@@ -1845,40 +1854,43 @@ namespace MDSD.FluentNav.Builder.Droid
 			public static int abc_select_dialog_material = 2130903064;
 			
 			// aapt resource value: 0x7f030019
-			public static int notification_media_action = 2130903065;
+			public static int activity_fluentnav = 2130903065;
 			
 			// aapt resource value: 0x7f03001a
-			public static int notification_media_cancel_action = 2130903066;
+			public static int notification_media_action = 2130903066;
 			
 			// aapt resource value: 0x7f03001b
-			public static int notification_template_big_media = 2130903067;
+			public static int notification_media_cancel_action = 2130903067;
 			
 			// aapt resource value: 0x7f03001c
-			public static int notification_template_big_media_narrow = 2130903068;
+			public static int notification_template_big_media = 2130903068;
 			
 			// aapt resource value: 0x7f03001d
-			public static int notification_template_lines = 2130903069;
+			public static int notification_template_big_media_narrow = 2130903069;
 			
 			// aapt resource value: 0x7f03001e
-			public static int notification_template_media = 2130903070;
+			public static int notification_template_lines = 2130903070;
 			
 			// aapt resource value: 0x7f03001f
-			public static int notification_template_part_chronometer = 2130903071;
+			public static int notification_template_media = 2130903071;
 			
 			// aapt resource value: 0x7f030020
-			public static int notification_template_part_time = 2130903072;
+			public static int notification_template_part_chronometer = 2130903072;
 			
 			// aapt resource value: 0x7f030021
-			public static int select_dialog_item_material = 2130903073;
+			public static int notification_template_part_time = 2130903073;
 			
 			// aapt resource value: 0x7f030022
-			public static int select_dialog_multichoice_material = 2130903074;
+			public static int select_dialog_item_material = 2130903074;
 			
 			// aapt resource value: 0x7f030023
-			public static int select_dialog_singlechoice_material = 2130903075;
+			public static int select_dialog_multichoice_material = 2130903075;
 			
 			// aapt resource value: 0x7f030024
-			public static int support_simple_spinner_dropdown_item = 2130903076;
+			public static int select_dialog_singlechoice_material = 2130903076;
+			
+			// aapt resource value: 0x7f030025
+			public static int support_simple_spinner_dropdown_item = 2130903077;
 			
 			static Layout()
 			{

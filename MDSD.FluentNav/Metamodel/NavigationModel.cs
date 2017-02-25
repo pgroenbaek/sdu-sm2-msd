@@ -26,6 +26,11 @@ namespace MDSD.FluentNav.Metamodel
             {
                 return;
             }
+
+            if(_views.Count == 0)
+            {
+                CurrentView = view;
+            }
             _views.Add(view.Type, view);
         }
 

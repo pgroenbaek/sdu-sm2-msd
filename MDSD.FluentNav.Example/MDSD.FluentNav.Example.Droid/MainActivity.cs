@@ -42,6 +42,9 @@ namespace MDSD.FluentNav.Example.Droid
 
             nav
             .TopView<GreenFragment>(title: "Example")
+                .Plain()
+                .OnClick(Resource.Id.fragment_green_btn1).NavigateTo<RedFragment>()
+            .View<RedFragment>(title: "Red")
                 .Plain();
         }
     }

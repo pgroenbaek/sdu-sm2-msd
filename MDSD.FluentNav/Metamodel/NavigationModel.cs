@@ -13,11 +13,13 @@ namespace MDSD.FluentNav.Metamodel
         public bool IsModelBuilt { get; private set; }
         
         private Dictionary<Type, View> _views;
+        private Stack<Transition> _transitionStack;
 
         public NavigationModel()
         {
             IsModelBuilt = false;
             _views = new Dictionary<Type, View>();
+            _transitionStack = new Stack<Transition>();
         }
 
         public void AddView(View view)
@@ -40,6 +42,18 @@ namespace MDSD.FluentNav.Metamodel
             NavigationModelValidator.Validate(this);
         }
 
+        // Returns true if transition stack is empty.
+        public bool HandleBackPressed()
+        {
+            Transition previousTransition = _transitionStack.Peek();
+            if (previousTransition != null)
+            {
+                CurrentView = previousTransition.SourceView;
+                return false;
+            }
+            return true;
+        }
+
         public Transition HandleEvent(string eventId)
         {
             if(CurrentView != null)
@@ -52,6 +66,7 @@ namespace MDSD.FluentNav.Metamodel
             {
                 CurrentView = _views[nextTransition.TargetView];
             }
+            _transitionStack.Push(nextTransition);
             return nextTransition;
         }
     }

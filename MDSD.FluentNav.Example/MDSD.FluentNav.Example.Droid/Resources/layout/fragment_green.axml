@@ -6,7 +6,7 @@
     android:layout_height="match_parent" >
 
   <TextView
-    android:textColor="@color/md_green_800"
+    android:textColor="@color/md_green_900"
     android:text="Green"
     android:layout_gravity="center"
     android:layout_width="wrap_content"
@@ -15,6 +15,7 @@
 
   <Button
     android:id="@+id/fragment_green_btn1"
+    android:text="Click me!"
     android:layout_marginTop="10dp"
     android:layout_gravity="center"
     android:layout_width="wrap_content"

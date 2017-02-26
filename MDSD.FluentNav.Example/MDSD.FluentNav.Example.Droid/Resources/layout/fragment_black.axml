@@ -15,6 +15,7 @@
 
   <Button
     android:id="@+id/fragment_black_btn1"
+    android:text="Click me!"
     android:layout_marginTop="10dp"
     android:layout_gravity="center"
     android:layout_width="wrap_content"

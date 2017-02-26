@@ -23,6 +23,7 @@ namespace MDSD.FluentNav.Builder.Droid
 
         private NavigationModel _navModel;
         private Android.Support.V7.Widget.Toolbar _toolbar;
+        private MenuDefinition _appliedMenuDef;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -39,6 +40,16 @@ namespace MDSD.FluentNav.Builder.Droid
                 _navModel.Initialize();
                 ApplyView(_navModel.CurrentView);
             }
+        }
+
+        internal Android.Support.V7.Widget.Toolbar GetToolbar()
+        {
+            return _toolbar;
+        }
+
+        internal MenuDefinition GetAppliedMenuDefinition()
+        {
+            return _appliedMenuDef;
         }
 
         /// <summary>
@@ -89,14 +100,14 @@ namespace MDSD.FluentNav.Builder.Droid
         private void ApplyView(Metamodel.View view)
         {
             Type contentType = view.Type;
-            MenuDefinition menuDef = view.MenuDefinition;
+            _appliedMenuDef = view.MenuDefinition;
 
             // Set basic attributes.
             SupportActionBar.Title = view.Title;
 
             // Configure style of menu.
             MenuType menuType;
-            Enum.TryParse(menuDef.MenuType, out menuType);
+            Enum.TryParse(_appliedMenuDef.MenuType, out menuType);
             Android.Support.V4.App.Fragment container = null;
             switch(menuType)
             {
@@ -108,7 +119,6 @@ namespace MDSD.FluentNav.Builder.Droid
                 case MenuType.Drawer:
                     container = new DrawerAppCompatContainer();
                     SetUpNavigationEnabled(false);
-                    BuildDrawerMenu(menuDef);
                     break;
 
                 case MenuType.TabbedSlider:
@@ -134,34 +144,6 @@ namespace MDSD.FluentNav.Builder.Droid
                 .Replace(Resource.Id.activity_fluentnav_contentframe, contentFragment)
                 .DisallowAddToBackStack()
                 .Commit();
-        }
-
-        private void BuildDrawerMenu(MenuDefinition menuDef)
-        {
-            NavigationView navigationView = FindViewById<NavigationView>(Resource.Id.activity_fluentnav_navigationview);
-            navigationView.InflateMenu(Resource.Menu.menu_empty);
-
-            int spacerCounter = 0;
-            for (int i = 0; i < menuDef.FeaturesAtPosition.Count; i++)
-            {
-                if(menuDef.FeaturesAtPosition[i] == null)
-                {
-                    continue;
-                }
-
-                Dictionary<string, object> positionDef = menuDef.FeaturesAtPosition[i];
-                if(positionDef["type"].Equals("item"))
-                {
-                    string title = (string) positionDef["name"];
-                    navigationView.Menu.Add(spacerCounter, i, i + 1, title);
-                }
-                else if(positionDef["type"].Equals("spacer"))
-                {
-                    string title = (string)positionDef["name"];
-                    spacerCounter += 1;
-                    navigationView.Menu.Add(spacerCounter, i, i + 1, title);
-                }
-            }
         }
 
         private void SetUpNavigationEnabled(bool upNavigationEnabled)

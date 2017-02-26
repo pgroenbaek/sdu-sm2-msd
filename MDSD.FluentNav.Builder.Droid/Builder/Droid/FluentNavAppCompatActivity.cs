@@ -113,17 +113,14 @@ namespace MDSD.FluentNav.Builder.Droid
             {
                 case MenuType.Plain:
                     container = new PlainAppCompatContainer();
-                    SetUpNavigationEnabled(true);
                     break;
 
                 case MenuType.Drawer:
                     container = new DrawerAppCompatContainer();
-                    SetUpNavigationEnabled(false);
                     break;
 
                 case MenuType.TabbedSlider:
                     container = new TabbedSliderAppCompatContainer();
-                    SetUpNavigationEnabled(true);
                     break;
 
                 default:
@@ -144,15 +141,6 @@ namespace MDSD.FluentNav.Builder.Droid
                 .Replace(Resource.Id.activity_fluentnav_contentframe, contentFragment)
                 .DisallowAddToBackStack()
                 .Commit();
-        }
-
-        private void SetUpNavigationEnabled(bool upNavigationEnabled)
-        {
-            if(SupportActionBar != null)
-            {
-                SupportActionBar.SetDisplayHomeAsUpEnabled(!upNavigationEnabled);
-                SupportActionBar.SetDisplayShowHomeEnabled(upNavigationEnabled);
-            }
         }
 
 

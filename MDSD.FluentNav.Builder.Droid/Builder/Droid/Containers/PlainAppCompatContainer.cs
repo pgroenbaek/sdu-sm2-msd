@@ -25,11 +25,10 @@ namespace MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
-
-            
-
             ViewGroup rootView = (ViewGroup) inflater.Inflate(Resource.Layout.container_plain, container, false);
             rootView.SetOnHierarchyChangeListener(this);
+            _parentActivity.SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+            _parentActivity.SupportActionBar.SetDisplayShowHomeEnabled(!true);
             return rootView;
         }
 

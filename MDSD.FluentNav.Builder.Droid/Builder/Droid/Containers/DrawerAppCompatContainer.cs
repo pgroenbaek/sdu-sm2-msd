@@ -72,6 +72,15 @@ namespace MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers
                 _drawerToggle.OnConfigurationChanged(newConfig);
             }
         }
+
+        public override void OnActivityCreated(Bundle savedInstanceState)
+        {
+            base.OnActivityCreated(savedInstanceState);
+            if (_parentActivity.GetToolbar() != null)
+            {
+                _drawerToggle.SyncState();
+            }
+        }
     }
 
     class MenuFragment : Android.Support.V4.App.Fragment, NavigationView.IOnNavigationItemSelectedListener
@@ -110,13 +119,13 @@ namespace MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers
                 if (positionDef["type"].Equals("item"))
                 {
                     string title = (string)positionDef["name"];
-                    _navigationView.Menu.Add(spacerCounter, i, i + 1, title);
+                    Console.WriteLine(spacerCounter + " " + i + " " + title);
+                    _navigationView.Menu.Add(spacerCounter, i - spacerCounter, i + 1, title);
                 }
                 else if (positionDef["type"].Equals("spacer"))
                 {
                     string title = (string)positionDef["name"];
                     spacerCounter += 1;
-                    _navigationView.Menu.Add(spacerCounter, i, i + 1, title);
                 }
             }
 

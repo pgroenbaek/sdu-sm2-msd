@@ -8,7 +8,7 @@ namespace MDSD.FluentNav.Metamodel
     public class View
     {
         public Type Type { get; private set; }
-        public string Title { get; private set; }
+        public string Title { get; set; }
         public MenuDefinition MenuDefinition { get; set; }
 
         private Dictionary<string, Transition> _transitions;

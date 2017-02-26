@@ -8,7 +8,7 @@ namespace MDSD.FluentNav.Metamodel
 {
     public class Transition
     {
-        public Type TargetView { get; private set; }
+        public Type TargetView { get; set; }
         public View SourceView { get; internal set; }
 
         public Transition(Type targetView)

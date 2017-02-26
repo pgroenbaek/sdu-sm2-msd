@@ -13,7 +13,7 @@ using Android.Widget;
 
 namespace MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers
 {
-    public class TabbedSliderAppCompatContainer : Android.Support.V4.App.Fragment
+    public class TabbedSliderAppCompatContainer : Android.Support.V4.App.Fragment, ViewGroup.IOnHierarchyChangeListener
     {
         private FluentNavAppCompatActivity _parentActivity;
 
@@ -25,10 +25,31 @@ namespace MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            // Use this to return your custom view for this Fragment
-            // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
+            ViewGroup rootView = (ViewGroup) base.OnCreateView(inflater, container, savedInstanceState);
+            rootView.SetOnHierarchyChangeListener(this);
+            return rootView;
+        }
 
-            return base.OnCreateView(inflater, container, savedInstanceState);
+        // Add click listeners to buttons, when child views are added. Could be expanded to things other than buttons.
+        public void OnChildViewAdded(Android.Views.View parent, Android.Views.View child)
+        {
+            for (int i = 0; i < ((ViewGroup)child).ChildCount; i++)
+            {
+                Android.Views.View childView = ((ViewGroup)child).GetChildAt(i);
+                if (childView is Button)
+                {
+                    Button b = (Button)childView;
+                    b.Click += (btnSender, btnEvent) =>
+                    {
+                        _parentActivity.HandleEvent(Convert.ToString(b.Id));
+                    };
+                }
+            }
+        }
+
+        public void OnChildViewRemoved(Android.Views.View parent, Android.Views.View child)
+        {
+
         }
     }
 }

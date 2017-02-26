@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers
 {
-    public class DrawerAppCompatContainer : Android.Support.V4.App.Fragment
+    public class DrawerAppCompatContainer : Android.Support.V4.App.Fragment, ViewGroup.IOnHierarchyChangeListener
     {
         private FluentNavAppCompatActivity _parentActivity;
         private ActionBarDrawerToggle _drawerToggle;
@@ -33,7 +33,8 @@ namespace MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers
         public override Android.Views.View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
-            Android.Views.View rootView = inflater.Inflate(Resource.Layout.container_drawer, container, false);
+            ViewGroup rootView = (ViewGroup) inflater.Inflate(Resource.Layout.container_drawer, container, false);
+            rootView.SetOnHierarchyChangeListener(this);
 
             _parentActivity.SupportFragmentManager
                 .BeginTransaction()
@@ -81,6 +82,29 @@ namespace MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers
                 _drawerToggle.SyncState();
             }
         }
+
+        // Add click listeners to buttons, when child views are added. Could be expanded to things other than buttons.
+        public void OnChildViewAdded(Android.Views.View parent, Android.Views.View child)
+        {
+            for (int i = 0; i < ((ViewGroup)child).ChildCount; i++)
+            {
+                Android.Views.View childView = ((ViewGroup)child).GetChildAt(i);
+                Console.WriteLine(childView);
+                if (childView is Button)
+                {
+                    Button b = (Button)childView;
+                    b.Click += (btnSender, btnEvent) =>
+                    {
+                        _parentActivity.HandleEvent(Convert.ToString(b.Id));
+                    };
+                }
+            }
+        }
+
+        public void OnChildViewRemoved(Android.Views.View parent, Android.Views.View child)
+        {
+
+        }
     }
 
     class MenuFragment : Android.Support.V4.App.Fragment, NavigationView.IOnNavigationItemSelectedListener
@@ -88,6 +112,7 @@ namespace MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers
         private FluentNavAppCompatActivity _parentActivity;
         private NavigationView _navigationView;
         private DrawerLayout _drawerLayout;
+        private MenuDefinition _menuDef;
         private IMenuItem _previousMenuItem;
 
         public override void OnCreate(Bundle savedInstanceState)
@@ -102,20 +127,20 @@ namespace MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers
 
             Android.Views.View view = inflater.Inflate(Resource.Layout.container_drawer_menu, null, false);
 
-            MenuDefinition menuDef = _parentActivity.GetAppliedMenuDefinition();
+            _menuDef = _parentActivity.GetAppliedMenuDefinition();
 
             _navigationView = view.FindViewById<NavigationView>(Resource.Id.activity_fluentnav_navigationview);
             _drawerLayout = _parentActivity.FindViewById<DrawerLayout>(Resource.Id.activity_fluentnav_drawerlayout);
             _navigationView.InflateMenu(Resource.Menu.menu_empty);
             int spacerCounter = 0;
-            for (int i = 0; i < menuDef.FeaturesAtPosition.Count; i++)
+            for (int i = 0; i < _menuDef.FeaturesAtPosition.Count; i++)
             {
-                if (menuDef.FeaturesAtPosition[i] == null)
+                if (_menuDef.FeaturesAtPosition[i] == null)
                 {
                     continue;
                 }
 
-                Dictionary<string, object> positionDef = menuDef.FeaturesAtPosition[i];
+                Dictionary<string, object> positionDef = _menuDef.FeaturesAtPosition[i];
                 if (positionDef["type"].Equals("item"))
                 {
                     string title = (string)positionDef["name"];
@@ -128,7 +153,6 @@ namespace MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers
                     spacerCounter += 1;
                 }
             }
-
 
             _navigationView.SetNavigationItemSelectedListener(this);
             _navigationView.Menu.GetItem(0).SetChecked(true);
@@ -143,17 +167,19 @@ namespace MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers
             _previousMenuItem?.SetChecked(false);
             _previousMenuItem = item;
 
-            Navigate(item.ItemId);
+            int position = item.ItemId + item.GroupId;
+            string eventId = (string) _menuDef.FeaturesAtPosition[position]["eventId"];
+            Navigate(eventId);
 
             return true;
         }
 
-        private async Task Navigate(int itemId)
+        private async Task Navigate(string eventId)
         {
             _drawerLayout.CloseDrawers();
             await Task.Delay(TimeSpan.FromMilliseconds(250));
 
-            _parentActivity.HandleEvent("m" + itemId);
+            _parentActivity.HandleEvent(eventId);
         }
     }
 }

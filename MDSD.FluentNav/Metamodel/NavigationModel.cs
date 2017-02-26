@@ -65,8 +65,8 @@ namespace MDSD.FluentNav.Metamodel
             if(nextTransition != null && _views.ContainsKey(nextTransition.TargetView))
             {
                 CurrentView = _views[nextTransition.TargetView];
+                _transitionStack.Push(nextTransition);
             }
-            _transitionStack.Push(nextTransition);
             return nextTransition;
         }
     }

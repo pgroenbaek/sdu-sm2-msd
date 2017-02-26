@@ -40,7 +40,13 @@ namespace MDSD.FluentNav.Metamodel
                     // Return the transition where the first null or true was encountered.
                     // The condition being null means either "no condition" or it corresponds to the final "else".
                     Transition t = _transitions[eventId][i];
-                    if (t.Conditional == null || t.Conditional.Invoke())
+                    
+                    if (t.Conditional == null)
+                    {
+                        return t;
+                    }
+                    
+                    if(t.Conditional.Invoke())
                     {
                         return t;
                     }

@@ -15,6 +15,7 @@ namespace MDSD.FluentNav.Metamodel
         public Transition(Type targetView, Func<bool> conditional = null)
         {
             TargetView = targetView;
+            Conditional = conditional;
         }
         // TODO Transition anim type
     }

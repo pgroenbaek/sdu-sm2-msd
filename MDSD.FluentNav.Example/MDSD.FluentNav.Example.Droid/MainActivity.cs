@@ -33,7 +33,7 @@ namespace MDSD.FluentNav.Example.Droid
             .View<YellowFragment>(title: "YELLLOW")
                 .Plain()
                 .OnClick(Resource.Id.fragment_yellow_btn1)
-                    .NavigateToIf<BlueFragment>(() => true)
+                    .NavigateToIf<BlueFragment>(() => false)
                     .ElseNavigateTo<RedFragment>()
             .View<BlueFragment>(title: "This one is blue")
                 .TabbedSlider()

@@ -315,7 +315,6 @@ namespace MDSD.FluentNav.Builder.Droid
             {
                 Type targetViewType = typeof(T);
                 FlushTransition(currentViewType, currentEvent, new Transition(targetViewType, booleanExpression));
-                currentEvent = null;
             }
             return this;
         }
@@ -326,7 +325,6 @@ namespace MDSD.FluentNav.Builder.Droid
             {
                 Type targetViewType = typeof(T);
                 FlushTransition(currentViewType, currentEvent, new Transition(targetViewType, booleanExpression));
-                currentEvent = null;
             }
             return this;
         }

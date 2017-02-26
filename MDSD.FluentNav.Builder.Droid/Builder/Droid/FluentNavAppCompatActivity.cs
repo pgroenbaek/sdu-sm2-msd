@@ -88,36 +88,23 @@ namespace MDSD.FluentNav.Builder.Droid
             ApplyView(_navModel.CurrentView);
         }
 
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            Console.WriteLine(item);
+            return base.OnOptionsItemSelected(item);
+        }
+
         public void HandleEvent(string eventId)
         {
-            Console.WriteLine(eventId);
             _navModel.HandleEvent(eventId);
             ApplyView(_navModel.CurrentView);
         }
         
-        public override bool OnOptionsItemSelected(IMenuItem item)
-        {
-            switch (item.ItemId)
-            {
-                case Android.Resource.Id.Home:
-                    MenuType menuType;
-                    Enum.TryParse(_appliedMenuDef.MenuType, out menuType);
-                    if(menuType == MenuType.Plain)
-                    {
-                        OnBackPressed();
-                    }
-                    return true;
-            }
-            return base.OnOptionsItemSelected(item);
-        }
-
         private void ApplyView(Metamodel.View view)
         {
             Type contentType = view.Type;
-            Console.WriteLine(view);
             _appliedMenuDef = view.MenuDefinition;
-
-            Console.WriteLine(_appliedMenuDef);
+            
             // Set basic attributes.
             SupportActionBar.Title = view.Title;
 

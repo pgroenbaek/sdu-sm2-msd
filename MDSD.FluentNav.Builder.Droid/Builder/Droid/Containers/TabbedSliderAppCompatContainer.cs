@@ -30,6 +30,14 @@ namespace MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers
             return rootView;
         }
 
+        public override void OnResume()
+        {
+            base.OnResume();
+            _parentActivity.SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.abc_ic_ab_back_mtrl_am_alpha);
+            _parentActivity.SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+            _parentActivity.SupportActionBar.SetDisplayShowHomeEnabled(true);
+        }
+
         // Add click listeners to buttons, when child views are added. Could be expanded to things other than buttons.
         public void OnChildViewAdded(Android.Views.View parent, Android.Views.View child)
         {
@@ -50,6 +58,17 @@ namespace MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers
         public void OnChildViewRemoved(Android.Views.View parent, Android.Views.View child)
         {
 
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Android.Resource.Id.Home:
+                    _parentActivity.OnBackPressed();
+                    break;
+            }
+            return base.OnOptionsItemSelected(item);
         }
     }
 }

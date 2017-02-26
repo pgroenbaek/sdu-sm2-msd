@@ -7,12 +7,14 @@ using MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers;
 using MDSD.FluentNav.Metamodel;
 using System;
 using System.Collections.Generic;
+using Android.Support.V4.App;
 
 namespace MDSD.FluentNav.Builder.Droid
 {
     public abstract class FluentNavAppCompatActivity : AppCompatActivity, INavigationBuilder<Android.Support.V4.App.Fragment>, IViewBuilder<Android.Support.V4.App.Fragment>,
         IViewBuilderPlain<Android.Support.V4.App.Fragment>, IViewBuilderMenuDrawer<Android.Support.V4.App.Fragment>,
-        IViewBuilderMenuTabbedSlider<Android.Support.V4.App.Fragment>, ITransitionBuilder<Android.Support.V4.App.Fragment>
+        IViewBuilderMenuTabbedSlider<Android.Support.V4.App.Fragment>, ITransitionBuilder<Android.Support.V4.App.Fragment>,
+        ITransitionBuilderConditional<Android.Support.V4.App.Fragment>
     {
         public enum MenuType
         {
@@ -306,7 +308,40 @@ namespace MDSD.FluentNav.Builder.Droid
             }
             return this;
         }
-        
+
+        public ITransitionBuilderConditional<Android.Support.V4.App.Fragment> NavigateToIf<T>(Func<bool> booleanExpression) where T : Android.Support.V4.App.Fragment
+        {
+            if (currentEvent != null)
+            {
+                Type targetViewType = typeof(T);
+                FlushTransition(currentViewType, currentEvent, new Transition(targetViewType, booleanExpression));
+                currentEvent = null;
+            }
+            return this;
+        }
+
+        public ITransitionBuilderConditional<Android.Support.V4.App.Fragment> ElseIfNavigateTo<T>(Func<bool> booleanExpression) where T : Android.Support.V4.App.Fragment
+        {
+            if (currentEvent != null)
+            {
+                Type targetViewType = typeof(T);
+                FlushTransition(currentViewType, currentEvent, new Transition(targetViewType, booleanExpression));
+                currentEvent = null;
+            }
+            return this;
+        }
+
+        public IViewBuilderPlain<Android.Support.V4.App.Fragment> ElseNavigateTo<T>() where T : Android.Support.V4.App.Fragment
+        {
+            if (currentEvent != null)
+            {
+                Type targetViewType = typeof(T);
+                FlushTransition(currentViewType, currentEvent, new Transition(targetViewType));
+                currentEvent = null;
+            }
+            return this;
+        }
+
         private void FlushMenuTransitions()
         {
             foreach (string menuItemFrom in currentTransitionsTo.Keys)

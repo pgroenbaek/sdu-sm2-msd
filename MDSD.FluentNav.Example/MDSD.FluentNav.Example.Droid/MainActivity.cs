@@ -16,7 +16,7 @@ namespace MDSD.FluentNav.Example.Droid
     [Activity(Label = "MDSD.FluentNav.Example", Icon = "@drawable/icon", MainLauncher = true, Theme = "@style/AppTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : FluentNavAppCompatActivity
     {
-        
+
         protected override void BuildNavigation(INavigationBuilder<Android.Support.V4.App.Fragment> nav)
         {
             nav
@@ -33,7 +33,8 @@ namespace MDSD.FluentNav.Example.Droid
             .View<YellowFragment>(title: "YELLLOW")
                 .Plain()
                 .OnClick(Resource.Id.fragment_yellow_btn1)
-                    .NavigateTo<BlueFragment>()
+                    .NavigateToIf<BlueFragment>(() => true)
+                    .ElseNavigateTo<RedFragment>()
             .View<BlueFragment>(title: "This one is blue")
                 .TabbedSlider()
                 .TabbedItem<WhiteFragment>(name: "White")

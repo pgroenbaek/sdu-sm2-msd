@@ -10,11 +10,12 @@ namespace MDSD.FluentNav.Metamodel
     {
         public Type TargetView { get; set; }
         public View SourceView { get; internal set; }
+        public Func<bool> Conditional { get; internal set; }
 
-        public Transition(Type targetView)
+        public Transition(Type targetView, Func<bool> conditional = null)
         {
             TargetView = targetView;
         }
-        // TODO Transition type
+        // TODO Transition anim type
     }
 }

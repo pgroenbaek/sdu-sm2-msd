@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builder\INavigationBuilder.cs" />
+    <Compile Include="Builder\ITransitionBuilderConditional.cs" />
     <Compile Include="Builder\ITransitionBuilder.cs" />
     <Compile Include="Builder\IViewBuilderMenuTabbedSlider.cs" />
     <Compile Include="Builder\IViewBuilderPlain.cs" />

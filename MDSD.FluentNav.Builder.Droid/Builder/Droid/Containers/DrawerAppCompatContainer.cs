@@ -34,7 +34,7 @@ namespace MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers
         {
             base.OnCreateView(inflater, container, savedInstanceState);
             ViewGroup rootView = (ViewGroup) inflater.Inflate(Resource.Layout.container_drawer, container, false);
-            rootView.SetOnHierarchyChangeListener(this);
+            rootView.FindViewById<FrameLayout>(Resource.Id.activity_fluentnav_contentframe).SetOnHierarchyChangeListener(this);
 
             _parentActivity.SupportFragmentManager
                 .BeginTransaction()
@@ -89,7 +89,6 @@ namespace MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers
             for (int i = 0; i < ((ViewGroup)child).ChildCount; i++)
             {
                 Android.Views.View childView = ((ViewGroup)child).GetChildAt(i);
-                Console.WriteLine(childView);
                 if (childView is Button)
                 {
                     Button b = (Button)childView;

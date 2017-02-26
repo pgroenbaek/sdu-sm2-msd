@@ -26,7 +26,7 @@ namespace MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers
         {
             base.OnCreateView(inflater, container, savedInstanceState);
             ViewGroup rootView = (ViewGroup) inflater.Inflate(Resource.Layout.container_plain, container, false);
-            rootView.SetOnHierarchyChangeListener(this);
+            rootView.FindViewById<FrameLayout>(Resource.Id.activity_fluentnav_contentframe).SetOnHierarchyChangeListener(this);
             _parentActivity.SupportActionBar.SetDisplayHomeAsUpEnabled(true);
             _parentActivity.SupportActionBar.SetDisplayShowHomeEnabled(!true);
             return rootView;

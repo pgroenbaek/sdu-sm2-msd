@@ -26,7 +26,7 @@ namespace MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             ViewGroup rootView = (ViewGroup) base.OnCreateView(inflater, container, savedInstanceState);
-            rootView.SetOnHierarchyChangeListener(this);
+            rootView.FindViewById<FrameLayout>(Resource.Id.activity_fluentnav_contentframe).SetOnHierarchyChangeListener(this);
             return rootView;
         }
 

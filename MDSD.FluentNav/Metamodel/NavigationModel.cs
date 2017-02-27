@@ -45,6 +45,11 @@ namespace MDSD.FluentNav.Metamodel
         // Returns true if transition stack is empty.
         public bool HandleBackPressed()
         {
+            if(!IsModelBuilt)
+            {
+                throw new InvalidOperationException("Cannot use the model before it has been built. Call 'Initialize()' before attempting to do so.");
+            }
+
             if (_transitionStack.Count > 0)
             {
                 CurrentView = _transitionStack.Peek().SourceView;
@@ -56,7 +61,12 @@ namespace MDSD.FluentNav.Metamodel
 
         public Transition HandleEvent(string eventId)
         {
-            if(CurrentView == null)
+            if (!IsModelBuilt)
+            {
+                throw new InvalidOperationException("Cannot use the model before it has been built. Call 'Initialize()' before attempting to do so.");
+            }
+
+            if (CurrentView == null)
             {
                 return null;
             }

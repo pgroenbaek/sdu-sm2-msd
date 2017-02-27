@@ -25,8 +25,9 @@ namespace MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            ViewGroup rootView = (ViewGroup) base.OnCreateView(inflater, container, savedInstanceState);
-            rootView.FindViewById<FrameLayout>(Resource.Id.activity_fluentnav_contentframe).SetOnHierarchyChangeListener(this);
+            ViewGroup rootView = (ViewGroup) inflater.Inflate(Resource.Layout.container_tabbedslider, container, false);
+            // TODO Set listener properly, so that event handlers that forward buttonclicks to the metamodel are added (in OnChildViewAdded).
+            //rootView.FindViewById<FrameLayout>(Resource.Id.activity_fluentnav_contentframe).SetOnHierarchyChangeListener(this);
             return rootView;
         }
 

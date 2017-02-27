@@ -1893,8 +1893,8 @@ namespace MDSD.FluentNav.Builder.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f06007e
-			public static int action0 = 2131099774;
+			// aapt resource value: 0x7f060080
+			public static int action0 = 2131099776;
 			
 			// aapt resource value: 0x7f06005a
 			public static int action_bar = 2131099738;
@@ -1920,8 +1920,8 @@ namespace MDSD.FluentNav.Builder.Droid
 			// aapt resource value: 0x7f06005b
 			public static int action_context_bar = 2131099739;
 			
-			// aapt resource value: 0x7f060082
-			public static int action_divider = 2131099778;
+			// aapt resource value: 0x7f060084
+			public static int action_divider = 2131099780;
 			
 			// aapt resource value: 0x7f060003
 			public static int action_menu_divider = 2131099651;
@@ -1962,6 +1962,12 @@ namespace MDSD.FluentNav.Builder.Droid
 			// aapt resource value: 0x7f060070
 			public static int activity_fluentnav_navigationview = 2131099760;
 			
+			// aapt resource value: 0x7f060075
+			public static int activity_fluentnav_tablayout = 2131099765;
+			
+			// aapt resource value: 0x7f060076
+			public static int activity_fluentnav_tablayout_viewpager = 2131099766;
+			
 			// aapt resource value: 0x7f06006a
 			public static int activity_fluentnav_toolbar = 2131099754;
 			
@@ -1980,8 +1986,8 @@ namespace MDSD.FluentNav.Builder.Droid
 			// aapt resource value: 0x7f060044
 			public static int buttonPanel = 2131099716;
 			
-			// aapt resource value: 0x7f06007f
-			public static int cancel_action = 2131099775;
+			// aapt resource value: 0x7f060081
+			public static int cancel_action = 2131099777;
 			
 			// aapt resource value: 0x7f06002b
 			public static int center = 2131099691;
@@ -1995,8 +2001,8 @@ namespace MDSD.FluentNav.Builder.Droid
 			// aapt resource value: 0x7f060052
 			public static int checkbox = 2131099730;
 			
-			// aapt resource value: 0x7f060085
-			public static int chronometer = 2131099781;
+			// aapt resource value: 0x7f060087
+			public static int chronometer = 2131099783;
 			
 			// aapt resource value: 0x7f060033
 			public static int clip_horizontal = 2131099699;
@@ -2022,20 +2028,20 @@ namespace MDSD.FluentNav.Builder.Droid
 			// aapt resource value: 0x7f060040
 			public static int default_activity_button = 2131099712;
 			
-			// aapt resource value: 0x7f060076
-			public static int design_bottom_sheet = 2131099766;
+			// aapt resource value: 0x7f060078
+			public static int design_bottom_sheet = 2131099768;
+			
+			// aapt resource value: 0x7f06007f
+			public static int design_menu_item_action_area = 2131099775;
+			
+			// aapt resource value: 0x7f06007e
+			public static int design_menu_item_action_area_stub = 2131099774;
 			
 			// aapt resource value: 0x7f06007d
-			public static int design_menu_item_action_area = 2131099773;
+			public static int design_menu_item_text = 2131099773;
 			
 			// aapt resource value: 0x7f06007c
-			public static int design_menu_item_action_area_stub = 2131099772;
-			
-			// aapt resource value: 0x7f06007b
-			public static int design_menu_item_text = 2131099771;
-			
-			// aapt resource value: 0x7f06007a
-			public static int design_navigation_view = 2131099770;
+			public static int design_navigation_view = 2131099772;
 			
 			// aapt resource value: 0x7f06000e
 			public static int disableHome = 2131099662;
@@ -2058,8 +2064,8 @@ namespace MDSD.FluentNav.Builder.Droid
 			// aapt resource value: 0x7f06001c
 			public static int end = 2131099676;
 			
-			// aapt resource value: 0x7f06008a
-			public static int end_padder = 2131099786;
+			// aapt resource value: 0x7f06008c
+			public static int end_padder = 2131099788;
 			
 			// aapt resource value: 0x7f060023
 			public static int enterAlways = 2131099683;
@@ -2103,8 +2109,8 @@ namespace MDSD.FluentNav.Builder.Droid
 			// aapt resource value: 0x7f06003f
 			public static int image = 2131099711;
 			
-			// aapt resource value: 0x7f060089
-			public static int info = 2131099785;
+			// aapt resource value: 0x7f06008b
+			public static int info = 2131099787;
 			
 			// aapt resource value: 0x7f060000
 			public static int item_touch_helper_previous_elevation = 2131099648;
@@ -2112,11 +2118,11 @@ namespace MDSD.FluentNav.Builder.Droid
 			// aapt resource value: 0x7f06002f
 			public static int left = 2131099695;
 			
-			// aapt resource value: 0x7f060083
-			public static int line1 = 2131099779;
+			// aapt resource value: 0x7f060085
+			public static int line1 = 2131099781;
 			
-			// aapt resource value: 0x7f060087
-			public static int line3 = 2131099783;
+			// aapt resource value: 0x7f060089
+			public static int line3 = 2131099785;
 			
 			// aapt resource value: 0x7f06000b
 			public static int listMode = 2131099659;
@@ -2124,8 +2130,8 @@ namespace MDSD.FluentNav.Builder.Droid
 			// aapt resource value: 0x7f060041
 			public static int list_item = 2131099713;
 			
-			// aapt resource value: 0x7f060081
-			public static int media_actions = 2131099777;
+			// aapt resource value: 0x7f060083
+			public static int media_actions = 2131099779;
 			
 			// aapt resource value: 0x7f06001d
 			public static int middle = 2131099677;
@@ -2136,8 +2142,8 @@ namespace MDSD.FluentNav.Builder.Droid
 			// aapt resource value: 0x7f060016
 			public static int multiply = 2131099670;
 			
-			// aapt resource value: 0x7f060079
-			public static int navigation_header_container = 2131099769;
+			// aapt resource value: 0x7f06007b
+			public static int navigation_header_container = 2131099771;
 			
 			// aapt resource value: 0x7f060021
 			public static int never = 2131099681;
@@ -2232,11 +2238,11 @@ namespace MDSD.FluentNav.Builder.Droid
 			// aapt resource value: 0x7f060013
 			public static int showTitle = 2131099667;
 			
-			// aapt resource value: 0x7f060078
-			public static int snackbar_action = 2131099768;
+			// aapt resource value: 0x7f06007a
+			public static int snackbar_action = 2131099770;
 			
-			// aapt resource value: 0x7f060077
-			public static int snackbar_text = 2131099767;
+			// aapt resource value: 0x7f060079
+			public static int snackbar_text = 2131099769;
 			
 			// aapt resource value: 0x7f060027
 			public static int snap = 2131099687;
@@ -2259,8 +2265,8 @@ namespace MDSD.FluentNav.Builder.Droid
 			// aapt resource value: 0x7f060031
 			public static int start = 2131099697;
 			
-			// aapt resource value: 0x7f060080
-			public static int status_bar_latest_event_content = 2131099776;
+			// aapt resource value: 0x7f060082
+			public static int status_bar_latest_event_content = 2131099778;
 			
 			// aapt resource value: 0x7f060065
 			public static int submit_area = 2131099749;
@@ -2268,17 +2274,17 @@ namespace MDSD.FluentNav.Builder.Droid
 			// aapt resource value: 0x7f06000d
 			public static int tabMode = 2131099661;
 			
-			// aapt resource value: 0x7f060088
-			public static int text = 2131099784;
+			// aapt resource value: 0x7f06008a
+			public static int text = 2131099786;
 			
-			// aapt resource value: 0x7f060086
-			public static int text2 = 2131099782;
+			// aapt resource value: 0x7f060088
+			public static int text2 = 2131099784;
 			
 			// aapt resource value: 0x7f06004d
 			public static int textSpacerNoButtons = 2131099725;
 			
-			// aapt resource value: 0x7f060084
-			public static int time = 2131099780;
+			// aapt resource value: 0x7f060086
+			public static int time = 2131099782;
 			
 			// aapt resource value: 0x7f060043
 			public static int title = 2131099715;
@@ -2292,8 +2298,8 @@ namespace MDSD.FluentNav.Builder.Droid
 			// aapt resource value: 0x7f060047
 			public static int topPanel = 2131099719;
 			
-			// aapt resource value: 0x7f060075
-			public static int touch_outside = 2131099765;
+			// aapt resource value: 0x7f060077
+			public static int touch_outside = 2131099767;
 			
 			// aapt resource value: 0x7f060009
 			public static int up = 2131099657;
@@ -2448,76 +2454,79 @@ namespace MDSD.FluentNav.Builder.Droid
 			public static int container_plain = 2130903069;
 			
 			// aapt resource value: 0x7f03001e
-			public static int design_bottom_sheet_dialog = 2130903070;
+			public static int container_tabbedslider = 2130903070;
 			
 			// aapt resource value: 0x7f03001f
-			public static int design_layout_snackbar = 2130903071;
+			public static int design_bottom_sheet_dialog = 2130903071;
 			
 			// aapt resource value: 0x7f030020
-			public static int design_layout_snackbar_include = 2130903072;
+			public static int design_layout_snackbar = 2130903072;
 			
 			// aapt resource value: 0x7f030021
-			public static int design_layout_tab_icon = 2130903073;
+			public static int design_layout_snackbar_include = 2130903073;
 			
 			// aapt resource value: 0x7f030022
-			public static int design_layout_tab_text = 2130903074;
+			public static int design_layout_tab_icon = 2130903074;
 			
 			// aapt resource value: 0x7f030023
-			public static int design_menu_item_action_area = 2130903075;
+			public static int design_layout_tab_text = 2130903075;
 			
 			// aapt resource value: 0x7f030024
-			public static int design_navigation_item = 2130903076;
+			public static int design_menu_item_action_area = 2130903076;
 			
 			// aapt resource value: 0x7f030025
-			public static int design_navigation_item_header = 2130903077;
+			public static int design_navigation_item = 2130903077;
 			
 			// aapt resource value: 0x7f030026
-			public static int design_navigation_item_separator = 2130903078;
+			public static int design_navigation_item_header = 2130903078;
 			
 			// aapt resource value: 0x7f030027
-			public static int design_navigation_item_subheader = 2130903079;
+			public static int design_navigation_item_separator = 2130903079;
 			
 			// aapt resource value: 0x7f030028
-			public static int design_navigation_menu = 2130903080;
+			public static int design_navigation_item_subheader = 2130903080;
 			
 			// aapt resource value: 0x7f030029
-			public static int design_navigation_menu_item = 2130903081;
+			public static int design_navigation_menu = 2130903081;
 			
 			// aapt resource value: 0x7f03002a
-			public static int notification_media_action = 2130903082;
+			public static int design_navigation_menu_item = 2130903082;
 			
 			// aapt resource value: 0x7f03002b
-			public static int notification_media_cancel_action = 2130903083;
+			public static int notification_media_action = 2130903083;
 			
 			// aapt resource value: 0x7f03002c
-			public static int notification_template_big_media = 2130903084;
+			public static int notification_media_cancel_action = 2130903084;
 			
 			// aapt resource value: 0x7f03002d
-			public static int notification_template_big_media_narrow = 2130903085;
+			public static int notification_template_big_media = 2130903085;
 			
 			// aapt resource value: 0x7f03002e
-			public static int notification_template_lines = 2130903086;
+			public static int notification_template_big_media_narrow = 2130903086;
 			
 			// aapt resource value: 0x7f03002f
-			public static int notification_template_media = 2130903087;
+			public static int notification_template_lines = 2130903087;
 			
 			// aapt resource value: 0x7f030030
-			public static int notification_template_part_chronometer = 2130903088;
+			public static int notification_template_media = 2130903088;
 			
 			// aapt resource value: 0x7f030031
-			public static int notification_template_part_time = 2130903089;
+			public static int notification_template_part_chronometer = 2130903089;
 			
 			// aapt resource value: 0x7f030032
-			public static int select_dialog_item_material = 2130903090;
+			public static int notification_template_part_time = 2130903090;
 			
 			// aapt resource value: 0x7f030033
-			public static int select_dialog_multichoice_material = 2130903091;
+			public static int select_dialog_item_material = 2130903091;
 			
 			// aapt resource value: 0x7f030034
-			public static int select_dialog_singlechoice_material = 2130903092;
+			public static int select_dialog_multichoice_material = 2130903092;
 			
 			// aapt resource value: 0x7f030035
-			public static int support_simple_spinner_dropdown_item = 2130903093;
+			public static int select_dialog_singlechoice_material = 2130903093;
+			
+			// aapt resource value: 0x7f030036
+			public static int support_simple_spinner_dropdown_item = 2130903094;
 			
 			static Layout()
 			{

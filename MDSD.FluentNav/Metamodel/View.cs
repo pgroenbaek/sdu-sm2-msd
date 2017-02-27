@@ -11,7 +11,7 @@ namespace MDSD.FluentNav.Metamodel
         public string Title { get; set; }
         public MenuDefinition MenuDefinition { get; set; }
         
-        private Dictionary<string, List<Transition>> _transitions;
+        internal Dictionary<string, List<Transition>> _transitions;
 
         public View(Type viewType, string title)
         {

@@ -12,8 +12,8 @@ namespace MDSD.FluentNav.Metamodel
         public View CurrentView { get; private set; }
         public bool IsModelBuilt { get; private set; }
         
-        private Dictionary<Type, View> _views;
-        private Stack<Transition> _transitionStack;
+        internal Dictionary<Type, View> _views;
+        internal Stack<Transition> _transitionStack;
 
         public NavigationModel()
         {

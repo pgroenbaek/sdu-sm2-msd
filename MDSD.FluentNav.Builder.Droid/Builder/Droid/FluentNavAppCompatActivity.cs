@@ -7,25 +7,23 @@ using MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers;
 using MDSD.FluentNav.Metamodel;
 using System;
 using System.Collections.Generic;
-using Android.Support.V4.App;
 
 namespace MDSD.FluentNav.Builder.Droid
 {
-    public abstract class FluentNavAppCompatActivity : AppCompatActivity, INavigationBuilder<Android.Support.V4.App.Fragment>, IViewBuilder<Android.Support.V4.App.Fragment>,
-        IViewBuilderPlain<Android.Support.V4.App.Fragment>, IViewBuilderMenuDrawer<Android.Support.V4.App.Fragment>,
-        IViewBuilderMenuTabbedSlider<Android.Support.V4.App.Fragment>, ITransitionBuilder<Android.Support.V4.App.Fragment>,
-        ITransitionBuilderConditional<Android.Support.V4.App.Fragment>
+    public abstract class FluentNavAppCompatActivity : AppCompatActivity
     {
-        public enum MenuType
+        public enum MenuType // TODO, Move this into specific builders..
         {
             Plain,
             Drawer,
             TabbedSlider
         }
 
-        private NavigationModel _navModel;
         private Android.Support.V7.Widget.Toolbar _toolbar;
         private MenuDefinition _appliedMenuDef;
+        private NavigationModel _navModel;
+
+        private GenericFluentNavBuilder<Android.Support.V4.App.Fragment> _fluentNavBuilder = new GenericFluentNavBuilder<Android.Support.V4.App.Fragment>();
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -37,9 +35,8 @@ namespace MDSD.FluentNav.Builder.Droid
 
             if (savedInstanceState == null)
             {
-                BuildNavigation(this);
-                FlushAllViews();
-                _navModel.Initialize();
+                BuildNavigation(_fluentNavBuilder);
+                _navModel = _fluentNavBuilder.FetchBuiltModel();
                 ApplyView(_navModel.CurrentView);
             }
         }
@@ -54,30 +51,20 @@ namespace MDSD.FluentNav.Builder.Droid
             return _appliedMenuDef;
         }
 
+
         /// <summary>
         ///   Override with a definition of how views should be bound together.
         /// </summary>
         /// <param name="navigation">Builder interface</param>
         protected abstract void BuildNavigation(INavigationBuilder<Android.Support.V4.App.Fragment> navigation);
 
-
-
-
+        
 
         //////////////////////////////////////
         //////////////////////////////////////
         ///   Using the built metamodel    ///
         //////////////////////////////////////
         //////////////////////////////////////
-
-
-        // TODO's
-        // - Implement TabbedSlider
-        // - Make proper example work
-        // - Make simple validator + test
-        // - Introduce state (only on button-clicks)
-        // - Write README.md
-
         
         public override void OnBackPressed()
         {
@@ -148,251 +135,5 @@ namespace MDSD.FluentNav.Builder.Droid
                 .Commit();
         }
 
-
-
-
-
-        ///////////////////////////////////////
-        ///////////////////////////////////////
-        ///   Fluent builder-stuff below    ///
-        ///////////////////////////////////////
-        ///////////////////////////////////////
-
-        private int currentMenuDefPosition = 0;
-        private string currentEvent = null;
-        private Type firstViewType = null;
-        private Type currentViewType = null;
-        private MenuDefinition currentMenuDef = null;
-        private Dictionary<string, Type> currentTransitionsTo = new Dictionary<string, Type>();
-        private Dictionary<Type, Metamodel.View> allViews = new Dictionary<Type, Metamodel.View>();
-
-        public IViewBuilder<Android.Support.V4.App.Fragment> TopView<T>(string title = null) where T : Android.Support.V4.App.Fragment
-        {
-            _navModel = new NavigationModel(); // Make sure to overwrite model, if an attempt is made to redefine it within the BuildNavigation() impl.
-            firstViewType = typeof(T);
-            currentViewType = firstViewType;
-            if (!allViews.ContainsKey(firstViewType))
-            {
-                allViews.Add(firstViewType, new Metamodel.View(firstViewType, title));
-            }
-            else
-            {
-                allViews[firstViewType].Title = title;
-            }
-            return this;
-        }
-
-        public IViewBuilder<Android.Support.V4.App.Fragment> View<T>(string title = null) where T : Android.Support.V4.App.Fragment
-        {
-            if (currentMenuDef != null && !currentMenuDef.MenuType.Equals(MenuType.Plain.ToString()))
-            {
-                FlushMenuTransitions();
-            }
-
-            currentViewType = typeof(T);
-            if (!allViews.ContainsKey(currentViewType))
-            {
-                allViews.Add(currentViewType, new Metamodel.View(currentViewType, title));
-            }
-            else
-            {
-                allViews[currentViewType].Title = title;
-            }
-            return this;
-        }
-
-        public IViewBuilderMenuDrawer<Android.Support.V4.App.Fragment> DrawerSpacer(string name = null)
-        {
-            if (currentMenuDef == null || currentViewType == null)
-            {
-                return this;
-            }
-
-            if (!currentMenuDef.FeaturesAtPosition.ContainsKey(currentMenuDefPosition))
-            {
-                currentMenuDef.FeaturesAtPosition[currentMenuDefPosition] = new Dictionary<string, object>();
-            }
-            currentMenuDef.FeaturesAtPosition[currentMenuDefPosition].Add("name", name);
-            currentMenuDef.FeaturesAtPosition[currentMenuDefPosition].Add("type", "spacer");
-
-            NextMenuItem();
-            return this;
-        }
-
-        public IViewBuilderMenuDrawer<Android.Support.V4.App.Fragment> DrawerItem<T>(string name = null, object icon = null) where T : Android.Support.V4.App.Fragment
-        {
-            if (currentMenuDef == null || currentViewType == null)
-            {
-                return this;
-            }
-
-            Type itemViewType = typeof(T);
-            if (!allViews.ContainsKey(itemViewType))
-            {
-                allViews.Add(itemViewType, new Metamodel.View(itemViewType, null));
-            }
-            if (!currentMenuDef.FeaturesAtPosition.ContainsKey(currentMenuDefPosition))
-            {
-                currentMenuDef.FeaturesAtPosition[currentMenuDefPosition] = new Dictionary<string, object>();
-            }
-            string eventId = Convert.ToString(currentMenuDefPosition);
-            currentMenuDef.FeaturesAtPosition[currentMenuDefPosition].Add("eventId", eventId);
-            currentMenuDef.FeaturesAtPosition[currentMenuDefPosition].Add("type", "item");
-            currentMenuDef.FeaturesAtPosition[currentMenuDefPosition].Add("name", name);
-            currentMenuDef.FeaturesAtPosition[currentMenuDefPosition].Add("icon", icon);
-            
-            currentTransitionsTo.Add(eventId, itemViewType);
-
-            NextMenuItem();
-            return this;
-        }
-
-        public IViewBuilderMenuTabbedSlider<Android.Support.V4.App.Fragment> TabbedItem<T>(string name = null, object icon = null) where T : Android.Support.V4.App.Fragment
-        {
-            if (currentMenuDef == null || currentViewType == null)
-            {
-                return this;
-            }
-            
-            Type itemViewType = typeof(T);
-            if (!allViews.ContainsKey(itemViewType))
-            {
-                allViews.Add(itemViewType, new Metamodel.View(itemViewType, null));
-            }
-            if (!currentMenuDef.FeaturesAtPosition.ContainsKey(currentMenuDefPosition))
-            {
-                currentMenuDef.FeaturesAtPosition[currentMenuDefPosition] = new Dictionary<string, object>();
-            }
-            string eventId = Convert.ToString(currentMenuDefPosition);
-            currentMenuDef.FeaturesAtPosition[currentMenuDefPosition].Add("eventId", eventId);
-            currentMenuDef.FeaturesAtPosition[currentMenuDefPosition].Add("type", "item");
-            currentMenuDef.FeaturesAtPosition[currentMenuDefPosition].Add("name", name);
-            currentMenuDef.FeaturesAtPosition[currentMenuDefPosition].Add("icon", icon);
-            
-            currentTransitionsTo.Add(eventId, itemViewType);
-
-            NextMenuItem();
-            return this;
-        }
-
-        public IViewBuilderPlain<Android.Support.V4.App.Fragment> Plain()
-        {
-            currentMenuDef = new MenuDefinition(MenuType.Plain.ToString());
-            return this;
-        }
-
-        public IViewBuilderMenuDrawer<Android.Support.V4.App.Fragment> DrawerMenu()
-        {
-            currentMenuDef = new MenuDefinition(MenuType.Drawer.ToString());
-            return this;
-        }
-
-        public IViewBuilderMenuTabbedSlider<Android.Support.V4.App.Fragment> TabbedSlider()
-        {
-            currentMenuDef = new MenuDefinition(MenuType.TabbedSlider.ToString());
-            return this;
-        }
-
-        public ITransitionBuilder<Android.Support.V4.App.Fragment> OnClick(int resourceId)
-        {
-            currentEvent = Convert.ToString(resourceId);
-            return this;
-        }
-
-        public IViewBuilderPlain<Android.Support.V4.App.Fragment> NavigateTo<T>() where T : Android.Support.V4.App.Fragment
-        {
-            if (currentEvent != null) {
-                Type targetViewType = typeof(T);
-                FlushTransition(currentViewType, currentEvent, new Transition(targetViewType));
-                currentEvent = null;
-            }
-            return this;
-        }
-
-        public ITransitionBuilderConditional<Android.Support.V4.App.Fragment> NavigateToIf<T>(Func<bool> booleanExpression) where T : Android.Support.V4.App.Fragment
-        {
-            if (currentEvent != null)
-            {
-                Type targetViewType = typeof(T);
-                FlushTransition(currentViewType, currentEvent, new Transition(targetViewType, booleanExpression));
-            }
-            return this;
-        }
-
-        public ITransitionBuilderConditional<Android.Support.V4.App.Fragment> ElseIfNavigateTo<T>(Func<bool> booleanExpression) where T : Android.Support.V4.App.Fragment
-        {
-            if (currentEvent != null)
-            {
-                Type targetViewType = typeof(T);
-                FlushTransition(currentViewType, currentEvent, new Transition(targetViewType, booleanExpression));
-            }
-            return this;
-        }
-
-        public IViewBuilderPlain<Android.Support.V4.App.Fragment> ElseNavigateTo<T>() where T : Android.Support.V4.App.Fragment
-        {
-            if (currentEvent != null)
-            {
-                Type targetViewType = typeof(T);
-                FlushTransition(currentViewType, currentEvent, new Transition(targetViewType));
-                currentEvent = null;
-            }
-            return this;
-        }
-
-        private void FlushMenuTransitions()
-        {
-            foreach (string menuItemFrom in currentTransitionsTo.Keys)
-            {
-                Type fromViewType = currentTransitionsTo[menuItemFrom];
-                allViews[fromViewType].MenuDefinition = currentMenuDef;
-                foreach (string menuItemTo in currentTransitionsTo.Keys)
-                {
-                    Type toViewType = currentTransitionsTo[menuItemTo];
-                    if (allViews.ContainsKey(fromViewType))
-                    {
-                        allViews[fromViewType].AddTransition(menuItemTo, new Transition(toViewType));
-                    }
-                }
-            }
-
-            currentTransitionsTo.Clear();
-            currentMenuDef = null;
-            currentEvent = null;
-            currentMenuDefPosition = 0;
-        }
-
-        private void FlushTransition(Type sourceViewType, string eventId, Transition t)
-        {
-            if (!allViews.ContainsKey(sourceViewType))
-            {
-                allViews.Add(sourceViewType, new Metamodel.View(sourceViewType, null));
-            }
-            allViews[sourceViewType].AddTransition(eventId, t);
-        }
-
-        private void FlushAllViews()
-        {
-            // Add all views, the view that was specified as topview is added as the first view.
-            _navModel.AddView(allViews[firstViewType]);
-            foreach(Type viewType in allViews.Keys)
-            {
-                if(viewType == firstViewType)
-                {
-                    continue;
-                }
-                Metamodel.View view = allViews[viewType];
-                if(view.MenuDefinition == null) 
-                {
-                    view.MenuDefinition = new MenuDefinition(MenuType.Plain.ToString());
-                }
-                _navModel.AddView(allViews[viewType]);
-            }
-        }
-
-        private void NextMenuItem()
-        {
-            currentMenuDefPosition += 1;
-        }
     }
 }

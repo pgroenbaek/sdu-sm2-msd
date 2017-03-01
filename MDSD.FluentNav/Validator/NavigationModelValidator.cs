@@ -12,7 +12,7 @@ namespace MDSD.FluentNav.Validator
         /// <summary>
         ///   Validates a navigation model, ensuring the following is in order:
         ///   1. All navigation targets are present as views.
-        ///   TODO. Anything more?
+        ///   2. 
         ///   
         ///   An exception is thrown if the momdel is invalid.
         /// </summary>

@@ -8,7 +8,7 @@ namespace MDSD.FluentNav.Builder
 {
     public interface IViewBuilder<TBaseView>
     {
-        IViewBuilderPlain<TBaseView> Plain();
+        IViewBuilderPlain<TBaseView> Content();
         IViewBuilderMenuDrawer<TBaseView> DrawerMenu();
         IViewBuilderMenuTabbedSlider<TBaseView> TabbedSlider();
     }

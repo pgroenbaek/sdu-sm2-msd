@@ -69,7 +69,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builder\AndroidMenuBuilder.cs" />
     <Compile Include="Containers\PlainAppCompatContainer.cs" />
     <Compile Include="Containers\DrawerAppCompatContainer.cs" />
     <Compile Include="Containers\TabbedSliderAppCompatContainer.cs" />

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace MDSD.FluentNav.Metamodel
 {
-    public class Transition<TMenuTypeEnum> where TMenuTypeEnum : struct, IComparable, IFormattable//, IConvertible
+    public class Transition
     {
         public Type TargetView { get; set; }
-        public View<TMenuTypeEnum> SourceView { get; internal set; }
+        public View SourceView { get; internal set; }
         public Func<bool> Conditional { get; internal set; }
 
         public Transition(Type targetView, Func<bool> conditional = null)

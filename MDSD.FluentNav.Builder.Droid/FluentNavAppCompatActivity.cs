@@ -12,7 +12,7 @@ namespace MDSD.FluentNav.Builder.Droid
 {
     public abstract class FluentNavAppCompatActivity : AppCompatActivity
     {
-        public enum MenuType // TODO, Move this into specific builders..
+        public enum MenuType
         {
             Plain,
             Drawer,
@@ -23,7 +23,7 @@ namespace MDSD.FluentNav.Builder.Droid
         private MenuDefinition _appliedMenuDef;
         private NavigationModel _navModel;
 
-        private GenericFluentNavBuilder<Android.Support.V4.App.Fragment> _fluentNavBuilder = new GenericFluentNavBuilder<Android.Support.V4.App.Fragment>();
+        private GenericFluentNavBuilder<Android.Support.V4.App.Fragment, MenuType> _fluentNavBuilder = new GenericFluentNavBuilder<Android.Support.V4.App.Fragment, MenuType>();
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -36,6 +36,7 @@ namespace MDSD.FluentNav.Builder.Droid
             if (savedInstanceState == null)
             {
                 BuildNavigation(_fluentNavBuilder);
+
                 _navModel = _fluentNavBuilder.FetchBuiltModel();
                 ApplyView(_navModel.CurrentView);
             }
@@ -134,6 +135,5 @@ namespace MDSD.FluentNav.Builder.Droid
                 .DisallowAddToBackStack()
                 .Commit();
         }
-
     }
 }

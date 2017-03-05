@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace MDSD.FluentNav.Builder.Interfaces
 {
-    public interface IViewBuilder<TBaseView, TMenuTypeEnum> where TMenuTypeEnum : struct, IComparable, IFormattable//, IConvertible
+    public interface IViewBuilder<TBaseView>
     {
-        IContentBuilder<TBaseView, TMenuTypeEnum> Content();
-        IMenuBuilder<TBaseView, TMenuTypeEnum> Menu();
-        IViewBuilder<TBaseView, TMenuTypeEnum> View<TView>(string title = null) where TView : TBaseView;
+        IContentBuilder<TBaseView> Content();
+        IMenuBuilder<TBaseView> Menu();
+        IViewBuilder<TBaseView> View<TView>(string title = null) where TView : TBaseView;
     }
 }

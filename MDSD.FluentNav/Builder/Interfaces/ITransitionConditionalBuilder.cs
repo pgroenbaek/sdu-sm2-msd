@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MDSD.FluentNav.Builder.Interfaces
 {
-    public interface ITransitionConditionalBuilder<TBaseView, TMenuTypeEnum> where TMenuTypeEnum : struct, IComparable, IFormattable//, IConvertible
+    public interface ITransitionConditionalBuilder<TBaseView>
     {
-        ITransitionConditionalBuilder<TBaseView, TMenuTypeEnum> ElseIfNavigateTo<TView>(Func<bool> condition) where TView : TBaseView;
-        IContentBuilder<TBaseView, TMenuTypeEnum> ElseNavigateTo<TView>() where TView : TBaseView;
+        ITransitionConditionalBuilder<TBaseView> ElseIfNavigateTo<TView>(Func<bool> condition) where TView : TBaseView;
+        IContentBuilder<TBaseView> ElseNavigateTo<TView>() where TView : TBaseView;
     }
 }

@@ -2,33 +2,34 @@
 using MDSD.FluentNav.Metamodel;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MDSD.FluentNav.Builder
 {
-    public class GenericFluentNavBuilder<TBaseView, TMenuTypeEnum> : INavigationBuilder<TBaseView, TMenuTypeEnum>,
-        IViewBuilder<TBaseView, TMenuTypeEnum>, IContentBuilder<TBaseView, TMenuTypeEnum>,
-        ITransitionBuilder<TBaseView, TMenuTypeEnum>, ITransitionConditionalBuilder<TBaseView, TMenuTypeEnum>,
-        IMenuBuilder<TBaseView, TMenuTypeEnum>
-        where TMenuTypeEnum : struct, IComparable, IFormattable//, IConvertible
+    public class GenericFluentNavBuilder<TBaseView, TMenuTypeSelector> : INavigationBuilder<TBaseView>,
+        IViewBuilder<TBaseView>, IContentBuilder<TBaseView>,
+        ITransitionBuilder<TBaseView>, ITransitionConditionalBuilder<TBaseView>,
+        IMenuBuilder<TBaseView>
     {
         private NavigationModel _navModel;
+        private TMenuTypeSelector _menuType;
+        private GenericFluentNavBuilder<TBaseView, TMenuTypeSelector> _self;
+
 
         private int _currentMenuDefPosition = 0;
         private string _currentEvent = null;
         private Type _firstViewType = null;
         private Type _currentViewType = null;
-        private GenericMenu _currentMenuDef = null;
+        private Menu _currentMenuDef = null;
         private Dictionary<string, Type> _currentTransitionsTo = new Dictionary<string, Type>();
-        private Dictionary<Type, View> _allViews = new Dictionary<Type, View>();
-        
+        private Dictionary<Type, View> _allViews = new Dictionary<Type, View>();        
+                   
+
+
         public GenericFluentNavBuilder()
         {
             _navModel = new NavigationModel();
         }
-        
+ 
         public NavigationModel FetchBuiltModel()
         {
             FlushAllViews();
@@ -36,7 +37,7 @@ namespace MDSD.FluentNav.Builder
             return _navModel;
         }
 
-        public IViewBuilder<TBaseView, TMenuTypeEnum> View<TView>(string title = null) where TView : TBaseView
+        public IViewBuilder<TBaseView> View<TView>(string title = null) where TView : TBaseView
         {
             if(_firstViewType == null)
             {
@@ -55,7 +56,7 @@ namespace MDSD.FluentNav.Builder
             return this;
         }
 
-        /*public IViewBuilder<TBaseView, TMenuTypeEnum> View<TView>(string title = null) where TView : TBaseView
+        /*public IViewBuilder<TBaseView, TMenuTypeSelector> View<TView>(string title = null) where TView : TBaseView
         {
             if (_currentMenuDef != null && !_currentMenuDef.MenuType.Equals(MenuType.Plain.ToString()))
             {
@@ -74,19 +75,19 @@ namespace MDSD.FluentNav.Builder
             return this;
         }*/
 
-        public IContentBuilder<TBaseView, TMenuTypeEnum> Content()
+        public IContentBuilder<TBaseView> Content()
         {
             //_currentMenuDef = new MenuDefinition(MenuType.Plain.ToString());
             return this;
         }
 
-        public ITransitionBuilder<TBaseView, TMenuTypeEnum> OnClick(int resourceId)
+        public ITransitionBuilder<TBaseView> OnClick(int resourceId)
         {
             _currentEvent = Convert.ToString(resourceId);
             return this;
         }
 
-        public IContentBuilder<TBaseView, TMenuTypeEnum> NavigateTo<TView>() where TView : TBaseView
+        public IContentBuilder<TBaseView> NavigateTo<TView>() where TView : TBaseView
         {
             if (_currentEvent != null)
             {
@@ -97,7 +98,7 @@ namespace MDSD.FluentNav.Builder
             return this;
         }
 
-        public ITransitionConditionalBuilder<TBaseView, TMenuTypeEnum> NavigateToIf<TView>(Func<bool> booleanExpression) where TView : TBaseView
+        public ITransitionConditionalBuilder<TBaseView> NavigateToIf<TView>(Func<bool> booleanExpression) where TView : TBaseView
         {
             if (_currentEvent != null)
             {
@@ -107,7 +108,7 @@ namespace MDSD.FluentNav.Builder
             return this;
         }
 
-        public ITransitionConditionalBuilder<TBaseView, TMenuTypeEnum> ElseIfNavigateTo<TView>(Func<bool> booleanExpression) where TView : TBaseView
+        public ITransitionConditionalBuilder<TBaseView> ElseIfNavigateTo<TView>(Func<bool> booleanExpression) where TView : TBaseView
         {
             if (_currentEvent != null)
             {
@@ -117,7 +118,7 @@ namespace MDSD.FluentNav.Builder
             return this;
         }
 
-        public IContentBuilder<TBaseView, TMenuTypeEnum> ElseNavigateTo<TView>() where TView : TBaseView
+        public IContentBuilder<TBaseView> ElseNavigateTo<TView>() where TView : TBaseView
         {
             if (_currentEvent != null)
             {
@@ -128,19 +129,19 @@ namespace MDSD.FluentNav.Builder
             return this;
         }
 
-        public IMenuBuilder<TBaseView, TMenuTypeEnum> Menu()
+        public IMenuBuilder<TBaseView> Menu()
         {
             return this;
         }
 
-        public TMenuTypeEnum MenuType()
+        public IMenuBuilder<TBaseView> MenuType(int type)
         {
-            return this;
+            throw new NotImplementedException();
         }
 
-        public IMenuBuilder<TBaseView, TMenuTypeEnum> MenuAttribute()
+        public IMenuBuilder<TBaseView> MenuAttribute(string key, string attribute)
         {
-            return this;
+            throw new NotImplementedException();
         }
 
         private void FlushMenuTransitions()

@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace MDSD.FluentNav.Metamodel
 {
-    public class GenericMenu<TMenuTypeEnum> where TMenuTypeEnum : struct, IComparable, IFormattable//, IConvertible
+    public class Menu
     {
-        public TMenuTypeEnum MenuType { get; private set; }
+        public int MenuType { get; private set; }
         public Dictionary<string, object> MenuAttributes { get; private set; }
 
-        public GenericMenu(TMenuTypeEnum menuType)
+        public Menu(int menuType)
         {
             MenuType = menuType;
             MenuAttributes = new Dictionary<string, object>();

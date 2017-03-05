@@ -5,32 +5,32 @@ using System.Text;
 
 namespace MDSD.FluentNav.Metamodel
 {
-    public class View<TMenuTypeEnum> where TMenuTypeEnum : struct, IComparable, IFormattable//, IConvertible
+    public class View
     {
         public Type Type { get; private set; }
         public string Title { get; set; }
-        public GenericMenu<TMenuTypeEnum> MenuDefinition { get; set; }
+        public Menu MenuDefinition { get; set; }
         
-        internal Dictionary<string, List<Transition<TMenuTypeEnum>>> _transitions;
+        internal Dictionary<string, List<Transition>> _transitions;
 
         public View(Type viewType, string title)
         {
             Type = viewType;
             Title = title;
-            _transitions = new Dictionary<string, List<Transition<TMenuTypeEnum>>>();
+            _transitions = new Dictionary<string, List<Transition>>();
         }
 
-        public void AddTransition(string eventId, Transition<TMenuTypeEnum> transition)
+        public void AddTransition(string eventId, Transition transition)
         {
             transition.SourceView = this;
             if (!_transitions.ContainsKey(eventId))
             {
-                _transitions[eventId] = new List<Transition<TMenuTypeEnum>>();
+                _transitions[eventId] = new List<Transition>();
             }
             _transitions[eventId].Add(transition);
         }
         
-        internal Transition<TMenuTypeEnum> NextTransition(string eventId)
+        internal Transition NextTransition(string eventId)
         {
             if (_transitions.ContainsKey(eventId))
             {
@@ -39,7 +39,7 @@ namespace MDSD.FluentNav.Metamodel
                 {
                     // Return the transition where the first null or true was encountered.
                     // The condition being null means either "no condition" or it corresponds to the final "else".
-                    Transition<TMenuTypeEnum> t = _transitions[eventId][i];
+                    Transition t = _transitions[eventId][i];
                     
                     if (t.Conditional == null)
                     {

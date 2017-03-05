@@ -20,7 +20,7 @@ namespace MDSD.FluentNav.Example.Droid
         protected override void BuildNavigation(INavigationBuilder<Android.Support.V4.App.Fragment> nav)
         {
             nav
-            .TopView<GreenFragment>(title: "Example")
+            .View<GreenFragment>(title: "Example")
                 .DrawerMenu()
                 .DrawerItem<RedFragment>(name: "Red")
                 .DrawerItem<GreenFragment>(name: "Green")

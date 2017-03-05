@@ -44,10 +44,10 @@
     <Compile Include="Builder\Interfaces\ITransitionBuilder.cs" />
     <Compile Include="Builder\Interfaces\IContentBuilder.cs" />
     <Compile Include="Builder\Interfaces\IViewBuilder.cs" />
-    <Compile Include="Metamodel\GenericMenu.cs" />
-    <Compile Include="Metamodel\GenericNavigationModel.cs" />
-    <Compile Include="Metamodel\GenericTransition.cs" />
-    <Compile Include="Metamodel\GenericView.cs" />
+    <Compile Include="Metamodel\Menu.cs" />
+    <Compile Include="Metamodel\NavigationModel.cs" />
+    <Compile Include="Metamodel\Transition.cs" />
+    <Compile Include="Metamodel\View.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validator\NavigationModelValidator.cs" />
   </ItemGroup>

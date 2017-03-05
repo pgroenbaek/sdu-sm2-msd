@@ -5,15 +5,12 @@ using System.Collections.Generic;
 
 namespace MDSD.FluentNav.Builder
 {
-    public class GenericFluentNavBuilder<TBaseView, TMenuTypeSelector> : INavigationBuilder<TBaseView>,
+    public class GenericFluentNavBuilder<TBaseView> : INavigationBuilder<TBaseView>,
         IViewBuilder<TBaseView>, IContentBuilder<TBaseView>,
         ITransitionBuilder<TBaseView>, ITransitionConditionalBuilder<TBaseView>,
         IMenuBuilder<TBaseView>
     {
         private NavigationModel _navModel;
-        private TMenuTypeSelector _menuType;
-        private GenericFluentNavBuilder<TBaseView, TMenuTypeSelector> _self;
-
 
         private int _currentMenuDefPosition = 0;
         private string _currentEvent = null;
@@ -23,7 +20,12 @@ namespace MDSD.FluentNav.Builder
         private Dictionary<string, Type> _currentTransitionsTo = new Dictionary<string, Type>();
         private Dictionary<Type, View> _allViews = new Dictionary<Type, View>();        
                    
-
+        // TODOlist:
+        //
+        // - Adjust metamodel
+        // - Adjust builder
+        // - Adjust syntax
+        // - Make sure the example works.
 
         public GenericFluentNavBuilder()
         {

@@ -1,28 +1,33 @@
 ﻿using MDSD.FluentNav.Validator;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MDSD.FluentNav.Metamodel
 {
-    public class NavigationModel
+    public class NavigationModel<TMenuTypeEnum> where TMenuTypeEnum : struct, IComparable, IFormattable//, IConvertible
     {
-        public View CurrentView { get; private set; }
+        public View<TMenuTypeEnum> CurrentView { get; private set; }
         public bool IsModelBuilt { get; private set; }
         
-        internal Dictionary<Type, View> _views;
-        internal Stack<Transition> _transitionStack;
+        internal Dictionary<Type, View<TMenuTypeEnum>> _views;
+        internal Stack<Transition<TMenuTypeEnum>> _transitionStack;
 
         public NavigationModel()
         {
+            // Following enum check inspired by: http://stackoverflow.com/a/79903
+            if (!typeof(TMenuTypeEnum).GetTypeInfo().IsEnum)
+            {
+                throw new ArgumentException("TMenuTypeEnum must be an enumerated type");
+            }
             IsModelBuilt = false;
-            _views = new Dictionary<Type, View>();
-            _transitionStack = new Stack<Transition>();
+            _views = new Dictionary<Type, View<TMenuTypeEnum>>();
+            _transitionStack = new Stack<Transition<TMenuTypeEnum>>();
         }
 
-        public void AddView(View view)
+        public void AddView(View<TMenuTypeEnum> view)
         {
             if(IsModelBuilt)
             {
@@ -39,7 +44,7 @@ namespace MDSD.FluentNav.Metamodel
         public void Initialize()
         {
             IsModelBuilt = true;
-            NavigationModelValidator.Validate(this);
+            NavigationModelValidator<TMenuTypeEnum>.Validate(this);
         }
 
         // Returns true if transition stack is empty.
@@ -59,7 +64,7 @@ namespace MDSD.FluentNav.Metamodel
             return true;
         }
 
-        public Transition HandleEvent(string eventId)
+        public Transition<TMenuTypeEnum> HandleEvent(string eventId)
         {
             if (!IsModelBuilt)
             {
@@ -71,7 +76,7 @@ namespace MDSD.FluentNav.Metamodel
                 return null;
             }
 
-            Transition nextTransition = CurrentView.NextTransition(eventId);
+            Transition<TMenuTypeEnum> nextTransition = CurrentView.NextTransition(eventId);
             if(nextTransition != null && _views.ContainsKey(nextTransition.TargetView))
             {
                 CurrentView = _views[nextTransition.TargetView];

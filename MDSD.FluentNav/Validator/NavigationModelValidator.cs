@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MDSD.FluentNav.Validator
 {
-    public class NavigationModelValidator
+    public class NavigationModelValidator<TMenuTypeEnum> where TMenuTypeEnum : struct, IComparable, IFormattable//, IConvertible
     {
         /// <summary>
         ///   Validates a navigation model, ensuring the following is in order:
@@ -18,14 +18,14 @@ namespace MDSD.FluentNav.Validator
         /// </summary>
         /// <param name="navModel">The navigation model to validate.</param>
         /// <exception cref="ArgumentException">The model provided as an argument was invalid.</exception>
-        public static void Validate(NavigationModel navModel)
+        public static void Validate(NavigationModel<TMenuTypeEnum> navModel)
         {
             // Validate point 1.
-            foreach(View view in navModel._views.Values)
+            foreach(View<TMenuTypeEnum> view in navModel._views.Values)
             {
-                foreach(List<Transition> transitionList in view._transitions.Values)
+                foreach(List<Transition<TMenuTypeEnum>> transitionList in view._transitions.Values)
                 {
-                    foreach(Transition t in transitionList)
+                    foreach(Transition<TMenuTypeEnum> t in transitionList)
                     {
                         if(!navModel._views.ContainsKey(t.TargetView))
                         {

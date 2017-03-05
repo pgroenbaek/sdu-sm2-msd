@@ -20,7 +20,7 @@ namespace MDSD.FluentNav.Builder
         private string _currentEvent = null;
         private Type _firstViewType = null;
         private Type _currentViewType = null;
-        private MenuDefinition _currentMenuDef = null;
+        private GenericMenu _currentMenuDef = null;
         private Dictionary<string, Type> _currentTransitionsTo = new Dictionary<string, Type>();
         private Dictionary<Type, View> _allViews = new Dictionary<Type, View>();
         

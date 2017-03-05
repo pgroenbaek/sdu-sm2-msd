@@ -1,15 +1,16 @@
-﻿using System;
+﻿using MDSD.FluentNav.Builder.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MDSD.FluentNav.Builder
+namespace MDSD.FluentNav.Builder.Interfaces
 {
-    public interface IViewBuilder<TBaseView>
+    public interface IViewBuilder<TBaseView, TMenuTypeEnum> where TMenuTypeEnum : struct, IComparable, IFormattable//, IConvertible
     {
-        IViewBuilderPlain<TBaseView> Content();
-        IViewBuilderMenuDrawer<TBaseView> DrawerMenu();
-        IViewBuilderMenuTabbedSlider<TBaseView> TabbedSlider();
+        IContentBuilder<TBaseView, TMenuTypeEnum> Content();
+        IMenuBuilder<TBaseView, TMenuTypeEnum> Menu();
+        IViewBuilder<TBaseView, TMenuTypeEnum> View<TView>(string title = null) where TView : TBaseView;
     }
 }

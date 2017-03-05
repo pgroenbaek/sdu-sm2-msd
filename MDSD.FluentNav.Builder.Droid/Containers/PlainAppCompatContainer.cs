@@ -10,7 +10,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 
-namespace MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers
+namespace MDSD.FluentNav.Builder.Droid.Containers
 {
     public class PlainAppCompatContainer : Android.Support.V4.App.Fragment, ViewGroup.IOnHierarchyChangeListener
     {

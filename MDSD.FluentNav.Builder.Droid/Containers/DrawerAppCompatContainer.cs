@@ -16,7 +16,7 @@ using Android.Support.V4.Widget;
 using Android.Content.Res;
 using System.Threading.Tasks;
 
-namespace MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers
+namespace MDSD.FluentNav.Builder.Droid.Containers
 {
     public class DrawerAppCompatContainer : Android.Support.V4.App.Fragment, ViewGroup.IOnHierarchyChangeListener
     {

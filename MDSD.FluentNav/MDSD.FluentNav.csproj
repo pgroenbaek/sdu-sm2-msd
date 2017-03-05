@@ -38,12 +38,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builder\GenericFluentNavBuilder.cs" />
+    <Compile Include="Builder\Interfaces\IMenuBuilder.cs" />
     <Compile Include="Builder\Interfaces\INavigationBuilder.cs" />
-    <Compile Include="Builder\Interfaces\ITransitionBuilderConditional.cs" />
+    <Compile Include="Builder\Interfaces\ITransitionConditionalBuilder.cs" />
     <Compile Include="Builder\Interfaces\ITransitionBuilder.cs" />
-    <Compile Include="Builder\Interfaces\IViewBuilderMenuTabbedSlider.cs" />
-    <Compile Include="Builder\Interfaces\IViewBuilderPlain.cs" />
-    <Compile Include="Builder\Interfaces\IViewBuilderMenuDrawer.cs" />
+    <Compile Include="Builder\Interfaces\IContentBuilder.cs" />
     <Compile Include="Builder\Interfaces\IViewBuilder.cs" />
     <Compile Include="Metamodel\MenuDefinition.cs" />
     <Compile Include="Metamodel\NavigationModel.cs" />

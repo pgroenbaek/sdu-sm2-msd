@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace MDSD.FluentNav.Builder.Interfaces
 {
-    public interface INavigationBuilder<TBaseView, TMenuTypeEnum> where TMenuTypeEnum : struct, IComparable, IFormattable//, IConvertible
+    public interface IContentBuilder<TBaseView, TMenuTypeEnum> where TMenuTypeEnum : struct, IComparable, IFormattable//, IConvertible
     {
+        ITransitionBuilder<TBaseView, TMenuTypeEnum> OnClick(int resourceId);
         IViewBuilder<TBaseView, TMenuTypeEnum> View<TView>(string title = null) where TView : TBaseView;
     }
 }

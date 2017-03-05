@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MDSD.FluentNav.Builder
+namespace MDSD.FluentNav.Builder.Interfaces
 {
-    public interface ITransitionBuilder<TBaseView>
+    public interface ITransitionBuilder<TBaseView, TMenuTypeEnum> where TMenuTypeEnum : struct, IComparable, IFormattable//, IConvertible
     {
-        ITransitionBuilderConditional<TBaseView> NavigateToIf<TView>(Func<bool> condition) where TView : TBaseView;
-        IViewBuilderPlain<TBaseView> NavigateTo<TView>() where TView : TBaseView; // TODO, transition animation
+        ITransitionConditionalBuilder<TBaseView, TMenuTypeEnum> NavigateToIf<TView>(Func<bool> condition) where TView : TBaseView;
+        IContentBuilder<TBaseView, TMenuTypeEnum> NavigateTo<TView>() where TView : TBaseView; // TODO, transition animation
     }
 }

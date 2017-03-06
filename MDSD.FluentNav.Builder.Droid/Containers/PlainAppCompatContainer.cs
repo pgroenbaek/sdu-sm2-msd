@@ -20,7 +20,7 @@ namespace MDSD.FluentNav.Builder.Droid.Containers
         {
             base.OnCreate(savedInstanceState);
             _parentActivity = (FluentNavAppCompatActivity)Activity;
-        }        
+        }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -49,7 +49,7 @@ namespace MDSD.FluentNav.Builder.Droid.Containers
                     Button b = (Button)childView;
                     b.Click += (btnSender, btnEvent) =>
                     {
-                        _parentActivity.HandleEvent(Convert.ToString(b.Id));
+                        //_parentActivity.HandleEvent(Convert.ToString(b.Id));
                     };
                 }
             }

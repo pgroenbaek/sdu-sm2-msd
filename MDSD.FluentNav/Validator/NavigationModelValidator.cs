@@ -21,7 +21,7 @@ namespace MDSD.FluentNav.Validator
         public static void Validate(NavigationModel navModel)
         {
             // Validate point 1.
-            foreach(View view in navModel._views.Values)
+            /*foreach(View view in navModel._views.Values)
             {
                 foreach(List<Transition> transitionList in view._transitions.Values)
                 {
@@ -33,7 +33,7 @@ namespace MDSD.FluentNav.Validator
                         }
                     }
                 }
-            }
+            }*/
         }
     }
 }

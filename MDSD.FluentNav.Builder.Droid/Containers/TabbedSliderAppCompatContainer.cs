@@ -51,7 +51,7 @@ namespace MDSD.FluentNav.Builder.Droid.Containers
                     Button b = (Button)childView;
                     b.Click += (btnSender, btnEvent) =>
                     {
-                        _parentActivity.HandleEvent(Convert.ToString(b.Id));
+                        //_parentActivity.HandleEvent(Convert.ToString(b.Id));
                     };
                 }
             }

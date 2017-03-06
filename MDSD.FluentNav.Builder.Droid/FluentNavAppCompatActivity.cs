@@ -34,7 +34,7 @@ namespace MDSD.FluentNav.Builder.Droid
                 BuildNavigation(_fluentNavBuilder);
 
                 _navModel = _fluentNavBuilder.Build();
-                ApplyView(_navModel.CurrentView);
+                //ApplyView(_navModel.CurrentView);
             }
         }
 
@@ -78,13 +78,13 @@ namespace MDSD.FluentNav.Builder.Droid
 
         public override void OnBackPressed()
         {
-            bool isEmpty = _navModel.HandleBackPressed();
-            if(isEmpty)
+            ///bool isEmpty = _navModel.HandleBackPressed();
+            /*if(isEmpty)
             {
                 Finish();
                 return;
-            }
-            ApplyView(_navModel.CurrentView);
+            }*/
+            //ApplyView(_navModel.CurrentView);
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
@@ -93,7 +93,7 @@ namespace MDSD.FluentNav.Builder.Droid
             return base.OnOptionsItemSelected(item);
         }
 
-        public void HandleEvent(string eventId)
+        /*public void HandleEvent(string eventId)
         {
             if (_currentView == null)
             {
@@ -132,7 +132,7 @@ namespace MDSD.FluentNav.Builder.Droid
                 }
             }
             return null;
-        }
+        }*/
 
         private void ApplyView(Metamodel.View view)
         {

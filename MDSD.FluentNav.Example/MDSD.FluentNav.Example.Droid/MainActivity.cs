@@ -21,7 +21,7 @@ namespace MDSD.FluentNav.Example.Droid
         {
             nav
             .BeginViewGroup()
-                // If C# supported enum-constraints in generics, i could have enforced a menutype-parameter here in the Menu()-call 
+                // If C# supported enum-constraints in generics, i could have enforced a menutype-parameter of a type here in the Menu()-call 
                 // based on something specified in the subclass like "Android.Support.V4.App.Fragment" is currently. Would have been a lot nicer to look at.
                 .Menu()
                     .Type(MenuDrawer)

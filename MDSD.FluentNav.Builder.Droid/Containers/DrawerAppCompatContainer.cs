@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace MDSD.FluentNav.Builder.Droid.Containers
 {
-    public class DrawerAppCompatContainer : Android.Support.V4.App.Fragment, ViewGroup.IOnHierarchyChangeListener
+    public class DrawerAppCompatContainer : Android.Support.V4.App.Fragment, Android.Views.ViewGroup.IOnHierarchyChangeListener
     {
         private FluentNavAppCompatActivity _parentActivity;
         private ActionBarDrawerToggle _drawerToggle;
@@ -30,10 +30,10 @@ namespace MDSD.FluentNav.Builder.Droid.Containers
             _parentActivity = (FluentNavAppCompatActivity) Activity;
         }
 
-        public override Android.Views.View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        public override Android.Views.View OnCreateView(LayoutInflater inflater, Android.Views.ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
-            ViewGroup rootView = (ViewGroup) inflater.Inflate(Resource.Layout.container_drawer, container, false);
+            Android.Views.ViewGroup rootView = (Android.Views.ViewGroup) inflater.Inflate(Resource.Layout.container_drawer, container, false);
             rootView.FindViewById<FrameLayout>(Resource.Id.activity_fluentnav_contentframe).SetOnHierarchyChangeListener(this);
 
             _parentActivity.SupportFragmentManager
@@ -86,15 +86,15 @@ namespace MDSD.FluentNav.Builder.Droid.Containers
         // Add click listeners to buttons, when child views are added. Could be expanded to things other than buttons.
         public void OnChildViewAdded(Android.Views.View parent, Android.Views.View child)
         {
-            for (int i = 0; i < ((ViewGroup)child).ChildCount; i++)
+            for (int i = 0; i < ((Android.Views.ViewGroup)child).ChildCount; i++)
             {
-                Android.Views.View childView = ((ViewGroup)child).GetChildAt(i);
+                Android.Views.View childView = ((Android.Views.ViewGroup)child).GetChildAt(i);
                 if (childView is Button)
                 {
                     Button b = (Button)childView;
                     b.Click += (btnSender, btnEvent) =>
                     {
-                        _parentActivity.HandleEvent(Convert.ToString(b.Id));
+                        //_parentActivity.HandleEvent(Convert.ToString(b.Id));
                     };
                 }
             }
@@ -120,7 +120,7 @@ namespace MDSD.FluentNav.Builder.Droid.Containers
             _parentActivity = (FluentNavAppCompatActivity)Activity;
         }
 
-        public override Android.Views.View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        public override Android.Views.View OnCreateView(LayoutInflater inflater, Android.Views.ViewGroup container, Bundle savedInstanceState)
         {
             base.OnCreateView(inflater, container, savedInstanceState);
 
@@ -178,7 +178,7 @@ namespace MDSD.FluentNav.Builder.Droid.Containers
             _drawerLayout.CloseDrawers();
             await Task.Delay(TimeSpan.FromMilliseconds(250));
 
-            _parentActivity.HandleEvent(eventId);
+            //_parentActivity.HandleEvent(eventId);
         }
     }
 }

@@ -10,12 +10,12 @@ namespace MDSD.FluentNav.Metamodel
     public class NavigationModel
     {
         public bool IsModelBuilt { get; private set; }
-        public List<AbstractView> AllViews { get; private set; }
+        public List<View> AllViews { get; private set; }
 
         public NavigationModel()
         {
             IsModelBuilt = false;
-            AllViews = new List<AbstractView>();
+            AllViews = new List<View>();
         }
 
         public void Initialize()

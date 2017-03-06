@@ -9,6 +9,6 @@ namespace MDSD.FluentNav.Builder.Interfaces
     public interface INavigationBuilder<TBaseView>
     {
         IViewBuilder<TBaseView> View<TView>(string title = null) where TView : TBaseView;
-        IViewGroupBuilder<TBaseView> ViewGroup();
+        IViewGroupBuilder<TBaseView> BeginViewGroup();
     }
 }

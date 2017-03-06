@@ -8,22 +8,15 @@ namespace MDSD.FluentNav.Builder
     public class GenericFluentNavBuilder<TBaseView> : INavigationBuilder<TBaseView>,
         IViewGroupBuilder<TBaseView>, IContentBuilder<TBaseView>,
         ITransitionBuilder<TBaseView>, ITransitionConditionalBuilder<TBaseView>,
-        IMenuBuilder<TBaseView>
+        IMenuBuilder<TBaseView>, IViewBuilder<TBaseView>
     {
         private NavigationModel _navModel;
-
-        private int _currentMenuDefPosition = 0;
+        
         private string _currentEvent = null;
-        private Type _firstViewType = null;
-        private Type _currentViewType = null;
-        private Menu _currentMenuDef = null;
-        private Dictionary<string, Type> _currentTransitionsTo = new Dictionary<string, Type>();
-        private Dictionary<Type, View> _allViews = new Dictionary<Type, View>();        
+        private View _currentView = null;
+        private Stack<ViewGroup> _currentViewGroup = new Stack<ViewGroup>();
         
         // TODOlist:
-        //
-        // - Adjust metamodel
-        // - Adjust builder
         // - Make sure the example works.
 
         public GenericFluentNavBuilder()
@@ -33,105 +26,162 @@ namespace MDSD.FluentNav.Builder
  
         public NavigationModel Build()
         {
-            FlushAllViews();
+            if (_currentViewGroup.Count > 0)
+            {
+                throw new InvalidOperationException("Unbalanced viewgroups. Is an EndViewGroup() missing somewhere?");
+            }
             _navModel.Initialize();
             return _navModel;
         }
-
-        IViewBuilder<TBaseView> INavigationBuilder<TBaseView>.View<TView>(string title)
+        
+        public IViewBuilder<TBaseView> View<TView>(string title = null) where TView : TBaseView
         {
-
-            return (IViewBuilder<TBaseView>) this;
-        }
-
-        IViewGroupBuilder<TBaseView> INavigationBuilder<TBaseView>.ViewGroup()
-        {
-
+            FlushView();
+            _currentView = new View(typeof(TView), title);
             return this;
         }
 
-        IMenuBuilder<TBaseView> IViewGroupBuilder<TBaseView>.Menu()
+        public IViewGroupBuilder<TBaseView> BeginViewGroup()
         {
+            FlushView();
+            _currentViewGroup.Push(new ViewGroup());
             return this;
         }
 
-        IViewBuilder<TBaseView> IViewGroupBuilder<TBaseView>.SubView<TView>(string title)
+        public IMenuBuilder<TBaseView> Menu()
         {
-            return (IViewBuilder<TBaseView>) this;
-        }
-
-        ITransitionBuilder<TBaseView> IContentBuilder<TBaseView>.OnClick(int resourceId)
-        {
-            return this;
-        }
-
-        IViewBuilder<TBaseView> IContentBuilder<TBaseView>.SubView<TView>(string title)
-        {
-            return (IViewBuilder<TBaseView>) this;
-        }
-
-        IViewBuilder<TBaseView> IContentBuilder<TBaseView>.View<TView>(string title)
-        {
-            return (IViewBuilder<TBaseView>) this;
-        }
-
-        IViewGroupBuilder<TBaseView> IContentBuilder<TBaseView>.ViewGroup()
-        {
-            return this;
-        }
-
-        public void AddTransition(string eventId, Transition transition)
-        {
-            transition.SourceView = this;
-            if (!Transitions.ContainsKey(eventId))
+            if(_currentView != null)
             {
-                Transitions[eventId] = new List<Transition>();
+                _currentView.MenuDefinition = new Menu();
             }
-            Transitions[eventId].Add(transition);
+            return this;
         }
 
-        ITransitionConditionalBuilder<TBaseView> ITransitionBuilder<TBaseView>.NavigateToIf<TView>(Func<bool> condition)
+        public IContentBuilder<TBaseView> Content()
         {
             return this;
         }
 
-        IContentBuilder<TBaseView> ITransitionBuilder<TBaseView>.NavigateTo<TView>()
+        public IViewBuilder<TBaseView> EndViewGroup()
         {
+            FlushViewGroup();
             return this;
         }
 
-        ITransitionConditionalBuilder<TBaseView> ITransitionConditionalBuilder<TBaseView>.ElseIfNavigateTo<TView>(Func<bool> condition)
+        public ITransitionBuilder<TBaseView> OnClick(int resourceId)
         {
+            _currentEvent = Convert.ToString(resourceId);
             return this;
         }
 
-        IContentBuilder<TBaseView> ITransitionConditionalBuilder<TBaseView>.ElseNavigateTo<TView>()
+        public IContentBuilder<TBaseView> NavigateTo<TView>() where TView : TBaseView
         {
+            if (_currentEvent != null && _currentView != null)
+            {
+                Type targetViewType = typeof(TView);
+                FlushTransition(_currentEvent, new Transition(targetViewType, _currentView));
+                _currentEvent = null;
+            }
             return this;
         }
 
-        IMenuBuilder<TBaseView> IMenuBuilder<TBaseView>.Type(string type)
+        public ITransitionConditionalBuilder<TBaseView> NavigateToIf<TView>(Func<bool> condition) where TView : TBaseView
         {
+            if (_currentEvent != null && _currentView != null)
+            {
+                Type targetViewType = typeof(TView);
+                FlushTransition(_currentEvent, new Transition(targetViewType, _currentView, condition));
+            }
             return this;
         }
 
-        IMenuBuilder<TBaseView> IMenuBuilder<TBaseView>.Attribute(string key, object attribute)
+        public ITransitionConditionalBuilder<TBaseView> ElseIfNavigateTo<TView>(Func<bool> condition) where TView : TBaseView
         {
+            if (_currentEvent != null && _currentView != null)
+            {
+                Type targetViewType = typeof(TView);
+                FlushTransition(_currentEvent, new Transition(targetViewType, _currentView, condition));
+            }
             return this;
         }
 
-        IViewBuilder<TBaseView> IMenuBuilder<TBaseView>.SubView<TView>(string title)
+        public IContentBuilder<TBaseView> ElseNavigateTo<TView>() where TView : TBaseView
         {
-            return (IViewBuilder<TBaseView>) this;
+            if (_currentEvent != null && _currentView != null)
+            {
+                Type targetViewType = typeof(TView);
+                FlushTransition(_currentEvent, new Transition(targetViewType, _currentView));
+                _currentEvent = null;
+            }
+            return this;
         }
 
-        IViewBuilder<TBaseView> IMenuBuilder<TBaseView>.View<TView>(string title)
+        public IMenuBuilder<TBaseView> Type(string type)
         {
-            return (IViewBuilder<TBaseView>) this;
+            if (_currentView != null && _currentView.MenuDefinition != null)
+            {
+                _currentView.MenuDefinition.MenuType = type;
+            }
+            return this;
         }
 
+        public IMenuBuilder<TBaseView> Attribute(string key, object attribute)
+        {
+            if (_currentView != null && _currentView.MenuDefinition != null)
+            {
+                _currentView.MenuDefinition.MenuAttributes.Add(key, attribute);
+            }
+            return this;
+        }
 
+        public void FlushTransition(string eventId, Transition transition)
+        {
+            if (_currentView == null)
+            {
+                return;
+            }
 
+            if (!_currentView.Transitions.ContainsKey(eventId))
+            {
+                _currentView.Transitions[eventId] = new List<Transition>();
+            }
+            _currentView.Transitions[eventId].Add(transition);
+
+            _currentEvent = null;
+        }
+
+        private void FlushView()
+        {
+            if (_currentView == null)
+            {
+                return;
+            }
+
+            if(_currentViewGroup.Count == 0)
+            {
+                _navModel.AllViews.Add(_currentView);
+            }
+            else if(_currentViewGroup.Count > 0)
+            {
+                _currentViewGroup.Peek().SubViews.Add(_currentView);
+            }
+
+            _currentView = null;
+        }
+
+        private void FlushViewGroup()
+        {
+            if (_currentViewGroup.Count == 1)
+            {
+                ViewGroup viewGroup = _currentViewGroup.Pop();
+                _navModel.AllViews.Add(viewGroup);
+            }
+            else if (_currentViewGroup.Count > 1)
+            {
+                ViewGroup viewGroup = _currentViewGroup.Pop();
+                _currentViewGroup.Peek().SubViews.Add(viewGroup);
+            }
+        }
 
 
         /*public IViewGroupBuilder<TBaseView> View<TView>(string title = null) where TView : TBaseView
@@ -265,58 +315,5 @@ namespace MDSD.FluentNav.Builder
         {
             throw new NotImplementedException();
         }*/
-
-
-
-        private void FlushMenuTransitions()
-        {
-            foreach (string menuItemFrom in _currentTransitionsTo.Keys)
-            {
-                Type fromViewType = _currentTransitionsTo[menuItemFrom];
-                _allViews[fromViewType].MenuDefinition = _currentMenuDef;
-                foreach (string menuItemTo in _currentTransitionsTo.Keys)
-                {
-                    Type toViewType = _currentTransitionsTo[menuItemTo];
-                    if (_allViews.ContainsKey(fromViewType))
-                    {
-                        _allViews[fromViewType].AddTransition(menuItemTo, new Transition(toViewType));
-                    }
-                }
-            }
-
-            _currentTransitionsTo.Clear();
-            _currentMenuDef = null;
-            _currentEvent = null;
-            _currentMenuDefPosition = 0;
-        }
-
-        private void FlushTransition(Type sourceViewType, string eventId, Transition t)
-        {
-            if (!_allViews.ContainsKey(sourceViewType))
-            {
-                _allViews.Add(sourceViewType, new View(sourceViewType, null));
-            }
-            _allViews[sourceViewType].AddTransition(eventId, t);
-        }
-
-        private void FlushAllViews()
-        {
-            // Add all views, the view that was specified as topview is added as the first view.
-            _navModel.AddView(_allViews[_firstViewType]);
-            foreach (Type viewType in _allViews.Keys)
-            {
-                if (viewType == _firstViewType)
-                {
-                    continue;
-                }
-                View view = _allViews[viewType];
-                _navModel.AddView(_allViews[viewType]);
-            }
-        }
-
-        private void NextMenuItem()
-        {
-            _currentMenuDefPosition += 1;
-        }
     }
 }

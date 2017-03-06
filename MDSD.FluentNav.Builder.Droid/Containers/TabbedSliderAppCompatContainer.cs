@@ -13,6 +13,7 @@ using Android.Widget;
 
 namespace MDSD.FluentNav.Builder.Droid.Containers
 {
+    // TODO Unfinished, this could be an additional menu type for android, as well as tabbedbar's.
     public class TabbedSliderAppCompatContainer : Android.Support.V4.App.Fragment, ViewGroup.IOnHierarchyChangeListener
     {
         private FluentNavAppCompatActivity _parentActivity;

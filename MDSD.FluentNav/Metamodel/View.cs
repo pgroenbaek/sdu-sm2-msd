@@ -5,10 +5,11 @@ using System.Text;
 
 namespace MDSD.FluentNav.Metamodel
 {
-    public class View : AbstractView
+    public class View
     {
         public Type Type { get; private set; }
         public string Title { get; private set; }
+        public Menu MenuDefinition { get; set; } = null;
 
         public Dictionary<string, List<Transition>> Transitions;
 

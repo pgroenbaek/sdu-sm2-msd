@@ -20,22 +20,27 @@ namespace MDSD.FluentNav.Example.Droid
         protected override void BuildNavigation(INavigationBuilder<Android.Support.V4.App.Fragment> nav)
         {
             nav
-            .ViewGroup()
+            .BeginViewGroup()
+                // If C# supported enum-constraints in generics, i could have enforced a menutype-parameter here in the Menu()-call 
+                // based on something specified in the subclass like "Android.Support.V4.App.Fragment" is currently. Would have been a lot nicer to look at.
                 .Menu()
                     .Type(MenuDrawer)
                     .Attribute("spacer", 2)
-                .SubView<RedFragment>(title: "Red")
+                .View<RedFragment>(title: "Red")
                     .Content()
                         .OnClick(Resource.Id.fragment_red_btn1)
                             .NavigateTo<BlueFragment>()
-                .SubView<GreenFragment>(title: "Green")
-                .SubView<YellowFragment>(title: "Yellow")
-                    .Content()
-                        .OnClick(Resource.Id.fragment_yellow_btn1)
-                            .NavigateToIf<WhiteFragment>(() => false)
-                            .ElseNavigateTo<BlackFragment>()
+                .View<GreenFragment>(title: "Green")
+            .EndViewGroup()
             .View<BlueFragment>(title: "This one is blue.")
                 .Content()
+                    .OnClick(Resource.Id.fragment_blue_btn1)
+                        .NavigateTo<YellowFragment>()
+            .View<YellowFragment>(title: "Yellow")
+                .Content()
+                    .OnClick(Resource.Id.fragment_yellow_btn1)
+                        .NavigateToIf<WhiteFragment>(() => false)
+                        .ElseNavigateTo<BlackFragment>()
             ;
             
             /*

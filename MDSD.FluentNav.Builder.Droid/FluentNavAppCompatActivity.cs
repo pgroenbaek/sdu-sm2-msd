@@ -11,7 +11,6 @@ namespace MDSD.FluentNav.Builder.Droid
     public abstract class FluentNavAppCompatActivity : AppCompatActivity
     {
         public const string MenuDrawer = "Drawer";
-        public const string MenuPlain = "Plain";
 
         private Android.Support.V7.Widget.Toolbar _toolbar;
         private Metamodel.Menu _appliedMenuDef;

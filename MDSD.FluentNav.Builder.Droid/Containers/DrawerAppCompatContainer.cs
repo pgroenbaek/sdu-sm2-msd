@@ -51,7 +51,7 @@ namespace MDSD.FluentNav.Builder.Droid.Containers
             BuildDrawerMenu(_parentActivity.GetAppliedMenuDefinition());
         }
 
-        private void BuildDrawerMenu(MenuDefinition menuDef)
+        private void BuildDrawerMenu(Metamodel.Menu menuDef)
         {
             _drawerLayout = _parentActivity.FindViewById<DrawerLayout>(Resource.Id.activity_fluentnav_drawerlayout);
             _drawerToggle = new ActionBarDrawerToggle(
@@ -111,7 +111,7 @@ namespace MDSD.FluentNav.Builder.Droid.Containers
         private FluentNavAppCompatActivity _parentActivity;
         private NavigationView _navigationView;
         private DrawerLayout _drawerLayout;
-        private MenuDefinition _menuDef;
+        private Metamodel.Menu _menuDef;
         private IMenuItem _previousMenuItem;
 
         public override void OnCreate(Bundle savedInstanceState)
@@ -132,7 +132,7 @@ namespace MDSD.FluentNav.Builder.Droid.Containers
             _drawerLayout = _parentActivity.FindViewById<DrawerLayout>(Resource.Id.activity_fluentnav_drawerlayout);
             _navigationView.InflateMenu(Resource.Menu.menu_empty);
             int spacerCounter = 0;
-            for (int i = 0; i < _menuDef.FeaturesAtPosition.Count; i++)
+            /*for (int i = 0; i < _menuDef.FeaturesAtPosition.Count; i++)
             {
                 if (_menuDef.FeaturesAtPosition[i] == null)
                 {
@@ -151,7 +151,7 @@ namespace MDSD.FluentNav.Builder.Droid.Containers
                     string title = (string)positionDef["name"];
                     spacerCounter += 1;
                 }
-            }
+            }*/
 
             _navigationView.SetNavigationItemSelectedListener(this);
             _navigationView.Menu.GetItem(0).SetChecked(true);
@@ -167,8 +167,8 @@ namespace MDSD.FluentNav.Builder.Droid.Containers
             _previousMenuItem = item;
 
             int position = item.ItemId + item.GroupId;
-            string eventId = (string) _menuDef.FeaturesAtPosition[position]["eventId"];
-            Navigate(eventId);
+            //string eventId = (string) _menuDef.FeaturesAtPosition[position]["eventId"];
+            //Navigate(eventId);
 
             return true;
         }

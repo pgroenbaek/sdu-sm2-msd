@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Support.V7.App;
 using MDSD.FluentNav.Builder.Droid;
 using MDSD.FluentNav.Builder;
+using MDSD.FluentNav.Builder.Interfaces;
 using MDSD.FluentNav.Example.Droid.Views;
 
 namespace MDSD.FluentNav.Example.Droid
@@ -19,6 +20,7 @@ namespace MDSD.FluentNav.Example.Droid
 
         protected override void BuildNavigation(INavigationBuilder<Android.Support.V4.App.Fragment> nav)
         {
+            /*
             nav
             .View<GreenFragment>(title: "Example")
                 .DrawerMenu()
@@ -40,8 +42,9 @@ namespace MDSD.FluentNav.Example.Droid
                 .TabbedItem<WhiteFragment>(name: "White")
                 .TabbedItem<BlackFragment>(name: "Not White")
             ;
-
-            /*nav
+            */
+            /*
+            nav
             .TopView<GreenFragment>(title: "Example")
                 .Plain()
                 .OnClick(Resource.Id.fragment_green_btn1).NavigateTo<RedFragment>()
@@ -49,7 +52,8 @@ namespace MDSD.FluentNav.Example.Droid
                 .Plain()
                 .OnClick(Resource.Id.fragment_red_btn1).NavigateTo<YellowFragment>()
             .View<YellowFragment>(title: "LALALA")
-                .Plain();*/
+                .Plain();
+                */
         }
     }
 }

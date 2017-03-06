@@ -3,7 +3,9 @@ using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
-using MDSD.FluentNav.Builder.Droid.Builder.Droid.Containers;
+using MDSD.FluentNav.Builder;
+using MDSD.FluentNav.Builder.Interfaces;
+using MDSD.FluentNav.Builder.Droid.Containers;
 using MDSD.FluentNav.Metamodel;
 using System;
 using System.Collections.Generic;
@@ -20,10 +22,10 @@ namespace MDSD.FluentNav.Builder.Droid
         }
 
         private Android.Support.V7.Widget.Toolbar _toolbar;
-        private MenuDefinition _appliedMenuDef;
+        private Metamodel.Menu _appliedMenuDef;
         private NavigationModel _navModel;
 
-        private GenericFluentNavBuilder<Android.Support.V4.App.Fragment, MenuType> _fluentNavBuilder = new GenericFluentNavBuilder<Android.Support.V4.App.Fragment, MenuType>();
+        private GenericFluentNavBuilder<Android.Support.V4.App.Fragment> _fluentNavBuilder = new GenericFluentNavBuilder<Android.Support.V4.App.Fragment>();
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -47,7 +49,7 @@ namespace MDSD.FluentNav.Builder.Droid
             return _toolbar;
         }
 
-        internal MenuDefinition GetAppliedMenuDefinition()
+        internal Metamodel.Menu GetAppliedMenuDefinition()
         {
             return _appliedMenuDef;
         }
@@ -99,8 +101,8 @@ namespace MDSD.FluentNav.Builder.Droid
             SupportActionBar.Title = view.Title;
 
             // Configure style of menu.
-            MenuType menuType;
-            Enum.TryParse<MenuType>(_appliedMenuDef.MenuType, out menuType);
+            MenuType? menuType = null;
+            //Enum.TryParse<MenuType>(_appliedMenuDef.MenuType, out menuType);
             Android.Support.V4.App.Fragment container = null;
             switch(menuType)
             {

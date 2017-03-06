@@ -80,6 +80,16 @@ namespace MDSD.FluentNav.Builder
             return this;
         }
 
+        public void AddTransition(string eventId, Transition transition)
+        {
+            transition.SourceView = this;
+            if (!Transitions.ContainsKey(eventId))
+            {
+                Transitions[eventId] = new List<Transition>();
+            }
+            Transitions[eventId].Add(transition);
+        }
+
         ITransitionConditionalBuilder<TBaseView> ITransitionBuilder<TBaseView>.NavigateToIf<TView>(Func<bool> condition)
         {
             return this;

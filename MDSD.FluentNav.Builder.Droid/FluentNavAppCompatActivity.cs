@@ -1,11 +1,7 @@
 using Android.OS;
-using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Views;
-using Android.Widget;
-using MDSD.FluentNav.Builder;
 using MDSD.FluentNav.Builder.Interfaces;
-using MDSD.FluentNav.Builder.Droid.Containers;
 using MDSD.FluentNav.Metamodel;
 using System;
 using System.Collections.Generic;
@@ -60,7 +56,7 @@ namespace MDSD.FluentNav.Builder.Droid
         /// <param name="navigation">Builder interface</param>
         protected abstract void BuildNavigation(INavigationBuilder<Android.Support.V4.App.Fragment> navigation);
 
-        
+
 
         //////////////////////////////////////
         //////////////////////////////////////
@@ -68,6 +64,19 @@ namespace MDSD.FluentNav.Builder.Droid
         //////////////////////////////////////
         //////////////////////////////////////
         
+
+        // Returns true if transition stack is empty.
+        public bool HandleBackPressed()
+        {
+            if (_transitionStack.Count > 0)
+            {
+                _currentView = _transitionStack.Peek().SourceView;
+                _transitionStack.Pop();
+                return false;
+            }
+            return true;
+        }
+
         public override void OnBackPressed()
         {
             bool isEmpty = _navModel.HandleBackPressed();
@@ -87,10 +96,45 @@ namespace MDSD.FluentNav.Builder.Droid
 
         public void HandleEvent(string eventId)
         {
-            _navModel.HandleEvent(eventId);
+            if (_currentView == null)
+            {
+                return null;
+            }
+
+            Transition nextTransition = CurrentView.NextTransition(eventId);
+            if (nextTransition != null && _views.ContainsKey(nextTransition.TargetView))
+            {
+                CurrentView = _navModel.[nextTransition.TargetView];
+                _transitionStack.Push(nextTransition);
+            }
             ApplyView(_navModel.CurrentView);
         }
-        
+
+        internal Transition NextTransition(string eventId)
+        {
+            if (Transitions.ContainsKey(eventId))
+            {
+                // Evaluate from first to last condition.
+                for (int i = 0; i < Transitions[eventId].Count; i++)
+                {
+                    // Return the transition where the first null or true was encountered.
+                    // The condition being null means either "no condition" or it corresponds to the final "else".
+                    Transition t = Transitions[eventId][i];
+
+                    if (t.Conditional == null)
+                    {
+                        return t;
+                    }
+
+                    if (t.Conditional.Invoke())
+                    {
+                        return t;
+                    }
+                }
+            }
+            return null;
+        }
+
         private void ApplyView(Metamodel.View view)
         {
             Type contentType = view.Type;

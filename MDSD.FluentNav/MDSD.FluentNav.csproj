@@ -45,10 +45,12 @@
     <Compile Include="Builder\Interfaces\IContentBuilder.cs" />
     <Compile Include="Builder\Interfaces\IViewGroupBuilder.cs" />
     <Compile Include="Builder\Interfaces\IViewBuilder.cs" />
+    <Compile Include="Metamodel\AbstractView.cs" />
     <Compile Include="Metamodel\Menu.cs" />
     <Compile Include="Metamodel\NavigationModel.cs" />
     <Compile Include="Metamodel\Transition.cs" />
     <Compile Include="Metamodel\View.cs" />
+    <Compile Include="Metamodel\ViewGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validator\NavigationModelValidator.cs" />
   </ItemGroup>

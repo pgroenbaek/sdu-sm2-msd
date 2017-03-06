@@ -5,56 +5,18 @@ using System.Text;
 
 namespace MDSD.FluentNav.Metamodel
 {
-    public class View
+    public class View : AbstractView
     {
         public Type Type { get; private set; }
-        public string Title { get; set; }
-        public Menu MenuDefinition { get; set; }
+        public string Title { get; private set; }
 
-        internal List<View> _subViews;
-        internal Dictionary<string, List<Transition>> _transitions;
+        public Dictionary<string, List<Transition>> Transitions;
 
         public View(Type viewType, string title)
         {
             Type = viewType;
             Title = title;
-            _transitions = new Dictionary<string, List<Transition>>();
+            Transitions = new Dictionary<string, List<Transition>>();
         }
-
-        public void AddTransition(string eventId, Transition transition)
-        {
-            transition.SourceView = this;
-            if (!_transitions.ContainsKey(eventId))
-            {
-                _transitions[eventId] = new List<Transition>();
-            }
-            _transitions[eventId].Add(transition);
-        }
-        
-        internal Transition NextTransition(string eventId)
-        {
-            if (_transitions.ContainsKey(eventId))
-            {
-                // Evaluate from first to last condition.
-                for (int i = 0; i < _transitions[eventId].Count; i++)
-                {
-                    // Return the transition where the first null or true was encountered.
-                    // The condition being null means either "no condition" or it corresponds to the final "else".
-                    Transition t = _transitions[eventId][i];
-                    
-                    if (t.Conditional == null)
-                    {
-                        return t;
-                    }
-                    
-                    if(t.Conditional.Invoke())
-                    {
-                        return t;
-                    }
-                }
-            }
-            return null;
-        }
-
     }
 }

@@ -19,12 +19,11 @@ namespace MDSD.FluentNav.Builder
         private Menu _currentMenuDef = null;
         private Dictionary<string, Type> _currentTransitionsTo = new Dictionary<string, Type>();
         private Dictionary<Type, View> _allViews = new Dictionary<Type, View>();        
-                   
+        
         // TODOlist:
         //
         // - Adjust metamodel
         // - Adjust builder
-        // - Adjust syntax
         // - Make sure the example works.
 
         public GenericFluentNavBuilder()
@@ -32,14 +31,100 @@ namespace MDSD.FluentNav.Builder
             _navModel = new NavigationModel();
         }
  
-        public NavigationModel FetchBuiltModel()
+        public NavigationModel Build()
         {
             FlushAllViews();
             _navModel.Initialize();
             return _navModel;
         }
 
-        public IViewGroupBuilder<TBaseView> View<TView>(string title = null) where TView : TBaseView
+        IViewBuilder<TBaseView> INavigationBuilder<TBaseView>.View<TView>(string title)
+        {
+
+            return (IViewBuilder<TBaseView>) this;
+        }
+
+        IViewGroupBuilder<TBaseView> INavigationBuilder<TBaseView>.ViewGroup()
+        {
+
+            return this;
+        }
+
+        IMenuBuilder<TBaseView> IViewGroupBuilder<TBaseView>.Menu()
+        {
+            return this;
+        }
+
+        IViewBuilder<TBaseView> IViewGroupBuilder<TBaseView>.SubView<TView>(string title)
+        {
+            return (IViewBuilder<TBaseView>) this;
+        }
+
+        ITransitionBuilder<TBaseView> IContentBuilder<TBaseView>.OnClick(int resourceId)
+        {
+            return this;
+        }
+
+        IViewBuilder<TBaseView> IContentBuilder<TBaseView>.SubView<TView>(string title)
+        {
+            return (IViewBuilder<TBaseView>) this;
+        }
+
+        IViewBuilder<TBaseView> IContentBuilder<TBaseView>.View<TView>(string title)
+        {
+            return (IViewBuilder<TBaseView>) this;
+        }
+
+        IViewGroupBuilder<TBaseView> IContentBuilder<TBaseView>.ViewGroup()
+        {
+            return this;
+        }
+
+        ITransitionConditionalBuilder<TBaseView> ITransitionBuilder<TBaseView>.NavigateToIf<TView>(Func<bool> condition)
+        {
+            return this;
+        }
+
+        IContentBuilder<TBaseView> ITransitionBuilder<TBaseView>.NavigateTo<TView>()
+        {
+            return this;
+        }
+
+        ITransitionConditionalBuilder<TBaseView> ITransitionConditionalBuilder<TBaseView>.ElseIfNavigateTo<TView>(Func<bool> condition)
+        {
+            return this;
+        }
+
+        IContentBuilder<TBaseView> ITransitionConditionalBuilder<TBaseView>.ElseNavigateTo<TView>()
+        {
+            return this;
+        }
+
+        IMenuBuilder<TBaseView> IMenuBuilder<TBaseView>.Type(string type)
+        {
+            return this;
+        }
+
+        IMenuBuilder<TBaseView> IMenuBuilder<TBaseView>.Attribute(string key, object attribute)
+        {
+            return this;
+        }
+
+        IViewBuilder<TBaseView> IMenuBuilder<TBaseView>.SubView<TView>(string title)
+        {
+            return (IViewBuilder<TBaseView>) this;
+        }
+
+        IViewBuilder<TBaseView> IMenuBuilder<TBaseView>.View<TView>(string title)
+        {
+            return (IViewBuilder<TBaseView>) this;
+        }
+
+
+
+
+
+        /*public IViewGroupBuilder<TBaseView> View<TView>(string title = null) where TView : TBaseView
         {
             if(_firstViewType == null)
             {
@@ -56,7 +141,7 @@ namespace MDSD.FluentNav.Builder
                 _allViews[_firstViewType].Title = title;
             }
             return this;
-        }
+        }*/
 
         /*public IViewBuilder<TBaseView, TMenuTypeSelector> View<TView>(string title = null) where TView : TBaseView
         {
@@ -77,13 +162,13 @@ namespace MDSD.FluentNav.Builder
             return this;
         }*/
 
-        public IContentBuilder<TBaseView> Content()
+        /*public IContentBuilder<TBaseView> Content()
         {
             //_currentMenuDef = new MenuDefinition(MenuType.Plain.ToString());
             return this;
-        }
+        }*/
 
-        public ITransitionBuilder<TBaseView> OnClick(int resourceId)
+        /*public ITransitionBuilder<TBaseView> OnClick(int resourceId)
         {
             _currentEvent = Convert.ToString(resourceId);
             return this;
@@ -129,9 +214,9 @@ namespace MDSD.FluentNav.Builder
                 _currentEvent = null;
             }
             return this;
-        }
+        }*/
 
-        public IMenuBuilder<TBaseView> Menu()
+        /*public IMenuBuilder<TBaseView> Menu()
         {
             return this;
         }
@@ -145,6 +230,33 @@ namespace MDSD.FluentNav.Builder
         {
             throw new NotImplementedException();
         }
+        
+        IViewBuilder<TBaseView> INavigationBuilder<TBaseView>.View<TView>(string title)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IViewGroupBuilder<TBaseView> ViewGroup()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IViewBuilder<TBaseView> SubView<TView>(string title = null) where TView : TBaseView
+        {
+            throw new NotImplementedException();
+        }
+
+        IViewBuilder<TBaseView> IContentBuilder<TBaseView>.View<TView>(string title)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IViewBuilder<TBaseView> View<TView>(string title)
+        {
+            throw new NotImplementedException();
+        }*/
+
+
 
         private void FlushMenuTransitions()
         {

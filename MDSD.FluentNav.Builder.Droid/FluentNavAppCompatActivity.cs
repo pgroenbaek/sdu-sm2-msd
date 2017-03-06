@@ -38,7 +38,7 @@ namespace MDSD.FluentNav.Builder.Droid
             {
                 BuildNavigation(_fluentNavBuilder);
 
-                _navModel = _fluentNavBuilder.FetchBuiltModel();
+                _navModel = _fluentNavBuilder.Build();
                 ApplyView(_navModel.CurrentView);
             }
         }

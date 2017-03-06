@@ -10,6 +10,7 @@ namespace MDSD.FluentNav.Builder.Interfaces
     {
         IMenuBuilder<TBaseView> Type(string type);
         IMenuBuilder<TBaseView> Attribute(string key, object attribute);
+        IViewBuilder<TBaseView> SubView<TView>(string title = null) where TView : TBaseView;
         IViewBuilder<TBaseView> View<TView>(string title = null) where TView : TBaseView;
     }
 }

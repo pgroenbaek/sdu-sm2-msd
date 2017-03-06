@@ -8,9 +8,8 @@ namespace MDSD.FluentNav.Builder.Interfaces
 {
     public interface IMenuBuilder<TBaseView>
     {
-        IMenuBuilder<TBaseView> MenuType(int type);
-        IMenuBuilder<TBaseView> MenuAttribute(string key, string attribute);
-        IContentBuilder<TBaseView> Content();
+        IMenuBuilder<TBaseView> Type(string type);
+        IMenuBuilder<TBaseView> Attribute(string key, object attribute);
         IViewBuilder<TBaseView> View<TView>(string title = null) where TView : TBaseView;
     }
 }

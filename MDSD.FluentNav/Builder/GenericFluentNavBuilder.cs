@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace MDSD.FluentNav.Builder
 {
     public class GenericFluentNavBuilder<TBaseView> : INavigationBuilder<TBaseView>,
-        IViewBuilder<TBaseView>, IContentBuilder<TBaseView>,
+        IViewGroupBuilder<TBaseView>, IContentBuilder<TBaseView>,
         ITransitionBuilder<TBaseView>, ITransitionConditionalBuilder<TBaseView>,
         IMenuBuilder<TBaseView>
     {
@@ -39,7 +39,7 @@ namespace MDSD.FluentNav.Builder
             return _navModel;
         }
 
-        public IViewBuilder<TBaseView> View<TView>(string title = null) where TView : TBaseView
+        public IViewGroupBuilder<TBaseView> View<TView>(string title = null) where TView : TBaseView
         {
             if(_firstViewType == null)
             {
@@ -136,12 +136,12 @@ namespace MDSD.FluentNav.Builder
             return this;
         }
 
-        public IMenuBuilder<TBaseView> MenuType(int type)
+        public IMenuBuilder<TBaseView> Type(string type)
         {
             throw new NotImplementedException();
         }
 
-        public IMenuBuilder<TBaseView> MenuAttribute(string key, string attribute)
+        public IMenuBuilder<TBaseView> Attribute(string key, object attribute)
         {
             throw new NotImplementedException();
         }

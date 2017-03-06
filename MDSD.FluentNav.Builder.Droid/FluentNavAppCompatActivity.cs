@@ -14,12 +14,8 @@ namespace MDSD.FluentNav.Builder.Droid
 {
     public abstract class FluentNavAppCompatActivity : AppCompatActivity
     {
-        public enum MenuType
-        {
-            Plain,
-            Drawer,
-            TabbedSlider
-        }
+        public const string MenuDrawer = "Drawer";
+        public const string MenuPlain = "Plain";
 
         private Android.Support.V7.Widget.Toolbar _toolbar;
         private Metamodel.Menu _appliedMenuDef;
@@ -101,10 +97,10 @@ namespace MDSD.FluentNav.Builder.Droid
             SupportActionBar.Title = view.Title;
 
             // Configure style of menu.
-            MenuType? menuType = null;
+            //MenuType? menuType = null;
             //Enum.TryParse<MenuType>(_appliedMenuDef.MenuType, out menuType);
             Android.Support.V4.App.Fragment container = null;
-            switch(menuType)
+            /*switch(menuType)
             {
                 case MenuType.Plain:
                     container = new PlainAppCompatContainer();
@@ -120,7 +116,7 @@ namespace MDSD.FluentNav.Builder.Droid
 
                 default:
                     return;
-            }
+            }*/
             SupportFragmentManager
                 .BeginTransaction()
                 .Replace(Resource.Id.activity_fluentnav_containerframe, container)

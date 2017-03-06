@@ -17,32 +17,28 @@ namespace MDSD.FluentNav.Example.Droid
     [Activity(Label = "MDSD.FluentNav.Example", Icon = "@drawable/icon", MainLauncher = true, Theme = "@style/AppTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : FluentNavAppCompatActivity
     {
-
         protected override void BuildNavigation(INavigationBuilder<Android.Support.V4.App.Fragment> nav)
         {
-            /*
             nav
-            .View<GreenFragment>(title: "Example")
-                .DrawerMenu()
-                .DrawerItem<RedFragment>(name: "Red")
-                .DrawerItem<GreenFragment>(name: "Green")
-                .DrawerSpacer(name: null)
-                .DrawerItem<YellowFragment>(icon: null, name: "Yellow")
-            .View<RedFragment>(title: "REEEEED")
-                .Content()
-                .OnClick(Resource.Id.fragment_red_btn1)
-                    .NavigateTo<BlueFragment>()
-            .View<YellowFragment>(title: "YELLLOW")
-                .Content()
-                .OnClick(Resource.Id.fragment_yellow_btn1)
-                    .NavigateToIf<BlueFragment>(() => false)
-                    .ElseNavigateTo<RedFragment>()
-            .View<BlueFragment>(title: "This one is blue")
-                .TabbedSlider()
-                .TabbedItem<WhiteFragment>(name: "White")
-                .TabbedItem<BlackFragment>(name: "Not White")
+            .ViewGroup()
+                .Menu()
+                    .Type(MenuDrawer)
+                    .Attribute("spacer", 2)
+                .View<RedFragment>(title: "Red")
+                    .Content()
+                        .OnClick(Resource.Id.fragment_red_btn1)
+                            .NavigateTo<BlueFragment>()
+                .View<GreenFragment>(title: "Green")
+                .View<YellowFragment>(title: "Yellow")
+                    .Content()
+                        .OnClick(Resource.Id.fragment_yellow_btn1)
+                            .NavigateToIf<BlueFragment>(() => false)
+                            .ElseNavigateTo<RedFragment>()
+            .ViewGroup()
+                .View<BlueFragment>(title: "This one is blue.")
+                    .Content()
             ;
-            */
+            
             /*
             nav
             .TopView<GreenFragment>(title: "Example")

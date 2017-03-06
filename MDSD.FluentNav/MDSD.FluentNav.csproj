@@ -43,6 +43,7 @@
     <Compile Include="Builder\Interfaces\ITransitionConditionalBuilder.cs" />
     <Compile Include="Builder\Interfaces\ITransitionBuilder.cs" />
     <Compile Include="Builder\Interfaces\IContentBuilder.cs" />
+    <Compile Include="Builder\Interfaces\IViewGroupBuilder.cs" />
     <Compile Include="Builder\Interfaces\IViewBuilder.cs" />
     <Compile Include="Metamodel\Menu.cs" />
     <Compile Include="Metamodel\NavigationModel.cs" />

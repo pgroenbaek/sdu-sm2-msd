@@ -10,7 +10,7 @@ namespace MDSD.FluentNav.Builder.Interfaces
     public interface IViewBuilder<TBaseView>
     {
         IContentBuilder<TBaseView> Content();
-        IMenuBuilder<TBaseView> Menu();
         IViewBuilder<TBaseView> View<TView>(string title = null) where TView : TBaseView;
+        IViewGroupBuilder<TBaseView> ViewGroup();
     }
 }

@@ -8,10 +8,10 @@ namespace MDSD.FluentNav.Metamodel
 {
     public class Menu
     {
-        public int MenuType { get; private set; }
+        public string MenuType { get; private set; }
         public Dictionary<string, object> MenuAttributes { get; private set; }
 
-        public Menu(int menuType)
+        public Menu(string menuType)
         {
             MenuType = menuType;
             MenuAttributes = new Dictionary<string, object>();

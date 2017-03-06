@@ -21,6 +21,9 @@ namespace MDSD.FluentNav.Builder.Droid
         private Metamodel.Menu _appliedMenuDef;
         private NavigationModel _navModel;
 
+        private Metamodel.View _currentView;
+        private Stack<Transition> _transitionStack = new Stack<Transition>();
+
         private GenericFluentNavBuilder<Android.Support.V4.App.Fragment> _fluentNavBuilder = new GenericFluentNavBuilder<Android.Support.V4.App.Fragment>();
 
         protected override void OnCreate(Bundle savedInstanceState)

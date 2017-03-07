@@ -94,7 +94,7 @@ namespace MDSD.FluentNav.Builder.Droid.Containers
                     Button b = (Button)childView;
                     b.Click += (btnSender, btnEvent) =>
                     {
-                        //_parentActivity.HandleEvent(Convert.ToString(b.Id));
+                        _parentActivity.HandleEvent(Convert.ToString(b.Id));
                     };
                 }
             }
@@ -112,6 +112,7 @@ namespace MDSD.FluentNav.Builder.Droid.Containers
         private NavigationView _navigationView;
         private DrawerLayout _drawerLayout;
         private Metamodel.Menu _menuDef;
+        private Metamodel.View _appliedView;
         private IMenuItem _previousMenuItem;
 
         public override void OnCreate(Bundle savedInstanceState)
@@ -127,32 +128,19 @@ namespace MDSD.FluentNav.Builder.Droid.Containers
             Android.Views.View view = inflater.Inflate(Resource.Layout.container_drawer_menu, null, false);
 
             _menuDef = _parentActivity.GetAppliedMenuDefinition();
+            _appliedView = _parentActivity.GetAppliedView();
 
             _navigationView = view.FindViewById<NavigationView>(Resource.Id.activity_fluentnav_navigationview);
             _drawerLayout = _parentActivity.FindViewById<DrawerLayout>(Resource.Id.activity_fluentnav_drawerlayout);
             _navigationView.InflateMenu(Resource.Menu.menu_empty);
-            int spacerCounter = 0;
-            /*for (int i = 0; i < _menuDef.FeaturesAtPosition.Count; i++)
+            if(_appliedView is Metamodel.ViewGroup)
             {
-                if (_menuDef.FeaturesAtPosition[i] == null)
+                int itemCounter = 0;
+                foreach (Metamodel.View v in ((Metamodel.ViewGroup) _appliedView).SubViews)
                 {
-                    continue;
+                    _navigationView.Menu.Add(0, itemCounter, itemCounter + 1, v.Title);
                 }
-
-                Dictionary<string, object> positionDef = _menuDef.FeaturesAtPosition[i];
-                if (positionDef["type"].Equals("item"))
-                {
-                    string title = (string)positionDef["name"];
-                    Console.WriteLine(spacerCounter + " " + i + " " + title);
-                    _navigationView.Menu.Add(spacerCounter, i - spacerCounter, i + 1, title);
-                }
-                else if (positionDef["type"].Equals("spacer"))
-                {
-                    string title = (string)positionDef["name"];
-                    spacerCounter += 1;
-                }
-            }*/
-
+            }
             _navigationView.SetNavigationItemSelectedListener(this);
             _navigationView.Menu.GetItem(0).SetChecked(true);
 
@@ -167,8 +155,8 @@ namespace MDSD.FluentNav.Builder.Droid.Containers
             _previousMenuItem = item;
 
             int position = item.ItemId + item.GroupId;
-            //string eventId = (string) _menuDef.FeaturesAtPosition[position]["eventId"];
-            //Navigate(eventId);
+            string eventId = (string) _menuDef.MenuAttributes["itemClick" + item.ItemId];
+            Navigate(eventId);
 
             return true;
         }
@@ -178,7 +166,7 @@ namespace MDSD.FluentNav.Builder.Droid.Containers
             _drawerLayout.CloseDrawers();
             await Task.Delay(TimeSpan.FromMilliseconds(250));
 
-            //_parentActivity.HandleEvent(eventId);
+            _parentActivity.HandleEvent(eventId);
         }
     }
 }

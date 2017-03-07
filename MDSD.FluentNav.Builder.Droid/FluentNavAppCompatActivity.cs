@@ -4,7 +4,9 @@ using Android.Views;
 using MDSD.FluentNav.Builder.Interfaces;
 using MDSD.FluentNav.Metamodel;
 using System;
+using System.Linq;
 using System.Collections.Generic;
+using MDSD.FluentNav.Builder.Droid.Containers;
 
 namespace MDSD.FluentNav.Builder.Droid
 {
@@ -34,7 +36,7 @@ namespace MDSD.FluentNav.Builder.Droid
                 BuildNavigation(_fluentNavBuilder);
 
                 _navModel = _fluentNavBuilder.Build();
-                //ApplyView(_navModel.CurrentView);
+                ApplyView(_currentView);
             }
         }
 
@@ -48,6 +50,11 @@ namespace MDSD.FluentNav.Builder.Droid
             return _appliedMenuDef;
         }
 
+        internal Metamodel.View GetAppliedView()
+        {
+            return _currentView;
+        }
+
 
         /// <summary>
         ///   Override with a definition of how views should be bound together.
@@ -56,83 +63,102 @@ namespace MDSD.FluentNav.Builder.Droid
         protected abstract void BuildNavigation(INavigationBuilder<Android.Support.V4.App.Fragment> navigation);
 
 
-
-        //////////////////////////////////////
-        //////////////////////////////////////
-        ///   Using the built metamodel    ///
-        //////////////////////////////////////
-        //////////////////////////////////////
         
 
-        // Returns true if transition stack is empty.
-        public bool HandleBackPressed()
+        public override void OnBackPressed()
         {
             if (_transitionStack.Count > 0)
             {
                 _currentView = _transitionStack.Peek().SourceView;
                 _transitionStack.Pop();
-                return false;
-            }
-            return true;
-        }
-
-        public override void OnBackPressed()
-        {
-            ///bool isEmpty = _navModel.HandleBackPressed();
-            /*if(isEmpty)
-            {
-                Finish();
+                ApplyView(_currentView);
                 return;
-            }*/
-            //ApplyView(_navModel.CurrentView);
+            }
+            Finish();
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
-            Console.WriteLine(item);
             return base.OnOptionsItemSelected(item);
         }
 
-        /*public void HandleEvent(string eventId)
+        public void HandleEvent(string eventId)
         {
-            if (_currentView == null)
+            if (_currentView == null || !_currentView.Transitions.ContainsKey(eventId))
             {
-                return null;
+                return;
             }
 
-            Transition nextTransition = CurrentView.NextTransition(eventId);
-            if (nextTransition != null && _views.ContainsKey(nextTransition.TargetView))
-            {
-                CurrentView = _navModel.[nextTransition.TargetView];
-                _transitionStack.Push(nextTransition);
-            }
-            ApplyView(_navModel.CurrentView);
-        }
-
-        internal Transition NextTransition(string eventId)
-        {
-            if (Transitions.ContainsKey(eventId))
+            Transition nextTransition = null;
+            if (_currentView.Transitions.ContainsKey(eventId))
             {
                 // Evaluate from first to last condition.
-                for (int i = 0; i < Transitions[eventId].Count; i++)
+                for (int i = 0; i < _currentView.Transitions[eventId].Count; i++)
                 {
                     // Return the transition where the first null or true was encountered.
                     // The condition being null means either "no condition" or it corresponds to the final "else".
-                    Transition t = Transitions[eventId][i];
+                    Transition t = _currentView.Transitions[eventId][i];
 
                     if (t.Conditional == null)
                     {
-                        return t;
+                         nextTransition = t;
                     }
 
                     if (t.Conditional.Invoke())
                     {
-                        return t;
+                        nextTransition = t;
+                    }
+                }
+            }
+
+            if (nextTransition != null)
+            {
+                _currentView = FindViewRecursively(null, nextTransition.TargetView);
+                if (_currentView != null) {
+                    _transitionStack.Push(nextTransition);
+                    ApplyView(_currentView);
+                }
+            }
+        }
+
+        public Metamodel.View FindViewRecursively(Metamodel.View currentView, Type target)
+        {
+            List<Metamodel.View> results = null;
+            if(currentView == null)
+            {
+                results = _navModel.AllViews.Where(v => v.Type == target).ToList();
+            }
+            else if (currentView is Metamodel.ViewGroup)
+            {
+                results = ((Metamodel.ViewGroup) currentView).SubViews.Where(v => v.Type == target).ToList();
+            }
+
+            if (results != null)
+            {
+                Metamodel.View result = results.First();
+                if (result != null)
+                {
+                    return result;
+                }
+
+                if (currentView == null)
+                {
+                    foreach(Metamodel.View v in _navModel.AllViews)
+                    {
+                        return FindViewRecursively(v, target);
+                    }
+                }
+                else if (currentView is Metamodel.ViewGroup)
+                {
+                    foreach (Metamodel.View v in ((Metamodel.ViewGroup)currentView).SubViews)
+                    {
+                        return FindViewRecursively(v, target);
                     }
                 }
             }
             return null;
-        }*/
+        }
+        
 
         private void ApplyView(Metamodel.View view)
         {
@@ -143,26 +169,17 @@ namespace MDSD.FluentNav.Builder.Droid
             SupportActionBar.Title = view.Title;
 
             // Configure style of menu.
-            //MenuType? menuType = null;
-            //Enum.TryParse<MenuType>(_appliedMenuDef.MenuType, out menuType);
             Android.Support.V4.App.Fragment container = null;
-            /*switch(menuType)
+            switch(_appliedMenuDef.MenuType)
             {
-                case MenuType.Plain:
-                    container = new PlainAppCompatContainer();
-                    break;
-
-                case MenuType.Drawer:
+                case MenuDrawer:
                     container = new DrawerAppCompatContainer();
                     break;
 
-                case MenuType.TabbedSlider:
-                    container = new TabbedSliderAppCompatContainer();
-                    break;
-
                 default:
-                    return;
-            }*/
+                    container = new PlainAppCompatContainer();
+                    break;
+            }
             SupportFragmentManager
                 .BeginTransaction()
                 .Replace(Resource.Id.activity_fluentnav_containerframe, container)

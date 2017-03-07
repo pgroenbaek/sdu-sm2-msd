@@ -15,9 +15,6 @@ namespace MDSD.FluentNav.Builder
         private string _currentEvent = null;
         private View _currentView = null;
         private Stack<ViewGroup> _currentViewGroup = new Stack<ViewGroup>();
-        
-        // TODOlist:
-        // - Make sure the example works.
 
         public GenericFluentNavBuilder()
         {
@@ -174,6 +171,25 @@ namespace MDSD.FluentNav.Builder
             if (_currentViewGroup.Count == 1)
             {
                 ViewGroup viewGroup = _currentViewGroup.Pop();
+
+                if (viewGroup.MenuDefinition != null)
+                {
+                    // Build navigation within menu
+                    foreach (View viewFrom in viewGroup.SubViews)
+                    {
+                        int count = 0;
+                        foreach (View viewTo in viewGroup.SubViews)
+                        {
+                            Type toViewType = viewTo.Type;
+                            string eventId = "m-" + toViewType.ToString();
+                            viewGroup.MenuDefinition.MenuAttributes.Add("itemClick" + count, eventId);
+                            viewFrom.Transitions.Add(eventId, new List<Transition>());
+                            viewFrom.Transitions[eventId].Add(new Transition(toViewType, viewFrom));
+                            count++;
+                        }
+                    }
+                }
+
                 _navModel.AllViews.Add(viewGroup);
             }
             else if (_currentViewGroup.Count > 1)
@@ -182,138 +198,6 @@ namespace MDSD.FluentNav.Builder
                 _currentViewGroup.Peek().SubViews.Add(viewGroup);
             }
         }
-
-
-        /*public IViewGroupBuilder<TBaseView> View<TView>(string title = null) where TView : TBaseView
-        {
-            if(_firstViewType == null)
-            {
-                _navModel = new NavigationModel();
-                _firstViewType = typeof(TView);
-            }
-            _currentViewType = _firstViewType;
-            if (!_allViews.ContainsKey(_firstViewType))
-            {
-                _allViews.Add(_firstViewType, new View(_firstViewType, title));
-            }
-            else
-            {
-                _allViews[_firstViewType].Title = title;
-            }
-            return this;
-        }*/
-
-        /*public IViewBuilder<TBaseView, TMenuTypeSelector> View<TView>(string title = null) where TView : TBaseView
-        {
-            if (_currentMenuDef != null && !_currentMenuDef.MenuType.Equals(MenuType.Plain.ToString()))
-            {
-                FlushMenuTransitions();
-            }
-
-            _currentViewType = typeof(TView);
-            if (!_allViews.ContainsKey(_currentViewType))
-            {
-                _allViews.Add(_currentViewType, new View(_currentViewType, title));
-            }
-            else
-            {
-                _allViews[_currentViewType].Title = title;
-            }
-            return this;
-        }*/
-
-        /*public IContentBuilder<TBaseView> Content()
-        {
-            //_currentMenuDef = new MenuDefinition(MenuType.Plain.ToString());
-            return this;
-        }*/
-
-        /*public ITransitionBuilder<TBaseView> OnClick(int resourceId)
-        {
-            _currentEvent = Convert.ToString(resourceId);
-            return this;
-        }
-
-        public IContentBuilder<TBaseView> NavigateTo<TView>() where TView : TBaseView
-        {
-            if (_currentEvent != null)
-            {
-                Type targetViewType = typeof(TView);
-                FlushTransition(_currentViewType, _currentEvent, new Transition(targetViewType));
-                _currentEvent = null;
-            }
-            return this;
-        }
-
-        public ITransitionConditionalBuilder<TBaseView> NavigateToIf<TView>(Func<bool> booleanExpression) where TView : TBaseView
-        {
-            if (_currentEvent != null)
-            {
-                Type targetViewType = typeof(TView);
-                FlushTransition(_currentViewType, _currentEvent, new Transition(targetViewType, booleanExpression));
-            }
-            return this;
-        }
-
-        public ITransitionConditionalBuilder<TBaseView> ElseIfNavigateTo<TView>(Func<bool> booleanExpression) where TView : TBaseView
-        {
-            if (_currentEvent != null)
-            {
-                Type targetViewType = typeof(TView);
-                FlushTransition(_currentViewType, _currentEvent, new Transition(targetViewType, booleanExpression));
-            }
-            return this;
-        }
-
-        public IContentBuilder<TBaseView> ElseNavigateTo<TView>() where TView : TBaseView
-        {
-            if (_currentEvent != null)
-            {
-                Type targetViewType = typeof(TView);
-                FlushTransition(_currentViewType, _currentEvent, new Transition(targetViewType));
-                _currentEvent = null;
-            }
-            return this;
-        }*/
-
-        /*public IMenuBuilder<TBaseView> Menu()
-        {
-            return this;
-        }
-
-        public IMenuBuilder<TBaseView> Type(string type)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IMenuBuilder<TBaseView> Attribute(string key, object attribute)
-        {
-            throw new NotImplementedException();
-        }
         
-        IViewBuilder<TBaseView> INavigationBuilder<TBaseView>.View<TView>(string title)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IViewGroupBuilder<TBaseView> ViewGroup()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IViewBuilder<TBaseView> SubView<TView>(string title = null) where TView : TBaseView
-        {
-            throw new NotImplementedException();
-        }
-
-        IViewBuilder<TBaseView> IContentBuilder<TBaseView>.View<TView>(string title)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IViewBuilder<TBaseView> View<TView>(string title)
-        {
-            throw new NotImplementedException();
-        }*/
     }
 }

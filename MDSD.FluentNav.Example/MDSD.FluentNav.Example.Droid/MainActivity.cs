@@ -25,7 +25,6 @@ namespace MDSD.FluentNav.Example.Droid
                 // based on something specified in the subclass like "Android.Support.V4.App.Fragment" is currently. Would have been a lot nicer to look at.
                 .Menu()
                     .Type(MenuDrawer)
-                    .Attribute("spacer", 2)
                 .View<RedFragment>(title: "Red")
                     .Content()
                         .OnClick(Resource.Id.fragment_red_btn1)
